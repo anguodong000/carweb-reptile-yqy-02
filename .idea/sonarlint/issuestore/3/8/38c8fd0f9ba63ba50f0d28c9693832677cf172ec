@@ -1,0 +1,8 @@
+
+nsquid:CallToDeprecatedMethod"?Remove this use of "WebMvcConfigurerAdapter"; it is deprecated.(χΐΪ‘8†¬Γ…Ν-
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Σ¶³ψÿÿÿÿ
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ρ¦ΏΣ
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(λτρϊÿÿÿÿ
+jsquid:CallToDeprecatedMethod"6Remove this use of "setMaxFileSize"; it is deprecated.(ε©Υΐωÿÿÿÿ8†¬Γ…Ν-
+squid:UselessImportCheck"_Remove this unused import 'org.springframework.web.servlet.config.annotation.WebMvcConfigurer'.(’µ¥Κÿÿÿÿÿ
+msquid:CallToDeprecatedMethod"9Remove this use of "setMaxRequestSize"; it is deprecated.(ο§Τϋÿÿÿÿ8†¬Γ…Ν-

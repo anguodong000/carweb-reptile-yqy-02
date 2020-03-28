@@ -1,0 +1,17 @@
+com\reptile\carwebreptileyqy\mapper\CarPartsMapper.class
+com\reptile\carwebreptileyqy\entity\ErrorRecordEntity.class
+com\reptile\carwebreptileyqy\controller\CarTypeController.class
+com\reptile\carwebreptileyqy\CarwebReptileYqyApplication.class
+com\reptile\carwebreptileyqy\controller\CarPartsController.class
+com\reptile\carwebreptileyqy\service\CarPartsService.class
+com\reptile\carwebreptileyqy\entity\CarPartsEntity.class
+com\reptile\carwebreptileyqy\dto\CarTypeDTO.class
+com\reptile\carwebreptileyqy\entity\GraspRecordEntity.class
+com\reptile\carwebreptileyqy\service\impl\CarPartsServiceImpl.class
+com\reptile\carwebreptileyqy\Config\MySolrConfig.class
+com\reptile\carwebreptileyqy\dto\CarPartsDTO.class
+com\reptile\carwebreptileyqy\entity\AutoPartsInfoEntity.class
+com\reptile\carwebreptileyqy\service\CarTypeService.class
+com\reptile\carwebreptileyqy\service\impl\CarTypeServiceImpl.class
+com\reptile\carwebreptileyqy\Config\UploadFileProperties.class
+com\reptile\carwebreptileyqy\controller\ReptileController.class

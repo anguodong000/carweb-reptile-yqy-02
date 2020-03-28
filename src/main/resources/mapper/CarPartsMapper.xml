@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reptile.carwebreptileyqy.mapper.CarPartsMapper">
+
+    <select id="list" parameterType="com.reptile.carwebreptileyqy.dto.CarPartsDTO" resultType="com.reptile.carwebreptileyqy.entity.CarPartsEntity" >
+        <bind name="key_offset" value="(currentPage-1)*20"></bind>
+        SELECT p.id,p.from_time AS fromTime,p.to_time AS toTime,p.parts_no AS partsNo,p.parts_name AS partsName,p.instruction,p.group_no AS groupNo,p.pnc FROM car_parts_info p where 1=1
+        <if test="groupNo != null and groupNo != ''">
+            and p.group_no like CONCAT('%',#{groupNo},'%')
+        </if>
+        LIMIT #{key_offset},20
+    </select>
+
+    <select id="total" parameterType="com.reptile.carwebreptileyqy.dto.CarPartsDTO" resultType="int" >
+        SELECT count(p.id) FROM car_parts_info p where 1=1
+        <if test="groupNo != null and groupNo != ''">
+            and p.group_no like CONCAT('%',#{groupNo},'%')
+        </if>
+    </select>
+
+    <select id="queryCarPartsByDetailId" parameterType="com.reptile.carwebreptileyqy.dto.CarPartsDTO" resultType="com.reptile.carwebreptileyqy.entity.CarPartsEntity" >
+        <bind name="key_offset" value="(currentPage-1)*20"></bind>
+        SELECT p.id,p.from_time AS fromTime,p.to_time AS toTime,p.parts_no AS partsNo,p.parts_name AS partsName,p.instruction,p.group_no AS groupNo,p.pnc
+        FROM car_parts_info p
+        LEFT JOIN car_parts_info_type_detail i
+        ON i.car_parts_info_id=p.id
+        LEFT JOIN car_type_detail d
+        ON i.car_type_detail_id = d.id
+        LEFT JOIN car_type t
+        ON i.car_type_id=t.id
+        where 1=1
+        <if test="carTypeId != null and carTypeId != ''">
+            and i.car_type_id=#{carTypeId}
+        </if>
+        <if test="carTypeDetailId != null and carTypeDetailId != ''">
+            and i.car_type_detail_id=#{carTypeDetailId}
+        </if>
+        <if test="groupNo != null and groupNo != ''">
+            and p.group_no like CONCAT('%',#{groupNo},'%')
+        </if>
+        LIMIT #{key_offset},20
+    </select>
+
+    <select id="totalQueryCarPartsByDetailId" parameterType="com.reptile.carwebreptileyqy.dto.CarPartsDTO" resultType="int" >
+        SELECT count(p.id)
+        FROM car_parts_info p
+        LEFT JOIN car_parts_info_type_detail i
+        ON i.car_parts_info_id=p.id
+        LEFT JOIN car_type_detail d
+        ON i.car_type_detail_id = d.id
+        LEFT JOIN car_type t
+        ON i.car_type_id=t.id
+        where 1=1
+        <if test="carTypeId != null and carTypeId != ''">
+            and i.car_type_id=#{carTypeId}
+        </if>
+        <if test="carTypeDetailId != null and carTypeDetailId != ''">
+            and i.car_type_detail_id=#{carTypeDetailId}
+        </if>
+        <if test="groupNo != null and groupNo != ''">
+            and p.group_no like CONCAT('%',#{groupNo},'%')
+        </if>
+    </select>
+
+    <select id="autoPartsInfoList" parameterType="com.reptile.carwebreptileyqy.dto.CarPartsDTO" resultType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity" >
+        <bind name="key_offset" value="(currentPage-1)*20"></bind>
+        SELECT p.id,
+               p.product_number AS productNumber,
+               p.product_name AS productName,
+               p.vehicle_model AS vehicleModel,
+               p.wholesale_price AS wholesalePrice,
+               p.retail_price AS retailPrice,
+               p.discount_price AS discountPrice,
+               ifnull(p.factory_number,'') AS factoryNumber,
+               ifnull(p.specification,'') AS specification
+        FROM auto_parts_info p where 1=1
+        <if test="queryString != null and queryString != ''">
+            and CONCAT(p.product_number,p.product_name,p.vehicle_model) LIKE CONCAT ('%', #{queryString},'%')
+        </if>
+        LIMIT #{key_offset},20
+    </select>
+
+    <select id="autoPartsInfoTotal" parameterType="com.reptile.carwebreptileyqy.dto.CarPartsDTO" resultType="int" >
+        SELECT count(p.id) FROM auto_parts_info p where 1=1
+        <if test="queryString != null and queryString != ''">
+            and CONCAT(p.product_number,p.product_name,p.vehicle_model) LIKE CONCAT ('%', #{queryString},'%')
+        </if>
+    </select>
+</mapper>
