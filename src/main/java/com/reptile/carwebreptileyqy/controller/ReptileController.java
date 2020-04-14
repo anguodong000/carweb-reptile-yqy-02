@@ -2,6 +2,7 @@ package com.reptile.carwebreptileyqy.controller;
 
 import com.reptile.carwebreptileyqy.service.ReptileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,6 +65,26 @@ public class ReptileController {
     @RequestMapping("/tabSwiper")
     public String tabSwiper(ModelMap modelMap) {
         return "tabSwiper";
+    }
+
+    @RequestMapping("/hinges")
+    public String hinges(ModelMap modelMap) {
+        return "hinges/hinges";
+    }
+
+    @RequestMapping("/carHinges/importCarHingesHtml")
+    public String importCarHingesHtml() {
+        return "hinges/import_carhinges";
+    }
+
+    @RequestMapping("/login-view")
+    public String login(ModelMap modelMap) {
+        return "login";
+    }
+
+    @RequestMapping("/register-view")
+    public String registerView(ModelMap modelMap) {
+        return "register";
     }
 
     @PostMapping(value = "/upload")

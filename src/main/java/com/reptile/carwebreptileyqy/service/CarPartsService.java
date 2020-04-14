@@ -1,6 +1,7 @@
 package com.reptile.carwebreptileyqy.service;
 
 import com.reptile.carwebreptileyqy.dto.CarPartsDTO;
+import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
 import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,4 +22,6 @@ public interface CarPartsService {
     List<CarPartsEntity> queryCarPartsByDetailId(CarPartsDTO carPartsDTO);
 
     int totalQueryCarPartsByDetailId(CarPartsDTO carPartsDTO);
+
+    int createPriceNeed(QueryPriceDto queryPriceDto);
 }

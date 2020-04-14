@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
 <head>
 	<title>汽车配件查询网</title>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.png"/>
-	<link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/owl.carousel.min.css">
@@ -36,7 +37,16 @@
 			<div class="top-bar-right">
 				<ul class="header-user-links">
 					<li>
-						<a href="#">您好，请登录 免费注册</a>
+						<div sec:authorize="!isAuthenticated()">
+							您好,<a href="#"><span style="color:red">请登录</span></a>
+							<a href="/logout" title="退出">退出</a>
+						</div>
+						<!--您好,<a href="#"><span style="color:red" sec:authentication="name"></span></a>-->
+						<div sec:authorize="isAuthenticated()">
+							您好,<a href="#"><span style="color:red" sec:authentication="name"></span></a>
+							<a href="/logout" title="退出">退出</a>
+						</div>
+
 					</li>
 				</ul>
 			</div>
@@ -91,6 +101,9 @@
 								<a href="/index" class="emeriss-menu-item-title" title="Home">首页</a>
 							</li>
 							<li class="menu-item">
+								<a href="/hinges" class="emeriss-menu-item-title" title="Home">合叶</a>
+							</li>
+							<li class="menu-item">
 								<a href="#" class="emeriss-menu-item-title" title="About">关于我们</a>
 							</li>
 						</ul>
@@ -128,9 +141,9 @@
 								<th style="width:130px;text-align:center;vertical-align:middle;">商品编号</th>
 								<th style="width:130px;text-align:center;vertical-align:middle;">商品名称</th>
 								<th style="width:130px;text-align:center;vertical-align:middle;">车型</th>
-								<th style="width:130px;text-align:center;vertical-align:middle;">批发价格(单位：元)</th>
+								<!--<th style="width:130px;text-align:center;vertical-align:middle;">批发价格(单位：元)</th>-->
 								<th style="width:130px;text-align:center;vertical-align:middle;">零售价格(单位：元)</th>
-								<th style="width:130px;text-align:center;vertical-align:middle;">优惠价格(单位：元)</th>
+								<!--<th style="width:130px;text-align:center;vertical-align:middle;">优惠价格(单位：元)</th>-->
 								<th style="width:130px;text-align:center;vertical-align:middle;">厂家编号</th>
 								<th style="width:130px;text-align:center;vertical-align:middle;">规格</th>
 							</tr>
@@ -508,7 +521,6 @@
 	<script src="../js/lightbox.min.js"></script>
 	<script src="../js/owl.thumbs.min.js"></script>
 	<script src="../js/jquery.scrollbar.min.js"></script>
-	<script src='https://ditu.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
 	<script src="../js/frontend-plugin.js"></script>
 	<script>
 		$(function() {
@@ -547,9 +559,11 @@
 						$td1 = $('<td style="text-align:center;vertical-align:middle;">'+item.productNumber+'</td>');
 						$td2 = $('<td style="text-align:center;vertical-align:middle;">'+item.productName+'</td>');
 						$td3 = $('<td style="text-align:center;vertical-align:middle;">'+item.vehicleModel+'</td>');
-						$td4 = $('<td style="text-align:center;vertical-align:middle;">'+item.wholesalePrice+'</td>');
-						$td5 = $('<td style="text-align:center;vertical-align:middle;">'+item.retailPrice+'</td>');
-						$td6 = $('<td style="text-align:center;vertical-align:middle;">'+item.discountPrice+'</td>');
+						//$td4 = $('<td style="text-align:center;vertical-align:middle;">'+item.wholesalePrice+'</td>');
+						//$td5 = $('<td style="text-align:center;vertical-align:middle;">'+item.retailPrice+'</td>');
+						$td5 = $('<td id="retailPricetd'+item.id+'" style="text-align:center;vertical-align:middle;"><a id="priceStr'+item.id+'" style="color:dodgerblue;" href="javascript:queryPrice('+item.id+','+item.retailPrice+')">查看价格</a></td>');
+						//$td5_show_price = $('<td style="text-align:center;vertical-align:middle;">'+item.retailPrice+'</td>');
+						//$td6 = $('<td style="text-align:center;vertical-align:middle;">'+item.discountPrice+'</td>');
 						$td7 = $('<td style="text-align:center;vertical-align:middle;">'+item.factoryNumber+'</td>');
 						$td7Null = $('<td style="text-align:center;vertical-align:middle;"></td>');
 						$td8 = $('<td style="text-align:center;vertical-align:middle;">'+item.specification+'</td>');
@@ -558,9 +572,9 @@
 						$tr.append($td1);
 						$tr.append($td2);
 						$tr.append($td3);
-						$tr.append($td4);
+						//$tr.append($td4);
 						$tr.append($td5);
-						$tr.append($td6);
+						//$tr.append($td6);
 						if(item.factoryNumber==undefined){
 							$tr.append($td7Null);
 						}else{
@@ -680,6 +694,29 @@
 				return false;
 			}
 		});
+
+		function queryPrice(partsId,price){
+			var param = {partsId:partsId,price:price};
+			$.ajax({
+				type:"POST",
+				data:JSON.stringify(param),
+				url:"/carParts/createPartsNeed",
+				contentType:"application/json",
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					if(data.code==200){
+						$('#retailPricetd'+partsId).append(price);
+						$('#priceStr'+partsId).empty();
+					}
+				},
+				error:function(e){
+					window.location.href="/login-view";
+					console.log(e);
+				}
+
+			});
+		}
 		/*<a href="javascript:autoPartList('+currentPage+')" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
 		<a href="#" class="page-numbers">1</a>
 				<a href="#" class="page-numbers">2</a>

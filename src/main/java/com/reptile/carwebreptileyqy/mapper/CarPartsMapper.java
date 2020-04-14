@@ -1,6 +1,7 @@
 package com.reptile.carwebreptileyqy.mapper;
 
 import com.reptile.carwebreptileyqy.dto.CarPartsDTO;
+import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
 import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import org.apache.ibatis.annotations.Insert;
@@ -25,4 +26,7 @@ public interface CarPartsMapper {
     List<CarPartsEntity> queryCarPartsByDetailId(CarPartsDTO carPartsDTO);
 
     int totalQueryCarPartsByDetailId(CarPartsDTO carPartsDTO);
+
+    @Insert("insert into price_need(partsId) values(#{partsId})")
+    int createPriceNeed(QueryPriceDto queryPriceDto);
 }

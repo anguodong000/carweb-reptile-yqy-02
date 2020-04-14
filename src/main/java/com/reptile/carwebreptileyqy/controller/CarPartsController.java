@@ -1,25 +1,19 @@
 package com.reptile.carwebreptileyqy.controller;
 
 import com.reptile.carwebreptileyqy.dto.CarPartsDTO;
-import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
+import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
+import com.reptile.carwebreptileyqy.dto.RegisterDto;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import com.reptile.carwebreptileyqy.service.CarPartsService;
+import com.reptile.carwebreptileyqy.service.UserService;
 import com.reptile.carwebreptileyqy.util.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.solr.client.solrj.SolrClient;
-import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.common.SolrDocument;
-import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.params.MapSolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
-import org.springframework.data.solr.core.query.Criteria;
-import org.springframework.data.solr.core.query.HighlightOptions;
-import org.springframework.data.solr.core.query.HighlightQuery;
-import org.springframework.data.solr.core.query.SimpleHighlightQuery;
-import org.springframework.data.solr.core.query.result.HighlightEntry;
-import org.springframework.data.solr.core.query.result.HighlightPage;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
@@ -36,6 +30,9 @@ public class CarPartsController {
 
     @Autowired
     SolrClient solrClient;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     SolrTemplate solrTemplate;
@@ -92,30 +89,70 @@ public class CarPartsController {
             @RequestBody CarPartsDTO carPartsDTO)  {
         BaseResponse baseResponse = new BaseResponse();
         Map responseMap = new LinkedHashMap();
-        /*List<AutoPartsInfoEntity> list = carPartsService.autoPartsInfoList(carPartsDTO);
-        int total = carPartsService.autoPartsInfoTotal(carPartsDTO);*/
-
         /**
          * 通过solrJ查询 7.1.0查询方式
          */
-        Map<String, String> queryParamMap = new HashMap<>();
+        List list = new ArrayList();
+        long total = 0L;
+        Map queryParamMap = new HashMap<>();
         if(carPartsDTO.getQueryString().equals("")){
             queryParamMap.put("q", "*:*");
         }else{
             queryParamMap.put("q", "textIk:"+carPartsDTO.getQueryString());
         }
+        queryParamMap.put("start",carPartsDTO.getCurrentPage());
+        queryParamMap.put("rows",20);
         MapSolrParams queryParams = new MapSolrParams(queryParamMap);
         try{
             QueryResponse response = solrClient.query(queryParams);
-            SolrDocumentList solrDocumentList = response.getResults();
-            long total = response.getResults().getNumFound();
+            list = response.getResults();
+            total = response.getResults().getNumFound();
+            /**
+             * 如果查询不出数据，就用编号去数据库查询（索引匹配问题，没有匹配到数据）
+             */
+            if(total==0){
+                list = carPartsService.autoPartsInfoList(carPartsDTO);
+                total = carPartsService.autoPartsInfoTotal(carPartsDTO);
+            }
             responseMap.put("total",total);
             responseMap.put("currentPage",carPartsDTO.getCurrentPage());
-            responseMap.put("autoPartsList",solrDocumentList);
+            responseMap.put("autoPartsList",list);
             baseResponse.setData(responseMap);
         }catch(Exception e){
             log.info("查询solr结果异常,e=",e.getMessage());
         }
         return baseResponse;
     }
+
+    @PostMapping(value = "/carParts/createPartsNeed",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    //@PreAuthorize("hasAuthority('QUERY_PARTS_PRICE')")
+    public BaseResponse createPartsNeed(
+            @RequestBody QueryPriceDto queryPriceDto){
+        BaseResponse baseResponse = new BaseResponse();
+        int i = carPartsService.createPriceNeed(queryPriceDto);
+        if(i!=1){
+            baseResponse.setCode("201");
+            baseResponse.setMessage("error");
+        }
+        return baseResponse;
+    }
+
+    /*@PostMapping(value = "/carWeb/register",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    //@PreAuthorize("hasAuthority('QUERY_PARTS_PRICE')")
+    public BaseResponse register(
+            @RequestBody RegisterDto registerDto){
+        BaseResponse baseResponse = new BaseResponse();
+        try{
+            int result = userService.createUser(registerDto);
+        }catch (Exception e){
+            baseResponse.setCode("202");
+            baseResponse.setExtraMessage("创建用户失败");
+            log.info("创建用户异常："+e.getMessage());
+        }
+        return baseResponse;
+    }*/
 }

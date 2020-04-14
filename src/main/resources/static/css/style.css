@@ -2023,6 +2023,7 @@ table tr:last-child td, table tr:last-child th {
 	margin-bottom: 40px;
 	text-transform: uppercase;
 	font-family: 'Oswald', serif;
+	text-align:center;
 }
 .blog-articles > .custom_blog_title,
 .comments-area > .custom_blog_title {
@@ -10026,6 +10027,7 @@ iframe {
 	.custom_blog_title {
 		margin-bottom: 30px;
 		font-size: 24px;
+		text-align:center;
 	}
 	.team-member .custom_blog_title {
 		margin-top: 53px;
@@ -10539,6 +10541,7 @@ iframe {
 	.custom_blog_title {
 		margin-bottom: 30px;
 		font-size: 18px;
+		text-align:center;
 	}
 	.blog-articles > .main-info-post {
 		margin-top: 30px;
