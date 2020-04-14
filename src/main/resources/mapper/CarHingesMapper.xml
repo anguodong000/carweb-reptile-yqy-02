@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reptile.carwebreptileyqy.mapper.CarHingesMapper">
+    <select id="list" parameterType="com.reptile.carwebreptileyqy.dto.CarHingesDTO" resultType="com.reptile.carwebreptileyqy.entity.CarHingesInfoEntity" >
+        <bind name="key_offset" value="(currentPage-1)*20"></bind>
+        SELECT h.hinges_number AS hingesNumber,
+        h.vehicle_model AS vehicleModel,
+        h.car_door_position AS carDoorPosition,
+        h.install_position AS installPosition
+        FROM car_hinges_info h WHERE 1=1
+        <if test="hingesNumber != null and hingesNumber != ''">
+            and h.hinges_number like CONCAT('%',#{hingesNumber},'%')
+        </if>
+        LIMIT #{key_offset},20
+    </select>
+
+    <select id="total" parameterType="com.reptile.carwebreptileyqy.dto.CarHingesDTO" resultType="int" >
+        SELECT count(h.id) FROM car_hinges_info h where 1=1
+        <if test="hingesNumber != null and hingesNumber != ''">
+            and h.hinges_number like CONCAT('%',#{hingesNumber},'%')
+        </if>
+    </select>
+</mapper>
