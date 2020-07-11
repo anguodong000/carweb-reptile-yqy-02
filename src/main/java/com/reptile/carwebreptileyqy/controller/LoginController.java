@@ -64,11 +64,10 @@ public class LoginController {
                 baseResponse.setCode("201");
                 baseResponse.setExtraMessage("用户名已存在");
             }else{
-                int result = userService.createUser(registerDto);
-
-                UserDetails userDetails = userDetailsService.loadUserByUsername(registerDto.getUsername());
+                userService.createUser(registerDto);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(registerDto.getTelephone());
                 //进行授权登录
-                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(registerDto.getUsername(), registerDto.getPassword(),userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(registerDto.getTelephone(), registerDto.getPassword(),userDetails.getAuthorities());
                 try{
                     token.setDetails(new WebAuthenticationDetails(request));
                     Authentication authenticatedUser = authenticationManager.authenticate(token);

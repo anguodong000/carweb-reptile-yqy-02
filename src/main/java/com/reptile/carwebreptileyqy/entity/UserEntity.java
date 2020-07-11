@@ -13,4 +13,6 @@ public class UserEntity implements Serializable {
     private String telephone;
     private String email;
     private String createTime;
+    private String company;
+    private String companyAddress;
 }

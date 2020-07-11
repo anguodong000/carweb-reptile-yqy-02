@@ -11,8 +11,8 @@ import java.util.Set;
 @Mapper
 public interface UserMapper {
 
-    @Select("SELECT u.id as id,u.user_name as username,u.user_password as password,u.telephone,u.email FROM user_info u where u.user_name=#{username} limit 1")
-    UserEntity findByUsername(String username);
+    @Select("SELECT u.id as id,u.user_name as username,u.user_password as password,u.telephone,u.email FROM user_info u where u.telephone=#{telephone} limit 1")
+    UserEntity findByUsername(String telephone);
 
     @Select("SELECT p.permission_code FROM user_info u " +
             "LEFT JOIN user_permission_info i " +
@@ -22,10 +22,10 @@ public interface UserMapper {
             "WHERE u.id=#{userId}")
     Set<String> findPermissionsByUserId(int userId);
 
-    @Select("SELECT COUNT(1) FROM user_info u WHERE u.user_name=#{username} ")
+    @Select("SELECT COUNT(1) FROM user_info u WHERE u.telephone=#{telephone} ")
     int isUsernameRepeat(RegisterDto registerDto);
 
-    @Insert("insert into user_info(id,user_name,user_password,telephone,email) values(#{id},#{username},#{password},#{telephone},#{email})")
+    @Insert("insert into user_info(user_name,user_password,telephone,email,company,company_address) values(#{username},#{password},#{telephone},#{email},#{company},#{companyAddress})")
     int createUser(UserEntity user);
 
     @Select("SELECT MAX(id) FROM user_info")

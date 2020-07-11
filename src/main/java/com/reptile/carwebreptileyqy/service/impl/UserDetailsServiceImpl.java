@@ -17,8 +17,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userService.findByUsername(username);
+    public UserDetails loadUserByUsername(String telephone) throws UsernameNotFoundException {
+        UserEntity user = userService.findByUsername(telephone);
         if (user == null) {
             throw new UsernameNotFoundException("该用户不存在");
         }
@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //将permissions转成数组
         String[] permissionArray = new String[permissions.size()];
         permissions.toArray(permissionArray);
-        UserDetails userDetails = User.withUsername(user.getUsername()).password(user.getPassword()).authorities(permissionArray).build();
+        UserDetails userDetails = User.withUsername(user.getTelephone()).password(user.getPassword()).authorities(permissionArray).build();
         return userDetails;
     }
 }

@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public UserEntity findByUsername(String username) {
-        return userMapper.findByUsername(username);
+    public UserEntity findByUsername(String telephone) {
+        return userMapper.findByUsername(telephone);
     }
 
     @Override
@@ -38,16 +38,18 @@ public class UserServiceImpl implements UserService {
     @Transactional(rollbackFor = Exception.class)
     public int createUser(RegisterDto registerDto) {
         UserEntity user = new UserEntity();
-        user.setUsername(registerDto.getUsername());
         user.setTelephone(registerDto.getTelephone());
+        user.setUsername(registerDto.getUsername());
         user.setEmail(registerDto.getEmail());
+        user.setCompany(registerDto.getCompany());
+        user.setCompanyAddress(registerDto.getCompanyAddress());
         String passwordEncode = BCrypt.hashpw(registerDto.getPassword(),BCrypt.gensalt());
         user.setPassword(passwordEncode);
         /**
          * 获取用户最大的id
          */
-        int userId = userMapper.getMaxUserId();
-        user.setId(userId+1);
+        /*int userId = userMapper.getMaxUserId();
+        user.setId(userId+1);*/
         userMapper.createUser(user);
         /**
          * 给用户赋权限
