@@ -48,12 +48,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login-view").permitAll()
                 .antMatchers("/register-view").permitAll()
-                .antMatchers("/index").permitAll()
+                //.antMatchers("/index").permitAll()
                 .antMatchers("/autoPartsInfo/list").permitAll()
                 .antMatchers("/carWeb/isUsernameRepeat").permitAll()
                 .antMatchers("/carWeb/register").permitAll()
                 .antMatchers("/carParts/createPartsNeed").access("hasAuthority('QUERY_PARTS_PRICE')")
-                //.antMatchers("/index").permitAll()
                 // 其他所有请求需要身份认证
                 .anyRequest().authenticated()
                 .and()
