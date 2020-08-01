@@ -1,16 +1,0 @@
-
-‹squid:UselessImportCheck"[Remove this unused import 'org.springframework.data.solr.core.query.result.HighlightEntry'.( ¿¯ÿÿÿÿÿ8±Çïä‘.
-„squid:UselessImportCheck"TRemove this unused import 'org.springframework.data.solr.core.query.HighlightQuery'.(ëËßúÿÿÿÿ8±Çïä‘.
-]squid:S18540":Remove this useless assignment to local variable "result".(£Âô¾øÿÿÿÿ8íŞ½ë.
-psquid:UselessImportCheck"@Remove this unused import 'org.apache.solr.common.SolrDocument'.(‰Î¿Óüÿÿÿÿ8¤òóä‘.
-msquid:UselessImportCheck
-"CRemove this unused import 'org.apache.solr.client.solrj.SolrQuery'.(æİág8¤òóä‘.
-Nsquid:S14810"+Remove this unused "result" local variable.(£Âô¾øÿÿÿÿ8íŞ½ë.
-…squid:UselessImportCheck"ZRemove this unused import 'org.springframework.data.solr.core.query.SimpleHighlightQuery'.(ñŸğñ8±Çïä‘.
-Fsquid:S11482"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8íŞ½ë.
-isquid:S1192A"FDefine a constant instead of duplicating this literal "total" 3 times.(Ú®Ñşÿÿÿÿ8¼öêÛ‘.
-†squid:UselessImportCheck"VRemove this unused import 'org.springframework.data.solr.core.query.HighlightOptions'.(¨ãšúøÿÿÿÿ8±Çïä‘.
-…squid:UselessImportCheck"ZRemove this unused import 'org.springframework.data.solr.core.query.result.HighlightPage'.(åê‚Ë8±Çïä‘.
-nsquid:CommentedOutCodeLine_"<This block of commented-out lines of code should be removed.(ÛÙö±üÿÿÿÿ8‰Âö»‘.
-osquid:S1192B"LDefine a constant instead of duplicating this literal "currentPage" 3 times.(‘¹°úÿÿÿÿÿ8÷İö€.
-ysquid:UselessImportCheck"NRemove this unused import 'org.springframework.data.solr.core.query.Criteria'.(¨ˆ¨’8±Çïä‘.

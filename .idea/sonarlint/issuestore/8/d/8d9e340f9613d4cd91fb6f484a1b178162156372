@@ -1,412 +1,0 @@
-
-Gsquid:S1148“"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8‡¨ü€Ñ-
-Ysquid:S1141 "5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-W
-squid:S106Î"9Replace this use of System.out or System.err by a logger.(ú¼¿‹8Ö‘¢­Î-
-Vsquid:S1143÷$"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Ysquid:S1141Ø"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Ö‘¢­Î-
-\
-squid:S106Ü"9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8Ö‘¢­Î-
-nsquid:S2095¸"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¥½ó€Ñ-
-nsquid:S2095–"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8Õüş€Ñ-
-Ysquid:S1141İ""5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-•squid:S1192Í"vDefine a constant instead of duplicating this literal "http://wpc.mobis.co.kr/Parts?cmd=getPartsList2&ptno=" 10 times.(İğÒ©8¨×­Î-
-Gsquid:S1148¥"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148©"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8–Ôÿ€Ñ-
-jsquid:S1192Î"KDefine a constant instead of duplicating this literal "partsStr:" 10 times.(ú¼¿‹8Ö‘¢­Î-
-W
-squid:S106Ú"9Replace this use of System.out or System.err by a logger.(³ÜüÌ8Ö‘¢­Î-
-W
-squid:S106³%"9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-V
-squid:S106ÿ "9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-jsquid:CommentedOutCodeLineš%"<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-W
-squid:S106¸$"9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-Gsquid:S1148”#"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143è%"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-ssquid:S1192Ü"ODefine a constant instead of duplicating this literal "partCatalogs:" 10 times.(œ¢çÓøÿÿÿÿ8Ö‘¢­Î-
-nsquid:S2095ª"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¼‡ş€Ñ-
-Ysquid:S1141å!"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148·"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8°Øü€Ñ-
-Vsquid:S1143™"7Remove this continue statement from this finally block.(ÉŠ©ƒ8Ö‘¢­Î-
-Vsquid:S1143–#"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-\
-squid:S106""9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8ø˜Ñ-
-\
-squid:S106Ú$"9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-nsquid:S2095æ"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¥½ó€Ñ-
-jsquid:CommentedOutCodeLineØ!"<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&SGMT=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-nsquid:S2095º"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8–Ôÿ€Ñ-
-W
-squid:S106×""9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-Gsquid:S1148ß"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÿ˜ó€Ñ-
-\
-squid:S106í#"9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8Õüş€Ñ-
-Gsquid:S1148Õ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8úù€Ñ-
-ssquid:S1192÷"UDefine a constant instead of duplicating this literal "Content-Disposition" 40 times.(èÍò$8‹±¢®Î-
-Fsquid:S11485"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148½"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÆØş€Ñ-
-Gsquid:S1148û"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-vsquid:S3776²#"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(•–ö­üÿÿÿÿ8ø˜Ñ-
-Ysquid:S1141Ô%"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-\
-squid:S106ù "9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-nsquid:S2095¤"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8õòû€Ñ-
-W
-squid:S106&"9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-Gsquid:S1148ü$"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-W
-squid:S106Ñ#"9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-Ysquid:S1141ı "5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-–squid:S1192Û"wDefine a constant instead of duplicating this literal "&lang=CH&hkgb=K&regns=CHN&views=Y&sgmts=E%2CJ%2CN%2CR" 10 times.(ö±ûÓ8¤›­Î-
-W
-squid:S106¬$"9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-Ysquid:S1141œ"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-\
-squid:S106«%"9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-psquid:S3776ñ"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(µÍî8ø˜Ñ-
-V
-squid:S106"9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-nsquid:S2095ú"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8‹±¢®Î-
-nsquid:S2095²"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ŠçÙ­Î-
-Gsquid:S1148—"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148ë"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8æ¯ş€Ñ-
-Gsquid:S1148ä&"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143ş$"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Vsquid:S1143Ø&"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-\
-squid:S106‰ "9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143†$"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-W
-squid:S106–"9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-Vsquid:S1143Ô "7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Gsquid:S1148­"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-\
-squid:S106© "9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-\
-squid:S106­ "9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8ø˜Ñ-
-\
-squid:S106é#"9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148ª#"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-jsquid:CommentedOutCodeLineè "<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-V
-squid:S106ï!"9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-jsquid:CommentedOutCodeLineŠ&"<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-tsquid:S1192÷"VDefine a constant instead of duplicating this literal "attachment;filename=" 40 times.(èÍò$8‹±¢®Î-
-ksquid:S1192ø"GDefine a constant instead of duplicating this literal "CRNM=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148­"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8öı€Ñ-
-nsquid:S2095È"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8‡¨ü€Ñ-
-\
-squid:S106€"9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8Ö‘¢­Î-
-nsquid:S2095Ò"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ÄÎû€Ñ-
-nsquid:S2095Ö"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8‹±¢®Î-
-nsquid:S2095Ş"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¨ó€Ñ-
-Vsquid:S1143æ&"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-W
-squid:S106á""9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-Vsquid:S1143Ü"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-qsquid:S3776Ã"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(‰¢±Û8Ö‘¢­Î-
-W
-squid:S106“#"9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-Gsquid:S1148á"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Õüş€Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&PKGB=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148å"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8‡¨ü€Ñ-
-jsquid:CommentedOutCodeLine©$"<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-Gsquid:S1148í%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148ï"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8õòû€Ñ-
-W
-squid:S106ƒ$"9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-Ysquid:S1141—&"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148ü%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148£"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¼‡ş€Ñ-
-Gsquid:S1148ƒ%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-nsquid:S2095ü"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¼‡ş€Ñ-
-vsquid:S3776Â""RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(ë¬œüÿÿÿÿ8ø˜Ñ-
-\
-squid:S106!"9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8ø˜Ñ-
-\
-squid:S106›&"9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-W
-squid:S106£&"9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-Gsquid:S1148ñ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148õ$"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-lsquid:S1192È"HDefine a constant instead of duplicating this literal "Cookie" 10 times.(à±Ê¿şÿÿÿÿ8Ö‘¢­Î-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&PNCD=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Ysquid:S1141Å#"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-nsquid:S2095„"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8‹±¢®Î-
-Ysquid:S1141Í#"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-\
-squid:S106É#"9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148»!"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-qsquid:S3776)"SRefactor this method to reduce its Cognitive Complexity from 123 to the 15 allowed.(¶Ğğğ8Ö‘¢­Î-
-W
-squid:S106ñ!"9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-Vsquid:S1143ï%"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-W
-squid:S106Ò"9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-Gsquid:S1148‹$"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-nsquid:S2095€"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ô³û€Ñ-
-Gsquid:S1148š$"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-W
-squid:S106 "9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-\
-squid:S106™!"9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-W
-squid:S106Ë""9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-W
-squid:S106»#"9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-\squid:S2130}"9Use "Integer.parseInt" for this string-to-int conversion.(¡²õüÿÿÿÿ8Ö‘¢­Î-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&UCCT=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Ysquid:S1141õ "5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-hsquid:S1192Ú"IDefine a constant instead of duplicating this literal "partNo:" 10 times.(³ÜüÌ8¤›­Î-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&GRTY=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&PCCD=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Ysquid:S1141Á"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Ysquid:S1141í!"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-W
-squid:S106£""9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-qsquid:S3776¢$"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(´²ƒé8ø˜Ñ-
-qsquid:S3776“%"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(¶êµì8ø˜Ñ-
-tsquid:S1192ø"PDefine a constant instead of duplicating this literal "&LANG=CH&GRNO=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-nsquid:S2095°"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143½!"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Gsquid:S1148™"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8æ¯ş€Ñ-
-Gsquid:S1148Ú "#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143ã"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-V
-squid:S106ß""9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-W
-squid:S106©%"9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-Vsquid:S1143¦""7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-V
-squid:S106â"9Replace this use of System.out or System.err by a logger.(’İ›W8Ö‘¢­Î-
-Gsquid:S1148¢#"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148…"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8–Ôÿ€Ñ-
-Gsquid:S1148é	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148ì&"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-nsquid:S2095ò"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ÆØş€Ñ-
-Gsquid:S1148¡"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8‹±¢®Î-
-Vsquid:S1143Æ "7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-vsquid:S3776å"RRefactor this method to reduce its Cognitive Complexity from 47 to the 15 allowed.(Ó™¿ûÿÿÿÿ8Ö‘¢­Î-
-Vsquid:S1143…%"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-qsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(Ÿ”¸8ø˜Ñ-
-\
-squid:S106Ï%"9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8ø˜Ñ-
-Ysquid:S1141‚#"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-‡squid:S1192ø"cDefine a constant instead of duplicating this literal "&ISVIN=MODEL&AS=N&MATCH=OFF&LRCD=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148ƒ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¥½ó€Ñ-
-W
-squid:S106å%"9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-Gsquid:S1148Ó"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-isquid:S1192–"JDefine a constant instead of duplicating this literal "groupNo:" 10 times.(ƒÿœ±8Ö‘¢­Î-
-jsquid:CommentedOutCodeLineø"<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-Gsquid:S1148‰"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8°Øü€Ñ-
-nsquid:S2095¾"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8°Øü€Ñ-
-nsquid:S2095"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8öı€Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&VHCD=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-W
-squid:S106‘ "9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-Gsquid:S1148’$"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-W
-squid:S106÷ "9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-V
-squid:S106À$"9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-›squid:S1192Û"|Define a constant instead of duplicating this literal "http://wpc.mobis.co.kr/Parts?cmd=getPartCatalogList2&ptno=" 10 times.(ö±ûÓ8Ö‘¢­Î-
-\
-squid:S106Ş$"9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8Õüş€Ñ-
-Gsquid:S1148«""#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Nsquid:S1068#"0Remove this unused "sessionValue" private field.(š™éà8Ö‘¢­Î-
-Gsquid:S1148Ñ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÁÀı€Ñ-
-nsquid:S2095Œ"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¨ó€Ñ-
-Gsquid:S1148„$"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148Ö&"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-W
-squid:S106™&"9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-Gsquid:S1148´!"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Ysquid:S1141¶$"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148Ê!"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148æ%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&BPNO=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Vsquid:S1143ß&"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-vsquid:S3776â "RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(’ã¶Üûÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143$"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-™squid:S1192ã"uDefine a constant instead of duplicating this literal "http://wpc.mobis.co.kr/Parts?cmd=getPartInfo2&ptno=" 10 times.(ïñıÿÿÿÿ8¤›­Î-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&HSGB=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-nsquid:CommentedOutCodeLine9"<This block of commented-out lines of code should be removed.(ÃÏ×ãûÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148é"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-nsquid:S2095´"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ÁÀı€Ñ-
-Gsquid:S1148»
-"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ûúò€Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&VIEW=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148º""#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-W
-squid:S106Â$"9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-\
-squid:S106é!"9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148Û"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8öı€Ñ-
-V
-squid:S106Ï#"9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-Ysquid:S1141…"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148Â!"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-¤squid:S1192Í"„Define a constant instead of duplicating this literal "&pncd=&lang=CH&page=1&hkgb=K&regns=CHN&views=Y&sgmts=E%2CJ%2CN%2CR" 10 times.(İğÒ©8Ö‘¢­Î-
-Ysquid:S1141Ÿ&"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-\
-squid:S106Ù""9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-W
-squid:S106û"9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&OPTY=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-nsquid:S2095Š"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8úù€Ñ-
-nsquid:S2095è"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¦ÿ€Ñ-
-Gsquid:S1148Å"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8‹±¢®Î-
-nsquid:S2095	"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¤Øò€Ñ-
-Gsquid:S1148ù"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ô³û€Ñ-
-Ysquid:S1141à"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148Ä "#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143 "7Remove this continue statement from this finally block.(ÉŠ©ƒ8Ö‘¢­Î-
-Vsquid:S1143Í "7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Ysquid:S1141ã$"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143Ä!"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Vsquid:S1143§"7Remove this continue statement from this finally block.(ÉŠ©ƒ8Ö‘¢­Î-
-Ysquid:S1141Ä&"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-V
-squid:S106‹"9Replace this use of System.out or System.err by a logger.(ßÊ¼38Ö‘¢­Î-
-W
-squid:S106³!"9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-\
-squid:S106˜"9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-V
-squid:S106 "9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-nsquid:S2095ğ	"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8Ûúò€Ñ-
-\
-squid:S106ı""9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8ø˜Ñ-
-~squid:S1192ö"ZDefine a constant instead of duplicating this literal "application/vnd.ms-excel" 40 times.(÷Üäúÿÿÿÿ8‹±¢®Î-
-nsquid:S2095â"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8öı€Ñ-
-Gsquid:S1148¤""#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148›#"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-\
-squid:S106‰""9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-W
-squid:S106Ç#"9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-V
-squid:S106±%"9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-esquid:S1192÷"GDefine a constant instead of duplicating this literal "utf-8" 40 times.(èÍò$8‹±¢®Î-
-V
-squid:S106¡&"9Replace this use of System.out or System.err by a logger.(’İ›W8ø˜Ñ-
-\
-squid:S106¿&"9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148ı"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-nsquid:S2095Î"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8æ¯ş€Ñ-
-nsquid:S2095¨"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8‹±¢®Î-
-Gsquid:S1148İ&"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Vsquid:S1143#"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-W
-squid:S106Õ&"9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-jsquid:CommentedOutCodeLineÈ""<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-vsquid:S3776Ò!"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(àî§ÿÿÿÿÿÿ8ø˜Ñ-
-nsquid:S2095†"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ÁÀı€Ñ-
-Gsquid:S1148‹%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Õüş€Ñ-
-nsquid:S2095Ì"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¤Øò€Ñ-
-nsquid:S2095 "JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8æ¯ş€Ñ-
-W
-squid:S106%"9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-Gsquid:S1148²""#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-nsquid:S2095”"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ÿ˜ó€Ñ-
-Vsquid:S1143¶!"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Gsquid:S1148Ë"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ô³û€Ñ-
-W
-squid:S106–"9Replace this use of System.out or System.err by a logger.(ƒÿœ±8Ö‘¢­Î-
-nsquid:S2095Ø"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8¼‡ş€Ñ-
-nsquid:S2095Ü"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8Šû€Ñ-
-W
-squid:S106ë "9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-\
-squid:S106º$"9Replace this use of System.out or System.err by a logger.(œ¢çÓøÿÿÿÿ8ø˜Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&EFOT=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-lsquid:S1192ã"HDefine a constant instead of duplicating this literal "&bpno=" 10 times.(ïñıÿÿÿÿ8Ö‘¢­Î-
-W
-squid:S106‡ "9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-\
-squid:S106»&"9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-Ysquid:S1141”"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148Ò "#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-\
-squid:S106ü"9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8Ö‘¢­Î-
-¡squid:S1192÷"}Define a constant instead of duplicating this literal "http://wpc.mobis.co.kr/TextSearch?cmd=getFinalGroupDataList" 10 times.(¤ÑØÙûÿÿÿÿ8¤›­Î-
-nsquid:S2095®"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ô³û€Ñ-
-W
-squid:S106ç!"9Replace this use of System.out or System.err by a logger.(³ÜüÌ8ø˜Ñ-
-¢squid:S1192ã"~Define a constant instead of duplicating this literal "&hkgb=K&regns=CHN&views=Y&sgmts=E%2CJ%2CN%2CR&bpnos=&mf=A%2C" 10 times.(ïñıÿÿÿÿ8Ö‘¢­Î-
-Ysquid:S1141¯%"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-qsquid:S1192È"MDefine a constant instead of duplicating this literal "sessionValue" 9 times.(à±Ê¿şÿÿÿÿ8Ö‘¢­Î-
-Vsquid:S1143Õ"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-W
-squid:S106ô$"9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-Gsquid:S1148³"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¦ÿ€Ñ-
-nsquid:S2095ì"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8°Øü€Ñ-
-Gsquid:S1148ó"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8‹±¢®Î-
-\
-squid:S106Ë%"9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148Ë "#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-nsquid:S2095Ä"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8Õüş€Ñ-
-qsquid:S3776„&"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(ü™çé8ø˜Ñ-
-jsquid:CommentedOutCodeLine¸#"<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-nsquid:S2095Â
-"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8ÿ˜ó€Ñ-
-qsquid:S1192ä"RDefine a constant instead of duplicating this literal "partCatalogInfo:" 10 times.(àÄõæ8Ö‘¢­Î-
-Vsquid:S1143­""7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Gsquid:S1148õ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¼‡ş€Ñ-
-Gsquid:S1148Ç"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¼‡ş€Ñ-
-W
-squid:S106Š"9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-\
-squid:S106ù""9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-osquid:CommentedOutCodeLineõ"<This block of commented-out lines of code should be removed.(ÃÏ×ãûÿÿÿÿ8Ö‘¢­Î-
-nsquid:S2095š"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8‡¨ü€Ñ-
-Ysquid:S1141² "5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Ysquid:S1141ò#"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148Ï"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8‹±¢®Î-
-Ysquid:S1141§%"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148×"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8–Ôÿ€Ñ-
-Gsquid:S1148±"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¥½ó€Ñ-
-Vsquid:S1143ö%"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-nsquid:S2095ö"JUse try-with-resources or close this "HSSFWorkbook" in a "finally" clause.(ĞÅ±Ìøÿÿÿÿ8õòû€Ñ-
-Ysquid:S1141Õ""5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Ysquid:S1141… "5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-ssquid:S1192Ğ"TDefine a constant instead of duplicating this literal "NoSessionException" 10 times.(õÙ·¬8Ö‘¢­Î-
-‚squid:S1192ü"^Define a constant instead of duplicating this literal "getFinalGroupDataListResult:" 10 times.(È·¹Šûÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÿ˜ó€Ñ-
-Gsquid:S1148á"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&HKGB=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148—	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148Á"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8õòû€Ñ-
-Vsquid:S1143”$"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-jsquid:CommentedOutCodeLineË"<This block of commented-out lines of code should be removed.(à«˜‰8Ö‘¢­Î-
-Gsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ö‘¢­Î-
-Gsquid:S1148Ú"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-W
-squid:S106!"9Replace this use of System.out or System.err by a logger.(àÄõæ8ø˜Ñ-
-W
-squid:S106Ã "9Replace this use of System.out or System.err by a logger.(ƒÿœ±8ø˜Ñ-
-lsquid:S1192ø"HDefine a constant instead of duplicating this literal "&EFIN=" 10 times.(¢ßœ®şÿÿÿÿ8Ö‘¢­Î-
-jsquid:CommentedOutCodeLine‡"<This block of commented-out lines of code should be removed.(à«˜‰8ø˜Ñ-
-Vsquid:S1143´""7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Vsquid:S1143¤#"7Remove this continue statement from this finally block.(ÉŠ©ƒ8ø˜Ñ-
-Ysquid:S1141’""5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Ysquid:S1141¾$"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148§"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¥½ó€Ñ-
-Gsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÄÎû€Ñ-
-Gsquid:S1148ô%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ø˜Ñ-
-W
-squid:S106ä"9Replace this use of System.out or System.err by a logger.(àÄõæ8Ö‘¢­Î-
-\
-squid:S106¸"9Replace this use of System.out or System.err by a logger.(È·¹Šûÿÿÿÿ8ø˜Ñ-
-\
-squid:S106¼"9Replace this use of System.out or System.err by a logger.(Èá·şıÿÿÿÿ8Šû€Ñ-
-esquid:S1192â"GDefine a constant instead of duplicating this literal "bpno:" 10 times.(’İ›W8¤›­Î-
-W
-squid:S106Û!"9Replace this use of System.out or System.err by a logger.(ú¼¿‹8ø˜Ñ-
-Ysquid:S1141¢!"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ø˜Ñ-
-Gsquid:S1148ÿ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÁÀı€Ñ-
