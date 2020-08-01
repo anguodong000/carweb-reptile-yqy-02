@@ -1971,7 +1971,7 @@ table tr:last-child td, table tr:last-child th {
 /*      MAIN         */
 /* -------------------- */
 .main-content {
-	padding-bottom: 65px;
+	padding-bottom: 50px;
 }
 .main-content.main-content-inlookbook {
 	padding-bottom: 0;
@@ -9147,7 +9147,7 @@ iframe {
 	background: #151515;
 }
 .footer .container-wapper {
-	padding-top: 60px;
+	padding-top: 30px;
 }
 .footer .footer-end {
 	padding: 20px 0;
@@ -11071,7 +11071,7 @@ a:hover, a:focus, a:active,
 		margin-bottom: 50px;
 	}
 	.main-content {
-		padding-bottom: 85px;
+		padding-bottom: 0px;
 	}
 	.instagram-wrapp .custommenu-title-blog {
 		margin-top: 70px;
