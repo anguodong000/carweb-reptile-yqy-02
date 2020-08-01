@@ -17,8 +17,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String telephone) throws UsernameNotFoundException {
-        UserEntity user = userService.findByUsername(telephone);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity user = userService.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("该用户不存在");
         }
