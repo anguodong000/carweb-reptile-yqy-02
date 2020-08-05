@@ -1,8 +1,8 @@
 package com.reptile.carwebreptileyqy.entity;
 
 import lombok.Data;
-
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 public class UserEntity implements Serializable {
@@ -12,7 +12,7 @@ public class UserEntity implements Serializable {
     private String password;
     private String telephone;
     private String email;
-    private String createTime;
+    private Date createTime;
     private String company;
     private String companyAddress;
 }

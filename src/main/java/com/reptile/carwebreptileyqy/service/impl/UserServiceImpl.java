@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Set;
 
 @Service
@@ -37,19 +38,18 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int createUser(RegisterDto registerDto) {
+        //获取用户最大id
+        int userId = userMapper.getMaxUserId();
         UserEntity user = new UserEntity();
+        user.setId(userId);
         user.setTelephone(registerDto.getTelephone());
         user.setUsername(registerDto.getUsername());
         user.setEmail(registerDto.getEmail());
         user.setCompany(registerDto.getCompany());
         user.setCompanyAddress(registerDto.getCompanyAddress());
+        user.setCreateTime(new Date());
         String passwordEncode = BCrypt.hashpw(registerDto.getPassword(),BCrypt.gensalt());
         user.setPassword(passwordEncode);
-        /**
-         * 获取用户最大的id
-         */
-        /*int userId = userMapper.getMaxUserId();
-        user.setId(userId+1);*/
         userMapper.createUser(user);
         /**
          * 给用户赋权限

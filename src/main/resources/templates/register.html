@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.png"/>
+	<link rel="shortcut icon" href="../images/timg.ico"/>
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/owl.carousel.min.css">
@@ -176,7 +176,7 @@
 		function checkForm(){
 			var flag = true;
 			var password = $("#password").val();
-			var telephone = $("#telephone").val();
+			var telephone = $.trim($("#telephone").val());
 
 			var param = {telephone:telephone};
 			if(telephone ==  null || telephone == ''){
@@ -213,9 +213,9 @@
 
 		function registerSubmit(){
 			var flag = true;
-			var username = $("#username").val();
+			var username = $.trim($("#username").val());
 			var password = $("#password").val();
-			var telephone = $("#telephone").val();
+			var telephone = $.trim($("#telephone").val());
 			var company = $("#company").val();
 			var companyAddress = $("#companyAddress").val();
 			var param = {username:username,password:password,telephone:telephone,company:company,companyAddress:companyAddress};
@@ -244,7 +244,7 @@
 							window.location.href="/index";
 						}
 						if(data.code==201){
-							alert("用户名已存在，请重新输入！")
+							alert("手机号已存在，请重新输入！")
 						}
 						if(data.code==202){
 							alert("用户名创建失败！")

@@ -25,12 +25,12 @@ public interface UserMapper {
     @Select("SELECT COUNT(1) FROM user_info u WHERE u.telephone=#{telephone} ")
     int isUsernameRepeat(RegisterDto registerDto);
 
-    @Insert("insert into user_info(user_name,user_password,telephone,email,company,company_address) values(#{username},#{password},#{telephone},#{email},#{company},#{companyAddress})")
+    @Insert("insert into user_info(id,user_name,user_password,telephone,email,company,company_address,create_time) values(#{id},#{username},#{password},#{telephone},#{email},#{company},#{companyAddress},#{createTime})")
     int createUser(UserEntity user);
 
-    @Select("SELECT MAX(id) FROM user_info")
+    @Select("SELECT MAX(id)+1 FROM user_info")
     int getMaxUserId();
 
-    @Insert("insert into user_permission_info(user_id,permission_id) values(#{id},1)")
+    @Insert("insert into user_permission_info(user_id,permission_id,create_time) values(#{id},1,#{createTime})")
     int createPermission(UserEntity user);
 }

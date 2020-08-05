@@ -62,7 +62,7 @@ public class LoginController {
             int userCount = userService.isUsernameRepeat(registerDto);
             if(userCount!=0){
                 baseResponse.setCode("201");
-                baseResponse.setExtraMessage("用户名已存在");
+                baseResponse.setExtraMessage("手机号已存在");
             }else{
                 userService.createUser(registerDto);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(registerDto.getTelephone());
@@ -80,6 +80,7 @@ public class LoginController {
         }catch (Exception e){
             baseResponse.setCode("202");
             baseResponse.setExtraMessage("创建用户失败");
+            //userService.deleteUserById();
             log.info("创建用户异常："+e.getMessage());
         }
         return baseResponse;

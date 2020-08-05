@@ -14,9 +14,13 @@ import org.apache.solr.common.params.MapSolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import java.util.*;
@@ -86,6 +90,7 @@ public class CarPartsController {
     @ResponseBody
     @Consumes(MediaType.APPLICATION_JSON)
     public BaseResponse autoPartsInfoList(
+            HttpServletRequest request, HttpServletResponse response,
             @RequestBody CarPartsDTO carPartsDTO)  {
         BaseResponse baseResponse = new BaseResponse();
         Map responseMap = new LinkedHashMap();
@@ -104,9 +109,9 @@ public class CarPartsController {
         queryParamMap.put("rows",20);
         MapSolrParams queryParams = new MapSolrParams(queryParamMap);
         try{
-            QueryResponse response = solrClient.query(queryParams);
-            list = response.getResults();
-            total = response.getResults().getNumFound();
+            QueryResponse queryResponse = solrClient.query(queryParams);
+            list = queryResponse.getResults();
+            total = queryResponse.getResults().getNumFound();
             /**
              * 如果查询不出数据，就用编号去数据库查询（索引匹配问题，没有匹配到数据）
              */
@@ -127,10 +132,13 @@ public class CarPartsController {
     @PostMapping(value = "/carParts/createPartsNeed",produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     @Consumes(MediaType.APPLICATION_JSON)
-    //@PreAuthorize("hasAuthority('QUERY_PARTS_PRICE')")
+    @PreAuthorize("hasAuthority('QUERY_PARTS_PRICE')")
     public BaseResponse createPartsNeed(
+            HttpServletRequest request, HttpServletResponse response,
             @RequestBody QueryPriceDto queryPriceDto){
+        String username = request.getRemoteUser();
         BaseResponse baseResponse = new BaseResponse();
+        queryPriceDto.setUsername(username);
         int i = carPartsService.createPriceNeed(queryPriceDto);
         if(i!=1){
             baseResponse.setCode("201");
