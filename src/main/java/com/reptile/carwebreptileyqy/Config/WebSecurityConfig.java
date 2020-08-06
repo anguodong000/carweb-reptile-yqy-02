@@ -52,6 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/autoPartsInfo/list").permitAll()
                 .antMatchers("/carWeb/isUsernameRepeat").permitAll()
                 .antMatchers("/carWeb/register").permitAll()
+                .antMatchers("/errorPage").permitAll()
+                .antMatchers("/error/999").permitAll()
                 .antMatchers("/carParts/createPartsNeed").access("hasAuthority('QUERY_PARTS_PRICE')")
                 // 其他所有请求需要身份认证
                 .anyRequest().authenticated()
@@ -60,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/index")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/index")
-                .failureUrl("/login?error")
+                .failureUrl("/errorPage")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)

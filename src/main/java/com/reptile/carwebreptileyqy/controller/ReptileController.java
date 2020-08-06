@@ -87,6 +87,11 @@ public class ReptileController {
         return "register";
     }
 
+    @RequestMapping("/errorPage")
+    public String errorPage(ModelMap modelMap) {
+        return "error/loginError";
+    }
+
     @PostMapping(value = "/upload")
     @ResponseBody
     public String uploadExcel(@RequestParam("file") MultipartFile file) {
