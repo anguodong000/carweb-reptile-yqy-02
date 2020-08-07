@@ -105,7 +105,7 @@ public class CarPartsController {
         }else{
             queryParamMap.put("q", "textIk:"+carPartsDTO.getQueryString());
         }
-        queryParamMap.put("start",carPartsDTO.getCurrentPage());
+        queryParamMap.put("start",carPartsDTO.getCurrentPage()-1);
         queryParamMap.put("rows",20);
         MapSolrParams queryParams = new MapSolrParams(queryParamMap);
         try{
