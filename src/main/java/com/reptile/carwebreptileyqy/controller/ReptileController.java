@@ -73,7 +73,7 @@ public class ReptileController {
     }
 
     @RequestMapping("/carHinges/importCarHingesHtml")
-    public String importCarHingesHtml() {
+    public String importCarHingesHtml(ModelMap modelMap) {
         return "hinges/import_carhinges";
     }
 
