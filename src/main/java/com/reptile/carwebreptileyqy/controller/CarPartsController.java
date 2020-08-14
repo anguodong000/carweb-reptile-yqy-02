@@ -129,6 +129,13 @@ public class CarPartsController {
         return baseResponse;
     }
 
+    /**
+     * 查询价格新增
+     * @param request
+     * @param response
+     * @param queryPriceDto
+     * @return
+     */
     @PostMapping(value = "/carParts/createPartsNeed",produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     @Consumes(MediaType.APPLICATION_JSON)

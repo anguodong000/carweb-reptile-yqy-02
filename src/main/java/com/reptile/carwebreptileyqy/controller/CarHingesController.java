@@ -38,6 +38,11 @@ public class CarHingesController {
         return "上传成功!";
     }
 
+    /**
+     * 合页列表查询
+     * @param carHingesDTO
+     * @return
+     */
     @PostMapping(value = "/carHinges/list",produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     @Consumes(MediaType.APPLICATION_JSON)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>汽车配件查询网</title>
 	<meta charset="UTF-8">
@@ -36,7 +36,16 @@
 			<div class="top-bar-right">
 				<ul class="header-user-links">
 					<li>
-						<a href="#">您好，请登录 免费注册</a>
+						<div sec:authorize="!isAuthenticated()">
+							您好,<a href="/login-view"><span style="color:red">请登录</span></a>
+							<a href="/logout" title="退出">退出</a>
+						</div>
+						<!--您好,<a href="#"><span style="color:red" sec:authentication="name"></span></a>-->
+						<div sec:authorize="isAuthenticated()">
+							您好,<a href="#"><span style="color:red" sec:authentication="name"></span></a>
+							<a href="/logout" title="退出">退出</a>
+						</div>
+
 					</li>
 				</ul>
 			</div>
