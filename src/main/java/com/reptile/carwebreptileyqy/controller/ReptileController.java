@@ -72,6 +72,11 @@ public class ReptileController {
         return "hinges/hinges";
     }
 
+    @RequestMapping("/userListPage")
+    public String userListPage(ModelMap modelMap) {
+        return "user/user_list";
+    }
+
     @RequestMapping("/carHinges/importCarHingesHtml")
     public String importCarHingesHtml(ModelMap modelMap) {
         return "hinges/import_carhinges";

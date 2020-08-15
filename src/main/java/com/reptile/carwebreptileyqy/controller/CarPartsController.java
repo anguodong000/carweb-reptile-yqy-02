@@ -4,6 +4,7 @@ import com.reptile.carwebreptileyqy.dto.CarPartsDTO;
 import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
 import com.reptile.carwebreptileyqy.dto.RegisterDto;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
+import com.reptile.carwebreptileyqy.entity.UserEntity;
 import com.reptile.carwebreptileyqy.service.CarPartsService;
 import com.reptile.carwebreptileyqy.service.UserService;
 import com.reptile.carwebreptileyqy.util.BaseResponse;
@@ -146,10 +147,17 @@ public class CarPartsController {
         String username = request.getRemoteUser();
         BaseResponse baseResponse = new BaseResponse();
         queryPriceDto.setUsername(username);
-        int i = carPartsService.createPriceNeed(queryPriceDto);
-        if(i!=1){
-            baseResponse.setCode("201");
-            baseResponse.setMessage("error");
+        //查询用户是否通过审核
+        UserEntity user = userService.findByUsername(username);
+        if(user.getIsAutyority()==0){
+            baseResponse.setCode("401");
+            baseResponse.setMessage("用户还未通过审核，请联系管理员！");
+        }else{
+            int i = carPartsService.createPriceNeed(queryPriceDto);
+            if(i!=1){
+                baseResponse.setCode("201");
+                baseResponse.setMessage("error");
+            }
         }
         return baseResponse;
     }

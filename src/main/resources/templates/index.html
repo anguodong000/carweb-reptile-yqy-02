@@ -375,7 +375,6 @@
 		$(function() {
 			queryAuthority();
 			autoPartList(1);
-
 		});
 
 		function autoPartList(currentPage){
@@ -556,6 +555,9 @@
 				dataType:"json",
 				success:function(data){
 					console.log(data);
+					if(data.code=401){
+						alert(data.message);
+					}
 					if(data.code==200){
 						$('#retailPricetd'+partsId).append(price);
 						$('#priceStr'+partsId).empty();
@@ -569,6 +571,7 @@
 			});
 		}
 
+		//查询是否具有用户审核权限
 		function queryAuthority(){
 			$.ajax({
 				type:"POST",
@@ -580,7 +583,7 @@
 					console.log("data:"+data);
 					var code = data.code;
 					if(code==200){
-						$li = $('<a href="#" class="emeriss-menu-item-title" title="About">用户审核</a>');
+						$li = $('<a href="/userListPage" class="emeriss-menu-item-title" title="About">用户审核</a>');
 						$('#user_authority_menu').append($li);
 					}
 				}

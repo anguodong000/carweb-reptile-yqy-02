@@ -1,11 +1,13 @@
 package com.reptile.carwebreptileyqy.controller;
 
+import com.reptile.carwebreptileyqy.dto.UserDTO;
 import com.reptile.carwebreptileyqy.entity.UserPermissionEntity;
 import com.reptile.carwebreptileyqy.service.AuthorityService;
 import com.reptile.carwebreptileyqy.util.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +51,26 @@ public class AuthorityController {
         if(permissionNameSet.contains(REGISTER_USER_AUTHORITY)){
         }else{
             baseResponse.setCode("401");
+            baseResponse.setMessage("error");
+        }
+        return baseResponse;
+    }
+
+    /**
+     * 查询是否具有审核权限页面
+     * @param
+     * @return
+     */
+    @PostMapping(value = "/authority/userAuthority",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BaseResponse userAuthority(HttpServletRequest request, HttpServletResponse response,
+            @RequestBody UserDTO userDTO){
+        BaseResponse baseResponse = new BaseResponse();
+        int r = authorityService.updateUserAuthority(userDTO);
+        if(r>0){
+        }else{
+            baseResponse.setCode("201");
             baseResponse.setMessage("error");
         }
         return baseResponse;

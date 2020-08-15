@@ -206,11 +206,6 @@
 			return flag;
 		}
 
-		/*$('#register').submit(function() {
-			alert(123);
-			return true;
-		});*/
-
 		function registerSubmit(){
 			var flag = true;
 			var username = $.trim($("#username").val());
@@ -223,12 +218,25 @@
 				alert("手机号不能为空");
 				flag = false;
 			}
+			var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+			if(!myreg.test(telephone)){
+				alert("手机号码有误，请重填");
+				return false;
+			}
 			if(username ==  null || username == ''){
 				alert("用户名不能为空");
 				flag = false;
 			}
 			if(password ==  null || password == ''){
 				alert("密码不能为空");
+				flag = false;
+			}
+			if(company ==  null || company == ''){
+				alert("公司名称不能为空");
+				flag = false;
+			}
+			if(companyAddress ==  null || companyAddress == ''){
+				alert("公司地址不能为空");
 				flag = false;
 			}
 			if(flag){

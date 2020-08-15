@@ -1,8 +1,10 @@
 package com.reptile.carwebreptileyqy.service;
 
 import com.reptile.carwebreptileyqy.dto.RegisterDto;
+import com.reptile.carwebreptileyqy.dto.UserDTO;
 import com.reptile.carwebreptileyqy.entity.UserEntity;
 
+import java.util.List;
 import java.util.Set;
 
 public interface UserService {
@@ -13,4 +15,8 @@ public interface UserService {
     int isUsernameRepeat(RegisterDto registerDto);
 
     int createUser(RegisterDto registerDto);
+
+    List<UserEntity> list(UserDTO userDTO);
+
+    int userTotal(UserDTO userDTO);
 }

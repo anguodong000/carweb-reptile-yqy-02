@@ -15,4 +15,6 @@ public class UserEntity implements Serializable {
     private Date createTime;
     private String company;
     private String companyAddress;
+    private Integer isAutyority;
+    private String isAutyorityName;
 }

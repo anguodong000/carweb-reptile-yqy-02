@@ -1,6 +1,7 @@
 package com.reptile.carwebreptileyqy.service.impl;
 
 import com.reptile.carwebreptileyqy.dto.RegisterDto;
+import com.reptile.carwebreptileyqy.dto.UserDTO;
 import com.reptile.carwebreptileyqy.entity.UserEntity;
 import com.reptile.carwebreptileyqy.mapper.UserMapper;
 import com.reptile.carwebreptileyqy.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -55,5 +57,17 @@ public class UserServiceImpl implements UserService {
          * 给用户赋权限
          */
         return userMapper.createPermission(user);
+    }
+
+    @Override
+    public List<UserEntity> list(UserDTO userDTO) {
+        List<UserEntity> userList = userMapper.selectAllUser(userDTO);
+        return userList;
+    }
+
+    @Override
+    public int userTotal(UserDTO userDTO) {
+        int count = userMapper.selectCount(userDTO);
+        return count;
     }
 }
