@@ -2,6 +2,7 @@ package com.reptile.carwebreptileyqy.entity;
 
 import lombok.Data;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -17,4 +18,6 @@ public class UserEntity implements Serializable {
     private String companyAddress;
     private Integer isAutyority;
     private String isAutyorityName;
+    private String validateCode;
+    private Timestamp registerDate;
 }

@@ -10,6 +10,8 @@ import java.util.Set;
 public interface UserService {
     UserEntity findByUsername(String username);
 
+    UserEntity findByEmail(String email);
+
     Set<String> findPermissionsByUserId(int userId);
 
     int isUsernameRepeat(RegisterDto registerDto);
@@ -19,4 +21,6 @@ public interface UserService {
     List<UserEntity> list(UserDTO userDTO);
 
     int userTotal(UserDTO userDTO);
+
+    int updateUser(UserEntity user);
 }

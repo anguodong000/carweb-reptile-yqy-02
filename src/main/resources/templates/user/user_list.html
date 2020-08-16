@@ -108,9 +108,9 @@
         <div class="row">
             <div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="site-main">
-                    <h3 class="custom_blog_title">
+                    <!--<h3 class="custom_blog_title">
                         用户列表
-                    </h3>
+                    </h3>-->
                     <div class="shop-top-control">
                         <label class="coupon_code">编号:</label>
                         <input id="username_queryform" type="text" style="background-color: white" placeholder="请输入用户名"/>
@@ -119,13 +119,13 @@
                     <table width="1180px" style="table-layout: fixed;">
                         <thead>
                         <tr style="">
-                            <th style="width:130px;text-align:center;vertical-align:middle;">用户名</th>
-                            <th style="width:130px;text-align:center;vertical-align:middle;">手机号</th>
-                            <th style="width:130px;text-align:center;vertical-align:middle;">电子邮箱</th>
-                            <th style="width:130px;text-align:center;vertical-align:middle;">公司名称</th>
-                            <th style="width:130px;text-align:center;vertical-align:middle;">公司地址</th>
-                            <th style="width:130px;text-align:center;vertical-align:middle;">用户状态</th>
-                            <th style="width:130px;text-align:center;vertical-align:middle;">操作</th>
+                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">用户名</th>
+                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">手机号</th>
+                            <!--<th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">电子邮箱</th>-->
+                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">公司名称</th>
+                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">公司地址</th>
+                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">用户状态</th>
+                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">操作</th>
                         </tr>
                         </thead>
                         <tbody id = "autoPartsTable">
@@ -406,17 +406,17 @@
                 }
                 $.each(data.data.userList, function(i,item){
                     $tr = $('<tr></tr>');
-                    $td1 = $('<td style="text-align:center;vertical-align:middle;">'+item.username+'</td>');
-                    $td2 = $('<td style="text-align:center;vertical-align:middle;">'+item.telephone+'</td>');
-                    $td3 = $('<td style="text-align:center;vertical-align:middle;">'+item.email+'</td>');
-                    $td4 = $('<td style="text-align:center;vertical-align:middle;">'+item.company+'</td>');
-                    $td5 = $('<td style="text-align:center;vertical-align:middle;">'+item.companyAddress+'</td>');
-                    $td6 = $('<td style="text-align:center;vertical-align:middle;">'+item.isAutyorityName+'</td>');
-                    $td7 = $('<td style="text-align:center;vertical-align:middle;"><a href="javascript:userAuthority('+item.telephone+')" style="color:cornflowerblue;">审核</a></td>');
+                    $td1 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.username+'</td>');
+                    $td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.telephone+'</td>');
+                    /*$td3 = $('<td style="text-align:center;vertical-align:middle;">'+item.email+'</td>');*/
+                    $td4 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.company+'</td>');
+                    $td5 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.companyAddress+'</td>');
+                    $td6 = $('<td style="text-align:center;vertical-align:middle;color:red;">'+item.isAutyorityName+'</td>');
+                    $td7 = $('<td style="text-align:center;vertical-align:middle;color:black;"><a href="javascript:userAuthority('+item.telephone+',1)" style="color:cornflowerblue;">启用</a>&nbsp;&nbsp;<a href="javascript:userAuthority('+item.telephone+',0)" style="color:cornflowerblue;">禁用</a></td>');
 
                     $tr.append($td1);
                     $tr.append($td2);
-                    $tr.append($td3);
+                    /*$tr.append($td3);*/
                     $tr.append($td4);
                     $tr.append($td5);
                     $tr.append($td6);
@@ -596,8 +596,8 @@
         });
     }
 
-    function userAuthority(telephone){
-        var param = {telephone:telephone};
+    function userAuthority(telephone,isAuthority){
+        var param = {telephone:telephone,isAuthority:isAuthority};
         $.ajax({
             type:"POST",
             data:JSON.stringify(param),

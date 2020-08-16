@@ -65,7 +65,7 @@
 												<input title="请输入密码" name="password" type="password">
 											</p>
 											<p class="lost_password">
-												<a href="javascript:void(0)">忘记密码?</a>
+												<a href="#" data-toggle="modal" data-target="#myModal2">忘记密码?</a>
 												<a href="javascript:void(0)">|</a>
 												<a href="/register-view">注册</a>
 											</p>
@@ -74,6 +74,27 @@
 											</p>
 										</form>
 									</div>
+
+									<div class="modal fade" id="myModal2" role="dialog">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h3 class="w3ls-password">密码找回</h3>
+														<p class="get-pw">在下面输入您的电子邮件地址，我们将向您发送一封包含说明的电子邮件</p>
+														<input id="email" type="text" style="background-color: white;width: 350px;" placeholder="请输入注册邮箱"/>
+														<button id="searchButton" type="button" class="button submit-newsletter">提交</button>&nbsp;&nbsp;
+														<!--<input type="text" class="user" name="email" placeholder="请输入邮箱" required="">
+														<button id="searchButton" type="button" class="button submit-newsletter">提交</button>&nbsp;&nbsp;-->
+														<!--<input style="text-align: center;" type="submit" value="提交">-->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
 								</div>
 								<!--<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="login-item">
@@ -186,5 +207,33 @@
 	<script src="../js/owl.thumbs.min.js"></script>
 	<script src="../js/jquery.scrollbar.min.js"></script>
 	<script src="../js/frontend-plugin.js"></script>
+	<script>
+		$("#searchButton").click(function () {
+			var email = $("#email").val();
+			var param = {email:email};
+			$.ajax({
+				type:"POST",
+				data:JSON.stringify(param),
+				url:"/user/forgetPassword",
+				contentType:"application/json",
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					if(data.code==200){
+						window.location.href="/index";
+					}
+					if(data.code==201){
+						alert("手机号已存在，请重新输入！")
+					}
+					if(data.code==202){
+						alert("用户名创建失败！")
+					}
+				},
+				error:function(e){
+					alert("创建用户失败！")
+				}
+			});
+		})
+	</script>
 </body>
 </html>

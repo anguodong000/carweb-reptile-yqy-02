@@ -97,6 +97,11 @@ public class ReptileController {
         return "error/loginError";
     }
 
+    @RequestMapping("/user/reset_password")
+    public String resetPassword(ModelMap modelMap) {
+        return "user/reset_password";
+    }
+
     @PostMapping(value = "/upload")
     @ResponseBody
     public String uploadExcel(@RequestParam("file") MultipartFile file) {

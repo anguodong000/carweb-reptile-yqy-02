@@ -1,23 +1,26 @@
 package com.reptile.carwebreptileyqy.controller;
 
-import com.reptile.carwebreptileyqy.dto.CarHingesDTO;
 import com.reptile.carwebreptileyqy.dto.UserDTO;
-import com.reptile.carwebreptileyqy.entity.CarHingesInfoEntity;
 import com.reptile.carwebreptileyqy.entity.UserEntity;
 import com.reptile.carwebreptileyqy.service.UserService;
 import com.reptile.carwebreptileyqy.util.BaseResponse;
+import com.reptile.carwebreptileyqy.util.MD5Util;
+import com.reptile.carwebreptileyqy.util.SendMail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
+import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -44,9 +47,9 @@ public class UserController {
             user.setCompany(user.getCompany() == null? "":user.getCompany());
             user.setCompanyAddress(user.getCompanyAddress() == null? "":user.getCompanyAddress());
             if(user.getIsAutyority()==0){
-                user.setIsAutyorityName("新注册");
+                user.setIsAutyorityName("已禁用");
             }else{
-                user.setIsAutyorityName("已审核");
+                user.setIsAutyorityName("已启用");
             }
         }
         int total = userService.userTotal(userDTO);
@@ -54,6 +57,44 @@ public class UserController {
         map.put("currentPage",userDTO.getCurrentPage());
         map.put("userList",list);
         baseResponse.setData(map);
+        return baseResponse;
+    }
+
+    @PostMapping(value = "/user/forgetPassword",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BaseResponse forgetPassword(
+            HttpServletRequest request, HttpServletResponse response,
+            @RequestBody UserDTO userDTO){
+        BaseResponse baseResponse = new BaseResponse();
+        UserEntity user = userService.findByEmail(userDTO.getEmail());
+        if(user == null){
+            baseResponse.setCode("4003");
+            baseResponse.setMessage("用户不存在,请输入注册时邮箱地址");
+        }else{
+            //密钥
+            String secretKey= UUID.randomUUID().toString();
+            //30分钟后过期
+            Timestamp outDate = new Timestamp(System.currentTimeMillis()+30*60*1000);
+            // 忽略毫秒数
+            long date = outDate.getTime() / 1000 * 1000;
+
+            user.setValidateCode(secretKey);
+            user.setRegisterDate(outDate);
+            userService.updateUser(user);
+
+            String key = user.getTelephone()+"$"+date+"$"+secretKey;
+            //数字签名
+            String digitalSignature = MD5Util.encode(key);
+
+            String emailTitle = "配齐网密码找回";
+            String path = request.getContextPath();
+            String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+            String resetPassHref = basePath+"user/reset_password?sid="+digitalSignature+"&userName="+user.getTelephone();
+            String emailContent = "请勿回复本邮件.点击下面的链接,重设密码<br/><a href="+resetPassHref +" rel='external nofollow' target='_BLANK'>点击我重新设置密码</a>" +
+                    "<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'"+key+"\t"+digitalSignature;
+            SendMail.sendMail(user.getEmail(),emailContent);
+        }
         return baseResponse;
     }
 }

@@ -73,6 +73,10 @@
 												<!--<label class="text">用户名</label>-->
 												<input title="请输入公司地址" name="companyAddress" type="text" id="companyAddress" autocomplete = "off" placeholder="请输入公司地址">
 											</p>
+											<p class="form-row form-row-wide">
+												<!--<label class="text">用户名</label>-->
+												<input title="请输入公司地址" name="email" type="text" id="email" autocomplete = "off" placeholder="请输入邮箱">
+											</p>
 
 											<p style="text-align:center;" class="form-row">
 												<!--<input type="submit" class="button-submit" value="注册">-->
@@ -173,7 +177,7 @@
 			password.removeAttribute("readonly");
 		},1000);
 
-		function checkForm(){
+		/*function checkForm(){
 			var flag = true;
 			var password = $("#password").val();
 			var telephone = $.trim($("#telephone").val());
@@ -204,7 +208,7 @@
 				flag = false;
 			}
 			return flag;
-		}
+		}*/
 
 		function registerSubmit(){
 			var flag = true;
@@ -213,7 +217,8 @@
 			var telephone = $.trim($("#telephone").val());
 			var company = $("#company").val();
 			var companyAddress = $("#companyAddress").val();
-			var param = {username:username,password:password,telephone:telephone,company:company,companyAddress:companyAddress};
+			var email = $("#email").val();
+			var param = {username:username,password:password,telephone:telephone,company:company,companyAddress:companyAddress,email:email};
 			if(telephone ==  null || telephone == ''){
 				alert("手机号不能为空");
 				flag = false;
@@ -237,6 +242,10 @@
 			}
 			if(companyAddress ==  null || companyAddress == ''){
 				alert("公司地址不能为空");
+				flag = false;
+			}
+			if(email ==  null || email == ''){
+				alert("邮箱不能为空");
 				flag = false;
 			}
 			if(flag){

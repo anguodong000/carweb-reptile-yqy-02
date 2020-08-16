@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserEntity findByEmail(String email) {
+        return userMapper.findByEmail(email);
+    }
+
+    @Override
     public Set<String> findPermissionsByUserId(int userId) {
         return userMapper.findPermissionsByUserId(userId);
     }
@@ -69,5 +74,10 @@ public class UserServiceImpl implements UserService {
     public int userTotal(UserDTO userDTO) {
         int count = userMapper.selectCount(userDTO);
         return count;
+    }
+
+    @Override
+    public int updateUser(UserEntity user) {
+        return userMapper.updateUser(user);
     }
 }

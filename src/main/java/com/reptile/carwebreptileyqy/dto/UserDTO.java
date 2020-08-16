@@ -2,6 +2,7 @@ package com.reptile.carwebreptileyqy.dto;
 
 import lombok.Data;
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 public class UserDTO implements Serializable {
@@ -9,4 +10,7 @@ public class UserDTO implements Serializable {
     private int currentPage;
     private String username;
     private String telephone;
+    private Integer isAuthority;
+    private Date updateTime;
+    private String email;
 }

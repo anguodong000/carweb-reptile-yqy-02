@@ -111,6 +111,9 @@
 							<li class="menu-item">
 								<a href="#" class="emeriss-menu-item-title" title="About">关于我们</a>
 							</li>
+							<li class="menu-item" id="user_authority_menu">
+								<!--<a href="#" class="emeriss-menu-item-title" title="About">用户审核</a>-->
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -137,9 +140,9 @@
 			<div class="row">
 				<div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="site-main">
-						<h3 class="custom_blog_title">
+						<!--<h3 class="custom_blog_title">
 							查询结果
-						</h3>
+						</h3>-->
 						<div class="shop-top-control">
 							<label class="coupon_code">编号:</label>
 							<input id="hingesNum" type="text" style="background-color: white" placeholder="请输入商品编号"/>
@@ -149,10 +152,10 @@
 						<table width="1180px" style="table-layout: fixed;">
 							<thead>
 								<tr style="">
-									<th style="width:130px;text-align:center;vertical-align:middle;">商品编号</th>
-									<th style="width:130px;text-align:center;vertical-align:middle;">车型</th>
-									<th style="width:130px;text-align:center;vertical-align:middle;">车门位置</th>
-									<th style="width:130px;text-align:center;vertical-align:middle;">安装位置</th>
+									<th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">OEM/厂家编号</th>
+									<th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">车型</th>
+									<th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">车门位置</th>
+									<th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">安装位置</th>
 								</tr>
 							</thead>
 							<tbody id = "autoPartsTable">
@@ -401,6 +404,7 @@
 	<script src="../../js/templet_form.js"></script>
 	<script>
 		$(function() {
+			queryAuthority();
 			carHingesList(1);
 		});
 
@@ -433,10 +437,10 @@
 
 					$.each(data.data.carHingesList, function(i,item){
 						$tr = $('<tr></tr>');
-						$td1 = $('<td style="text-align:center;vertical-align:middle;">'+item.hingesNumber+'</td>');
-						$td2 = $('<td style="text-align:center;vertical-align:middle;">'+item.vehicleModel+'</td>');
-						$td3 = $('<td style="text-align:center;vertical-align:middle;">'+item.carDoorPosition+'</td>');
-						$td4 = $('<td style="text-align:center;vertical-align:middle;">'+item.installPosition+'</td>');
+						$td1 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.hingesNumber+'</td>');
+						$td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.vehicleModel+'</td>');
+						$td3 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.carDoorPosition+'</td>');
+						$td4 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.installPosition+'</td>');
 
 						$tr.append($td1);
 						$tr.append($td2);
@@ -594,6 +598,25 @@
 					callback: function() {
 					}
 				}]
+			});
+		}
+
+		//查询是否具有用户审核权限
+		function queryAuthority(){
+			$.ajax({
+				type:"POST",
+				data:"",
+				url:"/authority/isHaveAuthorityPage",
+				contentType:"application/json",
+				dataType:"json",
+				success:function(data){
+					console.log("data:"+data);
+					var code = data.code;
+					if(code==200){
+						$li = $('<a href="/userListPage" class="emeriss-menu-item-title" title="About">用户审核</a>');
+						$('#user_authority_menu').append($li);
+					}
+				}
 			});
 		}
 	</script>

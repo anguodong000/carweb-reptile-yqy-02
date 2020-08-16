@@ -5,7 +5,6 @@ import com.reptile.carwebreptileyqy.entity.UserPermissionEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
 import java.util.List;
 
 @Mapper
@@ -19,6 +18,6 @@ public interface AuthorityMapper {
             "where u.telephone = #{username}")
     List<UserPermissionEntity> selectAuthorityByUsername(String username);
 
-    @Update("update user_info set is_authority = 1 where telephone = #{telephone}")
+    @Update("update user_info set is_authority = #{isAuthority},update_time=#{updateTime} where telephone = #{telephone}")
     int updateUserAuthority(UserDTO userDTO);
 }

@@ -6,6 +6,7 @@ import com.reptile.carwebreptileyqy.entity.UserEntity;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,9 @@ public interface UserMapper {
 
     @Select("SELECT u.id as id,u.user_name as username,u.user_password as password,u.telephone,u.email,u.company,u.company_address companyAddress,u.is_authority isAutyority FROM user_info u where u.telephone=#{telephone} limit 1")
     UserEntity findByUsername(String telephone);
+
+    @Select("SELECT u.id as id,u.user_name as username,u.user_password as password,u.telephone,u.email,u.company,u.company_address companyAddress,u.is_authority isAutyority FROM user_info u where u.email=#{email} limit 1")
+    UserEntity findByEmail(String email);
 
     @Select("SELECT p.permission_code FROM user_info u " +
             "LEFT JOIN user_permission_info i " +
@@ -41,4 +45,7 @@ public interface UserMapper {
 
     @Select("SELECT COUNT(1) FROM user_info u ")
     int selectCount(UserDTO userDTO);
+
+    @Update("update user_info set validateCode = #{validateCode},outDate=#{registerDate} where id = #{id}")
+    int updateUser(UserEntity user);
 }

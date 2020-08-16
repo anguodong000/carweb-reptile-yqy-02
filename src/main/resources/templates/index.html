@@ -46,7 +46,6 @@
 							您好,<a href="#"><span style="color:red" sec:authentication="name"></span></a>
 							<a href="/logout" title="退出">退出</a>
 						</div>
-
 					</li>
 				</ul>
 			</div>
@@ -77,12 +76,12 @@
 										<option value="Algeria">Storage</option>
 									</select>
 								</div>-->
-								<div class="inner">
-									<input id="queryString" type="text" class="input" name="s" value="" placeholder="请输入商品编号，商品名称，车型等关键字">
+								<!--<div class="inner">
+									<input id="queryString1" type="text" class="input" name="s" value="" placeholder="请输入商品编号，商品名称，车型等关键字">
 								</div>
-								<button id="searchButton" class="btn-search" type="button">
+								<button id="searchButton1" class="btn-search" type="button">
 									<span class="icon-search"></span>
-								</button>
+								</button>-->
 							</div>
 						</form>
 					</div>
@@ -133,28 +132,22 @@
 			</div>
 			<div class="row">
 				<div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="site-main">
-						<h3 class="custom_blog_title">
-							查询结果
-						</h3>
-						<table width="1180px" style="table-layout: fixed;">
-							<thead>
-							<tr style="">
-								<th style="width:130px;text-align:center;vertical-align:middle;">商品编号</th>
-								<th style="width:130px;text-align:center;vertical-align:middle;">商品名称</th>
-								<th style="width:130px;text-align:center;vertical-align:middle;">车型</th>
-								<!--<th style="width:130px;text-align:center;vertical-align:middle;">批发价格(单位：元)</th>-->
-								<th style="width:130px;text-align:center;vertical-align:middle;">零售价格(单位：元)</th>
-								<!--<th style="width:130px;text-align:center;vertical-align:middle;">优惠价格(单位：元)</th>-->
-								<th style="width:130px;text-align:center;vertical-align:middle;">厂家编号</th>
-								<th style="width:130px;text-align:center;vertical-align:middle;">规格</th>
+					<div class="">
+						<div class="shop-top-control" style="margin:0px 0px 10px 0px;text-align:center;">
+							<input id="queryString" type="text" style="background-color: white;width: 350px;" placeholder="请输入商品编号，商品名称，车型等关键字"/>
+							<button id="searchButton" type="button" class="button submit-newsletter">查询</button>&nbsp;&nbsp;
+						</div>
+						<table width="100%">
+							<tr>
+								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">OEM/厂家编号</td>
+								<td style="width:40%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">商品名称</td>
+								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">车型</td>
+								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">参考价格(单位：元)</td>
 							</tr>
-							</thead>
 							<tbody id = "autoPartsTable">
 							<!-- 后台数据-->
 							</tbody>
 						</table>
-
 						<div class="pagination clearfix style2" >
 							<div class="nav-link" id="editable_paginate">
 								<!--<a href="#" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
@@ -406,35 +399,15 @@
 
 					$.each(data.data.autoPartsList, function(i,item){
 						$tr = $('<tr></tr>');
-						$td1 = $('<td style="text-align:center;vertical-align:middle;">'+item.productNumber+'</td>');
-						$td2 = $('<td style="text-align:center;vertical-align:middle;">'+item.productName+'</td>');
-						$td3 = $('<td style="text-align:center;vertical-align:middle;">'+item.vehicleModel+'</td>');
-						//$td4 = $('<td style="text-align:center;vertical-align:middle;">'+item.wholesalePrice+'</td>');
-						//$td5 = $('<td style="text-align:center;vertical-align:middle;">'+item.retailPrice+'</td>');
-						$td5 = $('<td id="retailPricetd'+item.id+'" style="text-align:center;vertical-align:middle;"><a id="priceStr'+item.id+'" style="color:dodgerblue;" href="javascript:queryPrice('+item.id+','+item.retailPrice+')">查看价格</a></td>');
-						//$td5_show_price = $('<td style="text-align:center;vertical-align:middle;">'+item.retailPrice+'</td>');
-						//$td6 = $('<td style="text-align:center;vertical-align:middle;">'+item.discountPrice+'</td>');
-						$td7 = $('<td style="text-align:center;vertical-align:middle;">'+item.factoryNumber+'</td>');
-						$td7Null = $('<td style="text-align:center;vertical-align:middle;"></td>');
-						$td8 = $('<td style="text-align:center;vertical-align:middle;">'+item.specification+'</td>');
-						$td8Null = $('<td style="text-align:center;vertical-align:middle;"></td>');
+						$td1 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.productNumber+'</td>');
+						$td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.productName+'</td>');
+						$td3 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.vehicleModel+'</td>');
+						$td4 = $('<td id="retailPricetd'+item.id+'" style="text-align:center;vertical-align:middle;"><a id="priceStr'+item.id+'" style="color:red;" href="javascript:queryPrice('+item.id+','+item.retailPrice+')">查看价格</a></td>');
 
 						$tr.append($td1);
 						$tr.append($td2);
 						$tr.append($td3);
-						//$tr.append($td4);
-						$tr.append($td5);
-						//$tr.append($td6);
-						if(item.factoryNumber==undefined){
-							$tr.append($td7Null);
-						}else{
-							$tr.append($td7);
-						}
-						if(item.specification==undefined){
-							$tr.append($td8Null);
-						}else {
-							$tr.append($td8);
-						}
+						$tr.append($td4);
 						$('#autoPartsTable').append($tr);
 					});
 				}
@@ -443,7 +416,7 @@
 
 		function renderPageItem(totalPageNums,playes,edges,currentPage) {
 			//debugger;
-			$ul = $('<ul class="pagination pull-right" style="margin:-3px 0;">');
+			$ul = $('<ul class="pagination pull-right" style="margin:0px 5px 5px 5px;">');
 			var start = 1;
 			var end = totalPageNums;
 			if(playes % 2){
@@ -555,7 +528,7 @@
 				dataType:"json",
 				success:function(data){
 					console.log(data);
-					if(data.code=401){
+					if(data.code==401){
 						alert(data.message);
 					}
 					if(data.code==200){
