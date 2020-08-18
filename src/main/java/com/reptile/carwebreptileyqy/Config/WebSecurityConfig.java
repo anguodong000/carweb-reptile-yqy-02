@@ -56,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/error/999").permitAll()
                 .antMatchers("/user/forgetPassword").permitAll()
                 .antMatchers("/user/reset_password").permitAll()
+                .antMatchers("/user/updatePassword").permitAll()
                 .antMatchers("/carParts/createPartsNeed").access("hasAuthority('QUERY_PARTS_PRICE')")
                 // 其他所有请求需要身份认证
                 .anyRequest().authenticated()

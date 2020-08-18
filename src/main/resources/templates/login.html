@@ -53,8 +53,8 @@
 										<h5 class="title-login">用户登录</h5>
 										<form action="login" method="post" class="login">
 											<p class="form-row form-row-wide">
-												<label class="text">用户名</label>
-												<input title="请输入用户名" name="username" type="text">
+												<label class="text">手机号</label>
+												<input title="请输入注册手机号" name="username" type="text">
 											</p>
 											<!--<p class="form-row form-row-wide">
 												<label class="text">注册手机号</label>
@@ -220,17 +220,13 @@
 				success:function(data){
 					console.log(data);
 					if(data.code==200){
-						window.location.href="/index";
-					}
-					if(data.code==201){
-						alert("手机号已存在，请重新输入！")
-					}
-					if(data.code==202){
-						alert("用户名创建失败！")
+						alert("邮件发送成功")
+					}else{
+						alert("邮件发送失败，请重新申请")
 					}
 				},
 				error:function(e){
-					alert("创建用户失败！")
+					alert("邮件发送异常，请重新申请！")
 				}
 			});
 		})

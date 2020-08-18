@@ -1,27 +1,53 @@
 package com.reptile.carwebreptileyqy.controller;
 
+import com.reptile.carwebreptileyqy.dto.UserDTO;
+import com.reptile.carwebreptileyqy.entity.UserEntity;
 import com.reptile.carwebreptileyqy.service.ReptileService;
+import com.reptile.carwebreptileyqy.service.UserService;
+import com.reptile.carwebreptileyqy.service.impl.UserDetailsServiceImpl;
+import com.reptile.carwebreptileyqy.util.BaseResponse;
+import com.reptile.carwebreptileyqy.util.MD5Util;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.core.MediaType;
+import java.sql.Timestamp;
 
 /**
  * @author angd
  * @create 2019-08-21 17:54
  */
 @Controller
+@Slf4j
 public class ReptileController {
 
     @Autowired
     ReptileService reptileService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @RequestMapping("/main")
     public String reptileStart(ModelMap modelMap) {
@@ -97,9 +123,63 @@ public class ReptileController {
         return "error/loginError";
     }
 
+    /**
+     * 验证找回密码链接
+     * @param modelMap
+     * @return
+     */
     @RequestMapping("/user/reset_password")
-    public String resetPassword(ModelMap modelMap) {
+    public String resetPassword(ModelMap modelMap,HttpServletRequest request, String sid, String username) {
+        String msg="";
+        if(StringUtils.isEmpty(sid) || StringUtils.isEmpty(username)){
+            msg = "链接不完整,请重新生成";
+            request.setAttribute("msg",msg);
+            return "error/reset_password_error";
+        }
+        UserEntity user = userService.findByUsername(username);
+        if(user==null){
+            msg = "链接错误,无法找到匹配用户,请重新申请找回密码";
+            request.setAttribute("msg",msg);
+            return "error/reset_password_error";
+        }
+        Timestamp outDate = user.getOutDate();
+        if(outDate.getTime() <= System.currentTimeMillis()){
+            msg = "链接已经过期,请重新申请找回密码";
+            request.setAttribute("msg",msg);
+            return "error/reset_password_error";
+        }
+        //数字签名
+        String key = user.getTelephone()+"$"+outDate.getTime()/1000*1000+"$"+user.getValidateCode();
+        String digitalSignature = MD5Util.encode(key);
+        if(!digitalSignature.equals(sid)) {
+            msg = "链接不正确,是否已经过期了?重新申请吧";
+            request.setAttribute("msg",msg);
+            return "error/reset_password_error";
+        }
         return "user/reset_password";
+    }
+
+    @RequestMapping("/user/updatePassword")
+    public String updatePassword(
+            HttpServletRequest request, HttpServletResponse response,
+            @RequestBody UserDTO userDTO){
+        UserEntity user = new UserEntity();
+        user.setTelephone(userDTO.getTelephone());
+        String passwordEncode = BCrypt.hashpw(userDTO.getPassword(),BCrypt.gensalt());
+        user.setPassword(passwordEncode);
+        userService.updateUserPassword(user);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userDTO.getTelephone());
+        //进行授权登录
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDTO.getTelephone(), userDTO.getPassword(),userDetails.getAuthorities());
+        try{
+            token.setDetails(new WebAuthenticationDetails(request));
+            Authentication authenticatedUser = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+            request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+        }catch (Exception e){
+            log.info("用户授权失败："+e.getMessage());
+        }
+        return "index";
     }
 
     @PostMapping(value = "/upload")
@@ -629,5 +709,6 @@ public class ReptileController {
         }
         return "导出成功！";
     }
+
 
 }

@@ -77,20 +77,20 @@ public class UserController {
             //30分钟后过期
             Timestamp outDate = new Timestamp(System.currentTimeMillis()+30*60*1000);
             // 忽略毫秒数
-            long date = outDate.getTime() / 1000 * 1000;
+            //long date = outDate.getTime() / 1000 * 1000;
 
             user.setValidateCode(secretKey);
-            user.setRegisterDate(outDate);
+            user.setOutDate(outDate);
             userService.updateUser(user);
 
-            String key = user.getTelephone()+"$"+date+"$"+secretKey;
+            String key = user.getTelephone()+"$"+outDate.getTime() / 1000 * 1000+"$"+secretKey;
             //数字签名
             String digitalSignature = MD5Util.encode(key);
 
             String emailTitle = "配齐网密码找回";
             String path = request.getContextPath();
             String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-            String resetPassHref = basePath+"user/reset_password?sid="+digitalSignature+"&userName="+user.getTelephone();
+            String resetPassHref = basePath+"user/reset_password?sid="+digitalSignature+"&username="+user.getTelephone();
             String emailContent = "请勿回复本邮件.点击下面的链接,重设密码<br/><a href="+resetPassHref +" rel='external nofollow' target='_BLANK'>点击我重新设置密码</a>" +
                     "<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'"+key+"\t"+digitalSignature;
             SendMail.sendMail(user.getEmail(),emailContent);

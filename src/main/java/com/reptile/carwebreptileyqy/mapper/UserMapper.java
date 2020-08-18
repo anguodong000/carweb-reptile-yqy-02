@@ -14,7 +14,9 @@ import java.util.Set;
 @Mapper
 public interface UserMapper {
 
-    @Select("SELECT u.id as id,u.user_name as username,u.user_password as password,u.telephone,u.email,u.company,u.company_address companyAddress,u.is_authority isAutyority FROM user_info u where u.telephone=#{telephone} limit 1")
+    @Select("SELECT u.id as id,u.user_name as username,u.user_password as password,u.telephone,u.email," +
+            "u.company,u.company_address companyAddress,u.is_authority isAutyority,u.validateCode,u.outDate " +
+            "FROM user_info u where u.telephone=#{telephone} limit 1")
     UserEntity findByUsername(String telephone);
 
     @Select("SELECT u.id as id,u.user_name as username,u.user_password as password,u.telephone,u.email,u.company,u.company_address companyAddress,u.is_authority isAutyority FROM user_info u where u.email=#{email} limit 1")
@@ -46,6 +48,9 @@ public interface UserMapper {
     @Select("SELECT COUNT(1) FROM user_info u ")
     int selectCount(UserDTO userDTO);
 
-    @Update("update user_info set validateCode = #{validateCode},outDate=#{registerDate} where id = #{id}")
+    @Update("update user_info set validateCode = #{validateCode},outDate=#{outDate} where id = #{id}")
     int updateUser(UserEntity user);
+
+    @Update("update user_info set user_password = #{password} where telephone = #{telephone}")
+    int updateUserPassword(UserEntity user);
 }

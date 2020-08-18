@@ -10,6 +10,7 @@ public class UserDTO implements Serializable {
     private int currentPage;
     private String username;
     private String telephone;
+    private String password;
     private Integer isAuthority;
     private Date updateTime;
     private String email;

@@ -19,5 +19,5 @@ public class UserEntity implements Serializable {
     private Integer isAutyority;
     private String isAutyorityName;
     private String validateCode;
-    private Timestamp registerDate;
+    private Timestamp outDate;
 }

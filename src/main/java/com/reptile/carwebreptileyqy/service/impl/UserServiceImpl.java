@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
     public int updateUser(UserEntity user) {
         return userMapper.updateUser(user);
     }
+
+    @Override
+    public int updateUserPassword(UserEntity user) {
+        return userMapper.updateUserPassword(user);
+    }
 }

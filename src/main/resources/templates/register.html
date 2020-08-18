@@ -75,7 +75,7 @@
 											</p>
 											<p class="form-row form-row-wide">
 												<!--<label class="text">用户名</label>-->
-												<input title="请输入公司地址" name="email" type="text" id="email" autocomplete = "off" placeholder="请输入邮箱">
+												<input title="请输入邮箱" name="email" type="text" id="email" autocomplete = "off" placeholder="请输入邮箱">
 											</p>
 
 											<p style="text-align:center;" class="form-row">
@@ -176,39 +176,6 @@
 			username.removeAttribute("readonly");
 			password.removeAttribute("readonly");
 		},1000);
-
-		/*function checkForm(){
-			var flag = true;
-			var password = $("#password").val();
-			var telephone = $.trim($("#telephone").val());
-
-			var param = {telephone:telephone};
-			if(telephone ==  null || telephone == ''){
-				alert("手机号不能为空");
-				flag=false;
-			}else{
-				$.ajax({
-					type:"POST",
-					data:JSON.stringify(param),
-					url:"/carWeb/isUsernameRepeat",
-					contentType:"application/json",
-					dataType:"json",
-					success:function(data){
-						if(data.code!=200){
-							flag = false;
-						}
-					},
-					error:function (e) {
-						flag = false;
-					}
-				});
-			}
-			if(password ==  null || password == ''){
-				alert("密码不能为空");
-				flag = false;
-			}
-			return flag;
-		}*/
 
 		function registerSubmit(){
 			var flag = true;

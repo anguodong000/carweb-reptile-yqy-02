@@ -23,4 +23,6 @@ public interface UserService {
     int userTotal(UserDTO userDTO);
 
     int updateUser(UserEntity user);
+
+    int updateUserPassword(UserEntity user);
 }
