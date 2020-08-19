@@ -3,15 +3,21 @@ package com.reptile.carwebreptileyqy.controller;
 import com.reptile.carwebreptileyqy.dto.UserDTO;
 import com.reptile.carwebreptileyqy.entity.UserEntity;
 import com.reptile.carwebreptileyqy.service.UserService;
+import com.reptile.carwebreptileyqy.service.impl.UserDetailsServiceImpl;
 import com.reptile.carwebreptileyqy.util.BaseResponse;
 import com.reptile.carwebreptileyqy.util.MD5Util;
 import com.reptile.carwebreptileyqy.util.SendMail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -28,6 +34,12 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     /**
      * 用户列表查询
@@ -77,13 +89,13 @@ public class UserController {
             //30分钟后过期
             Timestamp outDate = new Timestamp(System.currentTimeMillis()+30*60*1000);
             // 忽略毫秒数
-            //long date = outDate.getTime() / 1000 * 1000;
+            long date = outDate.getTime() / 1000 * 1000;
 
             user.setValidateCode(secretKey);
             user.setOutDate(outDate);
             userService.updateUser(user);
 
-            String key = user.getTelephone()+"$"+outDate.getTime() / 1000 * 1000+"$"+secretKey;
+            String key = user.getTelephone()+"$"+date+"$"+secretKey;
             //数字签名
             String digitalSignature = MD5Util.encode(key);
 
@@ -95,6 +107,43 @@ public class UserController {
                     "<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'"+key+"\t"+digitalSignature;
             SendMail.sendMail(user.getEmail(),emailContent);
         }
+        return baseResponse;
+    }
+
+    @PostMapping(value = "/user/updatePassword",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BaseResponse updatePassword(
+            HttpServletRequest request, HttpServletResponse response,
+            @RequestBody UserDTO userDTO){
+        BaseResponse baseResponse = new BaseResponse();
+        //查询用户
+        UserEntity userDetail = userService.findByUsername(userDTO.getTelephone());
+        if(userDetail.getValidateCode()==null || !userDetail.getValidateCode().equals(userDTO.getValidateCode())){
+            baseResponse.setCode("203");
+            baseResponse.setMessage("用户匹配错误!");
+        }
+        UserEntity user = new UserEntity();
+        user.setTelephone(userDTO.getTelephone());
+        String passwordEncode = BCrypt.hashpw(userDTO.getPassword(),BCrypt.gensalt());
+        user.setPassword(passwordEncode);
+        int r=userService.updateUserPassword(user);
+        if(r!=1){
+            baseResponse.setCode("202");
+            baseResponse.setMessage("修改密码失败");
+            return baseResponse;
+        }
+        /*UserDetails userDetails = userDetailsService.loadUserByUsername(userDTO.getTelephone());
+        //进行授权登录
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDTO.getTelephone(), userDTO.getPassword(),userDetails.getAuthorities());
+        try{
+            token.setDetails(new WebAuthenticationDetails(request));
+            Authentication authenticatedUser = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+            request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+        }catch (Exception e){
+            log.info("用户授权失败："+e.getMessage());
+        }*/
         return baseResponse;
     }
 }

@@ -43,12 +43,6 @@ public class ReptileController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
     @RequestMapping("/main")
     public String reptileStart(ModelMap modelMap) {
         modelMap.put("list","大家好");
@@ -123,6 +117,11 @@ public class ReptileController {
         return "error/loginError";
     }
 
+    @RequestMapping("/resetPasswordSuccess")
+    public String resetPasswordSuccess(ModelMap modelMap) {
+        return "user/reset_password_success";
+    }
+
     /**
      * 验证找回密码链接
      * @param modelMap
@@ -156,30 +155,8 @@ public class ReptileController {
             request.setAttribute("msg",msg);
             return "error/reset_password_error";
         }
+        request.setAttribute("validateCode",user.getValidateCode());
         return "user/reset_password";
-    }
-
-    @RequestMapping("/user/updatePassword")
-    public String updatePassword(
-            HttpServletRequest request, HttpServletResponse response,
-            @RequestBody UserDTO userDTO){
-        UserEntity user = new UserEntity();
-        user.setTelephone(userDTO.getTelephone());
-        String passwordEncode = BCrypt.hashpw(userDTO.getPassword(),BCrypt.gensalt());
-        user.setPassword(passwordEncode);
-        userService.updateUserPassword(user);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userDTO.getTelephone());
-        //进行授权登录
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDTO.getTelephone(), userDTO.getPassword(),userDetails.getAuthorities());
-        try{
-            token.setDetails(new WebAuthenticationDetails(request));
-            Authentication authenticatedUser = authenticationManager.authenticate(token);
-            SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-            request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-        }catch (Exception e){
-            log.info("用户授权失败："+e.getMessage());
-        }
-        return "index";
     }
 
     @PostMapping(value = "/upload")

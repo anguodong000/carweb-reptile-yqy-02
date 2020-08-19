@@ -85,7 +85,7 @@
 														<h3 class="w3ls-password">密码找回</h3>
 														<p class="get-pw">在下面输入您的电子邮件地址，我们将向您发送一封包含说明的电子邮件</p>
 														<input id="email" type="text" style="background-color: white;width: 350px;" placeholder="请输入注册邮箱"/>
-														<button id="searchButton" type="button" class="button submit-newsletter">提交</button>&nbsp;&nbsp;
+														<button id="searchButton" type="button" class="button submit-newsletter">发送</button>&nbsp;&nbsp;
 														<!--<input type="text" class="user" name="email" placeholder="请输入邮箱" required="">
 														<button id="searchButton" type="button" class="button submit-newsletter">提交</button>&nbsp;&nbsp;-->
 														<!--<input style="text-align: center;" type="submit" value="提交">-->
@@ -209,6 +209,7 @@
 	<script src="../js/frontend-plugin.js"></script>
 	<script>
 		$("#searchButton").click(function () {
+			$(this).attr("disabled","true");
 			var email = $("#email").val();
 			var param = {email:email};
 			$.ajax({
@@ -229,6 +230,7 @@
 					alert("邮件发送异常，请重新申请！")
 				}
 			});
+			setTimeout("$('#searchButton').removeAttr('disabled')",10000);
 		})
 	</script>
 </body>
