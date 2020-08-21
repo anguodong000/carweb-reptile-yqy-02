@@ -27,6 +27,6 @@ public interface CarPartsMapper {
 
     int totalQueryCarPartsByDetailId(CarPartsDTO carPartsDTO);
 
-    @Insert("insert into price_need(partsId,username) values(#{partsId},#{username})")
+    @Insert("insert into price_need(partsId,username,create_time) values(#{partsId},#{username},#{createTime})")
     int createPriceNeed(QueryPriceDto queryPriceDto);
 }

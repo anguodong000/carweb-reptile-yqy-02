@@ -145,6 +145,7 @@ public class CarPartsServiceImpl implements CarPartsService {
 
     @Override
     public int createPriceNeed(QueryPriceDto queryPriceDto) {
+        queryPriceDto.setCreateTime(new Date());
         return carPartsMapper.createPriceNeed(queryPriceDto);
     }
 }
