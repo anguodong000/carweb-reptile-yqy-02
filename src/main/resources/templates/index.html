@@ -61,11 +61,11 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
+				<!--<div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
 					<div class="block-search-block">
-						<form class="form-search form-search-width-category">
+						&lt;!&ndash;<form class="form-search form-search-width-category">
 							<div class="form-content">
-								<!--<div class="category">
+								<div class="category">
 									<select title="cate" data-placeholder="All Categories" class="chosen-select"
 											tabindex="1">
 										<option value="United States">Accessories</option>
@@ -75,17 +75,17 @@
 										<option value="Albania">New Arrivals</option>
 										<option value="Algeria">Storage</option>
 									</select>
-								</div>-->
-								<!--<div class="inner">
+								</div>
+								<div class="inner">
 									<input id="queryString1" type="text" class="input" name="s" value="" placeholder="请输入商品编号，商品名称，车型等关键字">
 								</div>
 								<button id="searchButton1" class="btn-search" type="button">
 									<span class="icon-search"></span>
-								</button>-->
+								</button>
 							</div>
-						</form>
+						</form>&ndash;&gt;
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 	</div>
@@ -141,9 +141,8 @@
 							<tr>
 								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">OEM/厂家编号</td>
 								<td style="width:40%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">商品名称</td>
-								<td style="width:15%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">车型</td>
-								<td style="width:15%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">参考价格(单位：元)</td>
-								<!--<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">价格变动</td>-->
+								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">车型</td>
+								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">参考价格(单位：元)</td>
 							</tr>
 							<tbody id = "autoPartsTable">
 							<!-- 后台数据-->
@@ -404,13 +403,11 @@
 						$td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.productName+'</td>');
 						$td3 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.vehicleModel+'</td>');
 						$td4 = $('<td id="retailPricetd'+item.id+'" style="text-align:center;vertical-align:middle;"><a id="priceStr'+item.id+'" style="color:red;" href="javascript:queryPrice('+item.id+','+item.retailPrice+')">查看价格</a></td>');
-						//$td5 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.priceChange+'</td>');
 
 						$tr.append($td1);
 						$tr.append($td2);
 						$tr.append($td3);
 						$tr.append($td4);
-						//$tr.append($td5);
 						$('#autoPartsTable').append($tr);
 					});
 				}

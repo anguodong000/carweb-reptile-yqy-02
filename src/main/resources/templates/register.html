@@ -190,8 +190,8 @@
 				alert("手机号不能为空");
 				flag = false;
 			}
-			var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
-			if(!myreg.test(telephone)){
+			var myregTelephone=/^[1][3,4,5,7,8][0-9]{9}$/;
+			if(!myregTelephone.test(telephone)){
 				alert("手机号码有误，请重填");
 				return false;
 			}
@@ -211,8 +211,13 @@
 				alert("公司地址不能为空");
 				flag = false;
 			}
+			var myregEmail = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
 			if(email ==  null || email == ''){
 				alert("邮箱不能为空");
+				flag = false;
+			}
+			if(!myregEmail.test(email)){
+				alert("邮箱格式不正确");
 				flag = false;
 			}
 			if(flag){
