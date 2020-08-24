@@ -89,7 +89,8 @@
     </select>
 
     <select id ="getPartByProductNumber" parameterType="java.lang.String" resultType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
-        select * from auto_parts_info where product_number = #{productNumber} limit 1
+        select id,product_number productNumber,product_name productName,vehicle_model vehicleModel,wholesale_price wholesalePrice,retail_price retailPrice,discount_price discountPrice,price_change priceChange
+        from auto_parts_info where product_number = #{productNumber} limit 1
     </select>
 
     <select id="getPartMaxId" resultType="int">

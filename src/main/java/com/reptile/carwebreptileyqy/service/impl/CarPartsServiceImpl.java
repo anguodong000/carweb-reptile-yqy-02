@@ -156,7 +156,7 @@ public class CarPartsServiceImpl implements CarPartsService {
                 for (int j = 1; j <= lastRowNum; j++) {
                     Row row = sheet.getRow(j);
 
-                    if (row.getCell(0) != null) {
+                    if (!StringUtils.isEmpty(row.getCell(0))) {
                         row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
                         productNumber = row.getCell(0).getStringCellValue();
                     }
@@ -178,7 +178,12 @@ public class CarPartsServiceImpl implements CarPartsService {
                         AutoPartsInfoEntity autoPartsInfoEntity = new AutoPartsInfoEntity();
                         if(queryEntity!=null){
                             autoPartsInfoEntity.setId(queryEntity.getId());
+                            autoPartsInfoEntity.setProductNumber(productNumber);
+                            autoPartsInfoEntity.setProductName(queryEntity.getProductName());
+                            autoPartsInfoEntity.setVehicleModel(queryEntity.getVehicleModel());
+                            autoPartsInfoEntity.setWholesalePrice(queryEntity.getWholesalePrice());
                             autoPartsInfoEntity.setRetailPrice(retailPrice.doubleValue());
+                            autoPartsInfoEntity.setDiscountPrice(queryEntity.getDiscountPrice());
                             autoPartsInfoEntity.setPriceChange(priceChange);
                             autoPartsInfoEntity.setUpdateTime(new Date());
                             //更新数据库

@@ -139,6 +139,9 @@
 							<button id="updatePartsButton" onclick="updateParts()" type="submit" class="button submit-newsletter">配件更新</button>&nbsp;&nbsp;
 							<button id="deletePartsButton" type="button" class="button submit-newsletter">删除配件</button>&nbsp;&nbsp;
 						</div>
+						<div style="display: inline-block;visibility:hidden; width: 66px; text-align: left;" id="loadingDiv">
+							　　　　加载中<span id="id_loadspot"></span>
+						</div>
 						<table width="100%">
 							<tr>
 								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">OEM/厂家编号</td>
@@ -590,6 +593,8 @@
 				button: [{
 					name: '保存',
 					callback: function() {
+						var ajaxbg = $("#id_loadspot");
+						ajaxbg.show();
 						var fd = new FormData();
 						var iframe = this.iframe.contentWindow;
 						console.log(iframe);
@@ -605,6 +610,7 @@
 							success:function(data){
 								//carHingesList(1);
 								console.log(data);
+								ajaxbg.hide();
 								alert("操作成功！");
 							},
 							error:function(e){
