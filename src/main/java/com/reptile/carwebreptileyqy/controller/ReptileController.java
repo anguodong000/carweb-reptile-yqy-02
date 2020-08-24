@@ -72,6 +72,11 @@ public class ReptileController {
         return "carparts/import_carparts";
     }
 
+    @RequestMapping("/autoPartsInfo/importPartsHtml")
+    public String importPartsHtml() {
+        return "part/import_parts";
+    }
+
     @RequestMapping("/role")
     public String role(ModelMap modelMap) {
         return "role";

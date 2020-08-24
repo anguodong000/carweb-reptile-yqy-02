@@ -11,6 +11,7 @@ import com.reptile.carwebreptileyqy.util.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.params.MapSolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
@@ -116,10 +117,10 @@ public class CarPartsController {
             /**
              * 如果查询不出数据，就用编号去数据库查询（索引匹配问题，没有匹配到数据）
              */
-            if(total==0){
+            /*if(total==0){
                 list = carPartsService.autoPartsInfoList(carPartsDTO);
                 total = carPartsService.autoPartsInfoTotal(carPartsDTO);
-            }
+            }*/
             responseMap.put("total",total);
             responseMap.put("currentPage",carPartsDTO.getCurrentPage());
             responseMap.put("autoPartsList",list);
@@ -162,6 +163,36 @@ public class CarPartsController {
         return baseResponse;
     }
 
+    @PostMapping(value = "/autoPartsInfo/deleteParts",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BaseResponse deleteParts(
+            HttpServletRequest request, HttpServletResponse response)  {
+        BaseResponse baseResponse = new BaseResponse();
+        try{
+            UpdateResponse updateResponse = solrClient.deleteByQuery("*:*");
+            solrClient.commit();
+            System.out.println(updateResponse);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return baseResponse;
+    }
+
+    @PostMapping(value = "/autoPartsInfo/updateParts",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BaseResponse updateParts(
+            HttpServletRequest request, HttpServletResponse response,
+            @RequestParam("file") MultipartFile file)  {
+        BaseResponse baseResponse = new BaseResponse();
+        try{
+            String str = carPartsService.updateParts(file);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return baseResponse;
+    }
     /*@PostMapping(value = "/carWeb/register",produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     @Consumes(MediaType.APPLICATION_JSON)

@@ -136,6 +136,8 @@
 						<div class="shop-top-control" style="margin:0px 0px 10px 0px;text-align:center;">
 							<input id="queryString" type="text" style="background-color: white;width: 350px;" placeholder="请输入商品编号，商品名称，车型等关键字"/>
 							<button id="searchButton" type="button" class="button submit-newsletter">查询</button>&nbsp;&nbsp;
+							<button id="updatePartsButton" onclick="updateParts()" type="submit" class="button submit-newsletter">配件更新</button>&nbsp;&nbsp;
+							<button id="deletePartsButton" type="button" class="button submit-newsletter">删除配件</button>&nbsp;&nbsp;
 						</div>
 						<table width="100%">
 							<tr>
@@ -364,6 +366,17 @@
 	<script src="../js/owl.thumbs.min.js"></script>
 	<script src="../js/jquery.scrollbar.min.js"></script>
 	<script src="../js/frontend-plugin.js"></script>
+
+	<!--弹出框-->
+	<script src="../public/jquery-1.11.3.js"></script>
+	<script src="../public/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../js/plugins/lhgdialog/lhgdialog.js"></script>
+	<!-- 弹出警示框 -->
+	<script src="../js/plugins/toastr/toastr.min.js"></script>
+	<!-- 弹出确认框 -->
+	<script src="../public/artDialog4.1.7/artDialog.js?skin=blue"></script>
+	<script src="../public/artDialog4.1.7/plugins/iframeTools.js"></script>
+	<script src="../js/templet_form.js"></script>
 	<script>
 		$(function() {
 			queryAuthority();
@@ -562,6 +575,69 @@
 				}
 			});
 		}
+
+		function updateParts() {
+			$.dialog({
+				title: '配件更新',
+				width: 600,
+				height: 280,
+				lock:true,
+				content: 'url:/autoPartsInfo/importPartsHtml',
+				init: function() {
+					//var ul = iframe.document.getElementById('right_list');
+					var iframe = this.iframe.contentWindow;
+				},
+				button: [{
+					name: '保存',
+					callback: function() {
+						var fd = new FormData();
+						var iframe = this.iframe.contentWindow;
+						console.log(iframe);
+						//console.log(iframe.$("#password").val());
+						fd.append("file", iframe.$("#file").get(0).files[0]);//上传的文件file
+						$.ajax({
+							url:"/autoPartsInfo/updateParts",
+							type:"post",
+							data:fd,
+							cache: false,
+							processData: false,
+							contentType: false,
+							success:function(data){
+								//carHingesList(1);
+								console.log(data);
+								alert("操作成功！");
+							},
+							error:function(e){
+								alert("网络错误，请重试！！");
+							}
+						});
+					},
+					focus: true
+				}, {
+					name: '取消',
+					callback: function() {
+					}
+				}]
+			});
+		}
+
+		//删除配件
+		$("#deletePartsButton").click(function () {
+			$.ajax({
+				type:"POST",
+				url:"/autoPartsInfo/deleteParts",
+				contentType:"application/json",
+				dataType:"json",
+				success:function(data){
+					console.log("data:"+data);
+					var code = data.code;
+					if(code==200){
+						alert("删除成功")
+					}
+				}
+			});
+		})
+
 		/*<a href="javascript:autoPartList('+currentPage+')" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
 		<a href="#" class="page-numbers">1</a>
 				<a href="#" class="page-numbers">2</a>

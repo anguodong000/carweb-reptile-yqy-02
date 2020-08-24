@@ -24,4 +24,6 @@ public interface CarPartsService {
     int totalQueryCarPartsByDetailId(CarPartsDTO carPartsDTO);
 
     int createPriceNeed(QueryPriceDto queryPriceDto);
+
+    String updateParts(MultipartFile file);
 }

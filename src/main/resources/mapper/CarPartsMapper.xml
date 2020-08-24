@@ -72,7 +72,8 @@
                p.retail_price AS retailPrice,
                p.discount_price AS discountPrice,
                ifnull(p.factory_number,'') AS factoryNumber,
-               ifnull(p.specification,'') AS specification
+               ifnull(p.specification,'') AS specification,
+               ifnull(p.price_change,'') AS priceChange
         FROM auto_parts_info p where 1=1
         <if test="queryString != null and queryString != ''">
             and CONCAT(p.product_number,p.product_name,p.vehicle_model) LIKE CONCAT ('%', #{queryString},'%')
@@ -86,4 +87,21 @@
             and CONCAT(p.product_number,p.product_name,p.vehicle_model) LIKE CONCAT ('%', #{queryString},'%')
         </if>
     </select>
+
+    <select id ="getPartByProductNumber" parameterType="java.lang.String" resultType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
+        select * from auto_parts_info where product_number = #{productNumber} limit 1
+    </select>
+
+    <select id="getPartMaxId" resultType="int">
+        select max(id+1) from  auto_parts_info
+    </select>
+
+    <update id="updatePartRetailPrice" parameterType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
+        update auto_parts_info set retail_price=#{retailPrice},price_change = #{priceChange},update_time = #{updateTime} where id = #{id}
+    </update>
+
+    <insert id="savePartRetailPrice" parameterType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
+        insert into auto_parts_info(id,product_number,product_name,retail_price,price_change,create_time)
+        values(#{id},#{productNumber},#{productName},#{retailPrice},#{priceChange},#{createTime})
+    </insert>
 </mapper>

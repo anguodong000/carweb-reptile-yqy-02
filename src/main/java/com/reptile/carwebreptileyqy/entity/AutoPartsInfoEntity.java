@@ -2,9 +2,8 @@ package com.reptile.carwebreptileyqy.entity;
 
 import lombok.Data;
 import org.apache.solr.client.solrj.beans.Field;
-
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 public class AutoPartsInfoEntity implements Serializable {
@@ -36,4 +35,11 @@ public class AutoPartsInfoEntity implements Serializable {
 
     @Field("specification")
     private String specification;
+
+    @Field("priceChange")
+    private String priceChange;
+
+    private Date createTime;
+
+    private Date updateTime;
 }

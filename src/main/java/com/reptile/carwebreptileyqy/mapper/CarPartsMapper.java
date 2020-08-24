@@ -29,4 +29,12 @@ public interface CarPartsMapper {
 
     @Insert("insert into price_need(partsId,username,create_time) values(#{partsId},#{username},#{createTime})")
     int createPriceNeed(QueryPriceDto queryPriceDto);
+
+    AutoPartsInfoEntity getPartByProductNumber(String productNumber);
+
+    int getPartMaxId();
+
+    int updatePartRetailPrice(AutoPartsInfoEntity autoPartsInfoEntity);
+
+    int savePartRetailPrice(AutoPartsInfoEntity autoPartsInfoEntity);
 }
