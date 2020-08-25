@@ -25,5 +25,5 @@ public interface CarPartsService {
 
     int createPriceNeed(QueryPriceDto queryPriceDto);
 
-    String updateParts(MultipartFile file);
+    int updateParts(MultipartFile file);
 }

@@ -3,6 +3,7 @@ package com.reptile.carwebreptileyqy.controller;
 import com.reptile.carwebreptileyqy.dto.CarPartsDTO;
 import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
 import com.reptile.carwebreptileyqy.dto.RegisterDto;
+import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import com.reptile.carwebreptileyqy.entity.UserEntity;
 import com.reptile.carwebreptileyqy.service.CarPartsService;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
+import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.params.MapSolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
+import java.math.BigDecimal;
 import java.util.*;
 
 @RestController
@@ -99,7 +102,7 @@ public class CarPartsController {
         /**
          * 通过solrJ查询 7.1.0查询方式
          */
-        List list = new ArrayList();
+        List<SolrDocument> solrDocumentList = new ArrayList();
         long total = 0L;
         Map queryParamMap = new HashMap<>();
         if(carPartsDTO.getQueryString().equals("")){
@@ -112,18 +115,26 @@ public class CarPartsController {
         MapSolrParams queryParams = new MapSolrParams(queryParamMap);
         try{
             QueryResponse queryResponse = solrClient.query(queryParams);
-            list = queryResponse.getResults();
+            solrDocumentList = queryResponse.getResults();
+            for(int i=0;i<solrDocumentList.size();i++){
+                SolrDocument solrDocument = solrDocumentList.get(i);
+                BigDecimal retailPrice = new BigDecimal(solrDocument.get("retailPrice").toString());
+                double result = retailPrice.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                solrDocument.setField("retailPrice",result);
+                responseMap.put("autoPartsList",solrDocumentList);
+            }
             total = queryResponse.getResults().getNumFound();
             /**
              * 如果查询不出数据，就用编号去数据库查询（索引匹配问题，没有匹配到数据）
              */
-            /*if(total==0){
-                list = carPartsService.autoPartsInfoList(carPartsDTO);
+            if(total==0){
+                List<AutoPartsInfoEntity> partList = new ArrayList<>();
+                partList = carPartsService.autoPartsInfoList(carPartsDTO);
                 total = carPartsService.autoPartsInfoTotal(carPartsDTO);
-            }*/
+                responseMap.put("autoPartsList",partList);
+            }
             responseMap.put("total",total);
             responseMap.put("currentPage",carPartsDTO.getCurrentPage());
-            responseMap.put("autoPartsList",list);
             baseResponse.setData(responseMap);
         }catch(Exception e){
             log.info("查询solr结果异常,e=",e.getMessage());
@@ -187,7 +198,11 @@ public class CarPartsController {
             @RequestParam("file") MultipartFile file)  {
         BaseResponse baseResponse = new BaseResponse();
         try{
-            String str = carPartsService.updateParts(file);
+            int msg = carPartsService.updateParts(file);
+            if(msg==0){
+                baseResponse.setCode("202");
+                baseResponse.setMessage("导入失败,excel表头格式错误!");
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -133,21 +133,20 @@
 			<div class="row">
 				<div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="">
-						<div class="shop-top-control" style="margin:0px 0px 10px 0px;text-align:center;">
+						<div id="menu-top" class="shop-top-control" style="margin:0px 0px 10px 0px;text-align:center;">
 							<input id="queryString" type="text" style="background-color: white;width: 350px;" placeholder="请输入商品编号，商品名称，车型等关键字"/>
 							<button id="searchButton" type="button" class="button submit-newsletter">查询</button>&nbsp;&nbsp;
-							<button id="updatePartsButton" onclick="updateParts()" type="submit" class="button submit-newsletter">配件更新</button>&nbsp;&nbsp;
-							<button id="deletePartsButton" type="button" class="button submit-newsletter">删除配件</button>&nbsp;&nbsp;
-						</div>
-						<div style="display: inline-block;visibility:hidden; width: 66px; text-align: left;" id="loadingDiv">
-							　　　　加载中<span id="id_loadspot"></span>
+							<!--<button id="updatePartsButton" onclick="updateParts()" type="submit" class="button submit-newsletter">价格更新</button>&nbsp;&nbsp;
+							<span style="width: 100px;text-align:left;display:inline-block;" id="SpanUpdating"></span>-->
+							<!--<button id="deletePartsButton" type="button" class="button submit-newsletter">删除配件</button>&nbsp;&nbsp;-->
 						</div>
 						<table width="100%">
 							<tr>
 								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">OEM/厂家编号</td>
-								<td style="width:40%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">商品名称</td>
-								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">车型</td>
-								<td style="width:20%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">参考价格(单位：元)</td>
+								<td style="width:35%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">商品名称</td>
+								<td style="width:15%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">车型</td>
+								<td style="width:15%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">参考价格(单位：元)</td>
+								<td style="width:15%;height:10px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">价格变动</td>
 							</tr>
 							<tbody id = "autoPartsTable">
 							<!-- 后台数据-->
@@ -338,7 +337,7 @@
 				<div class="row">
 					<p align="center">
 						© 2020 北京华锦齐得利商贸有限责任公司  ｜
-						<a href="http://www.beian.miit.gov.cn/" target="_blank">京ICP备20029352号</a>
+						<a href="https://beian.miit.gov.cn/" target="_blank">京ICP备20029352号</a>
 					</p>
 					<p align="center">
 						邮箱：anguodong000@163.com | 客服QQ：1932604926 592912807
@@ -369,7 +368,6 @@
 	<script src="../js/owl.thumbs.min.js"></script>
 	<script src="../js/jquery.scrollbar.min.js"></script>
 	<script src="../js/frontend-plugin.js"></script>
-
 	<!--弹出框-->
 	<script src="../public/jquery-1.11.3.js"></script>
 	<script src="../public/bootstrap.min.js" type="text/javascript"></script>
@@ -419,11 +417,18 @@
 						$td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.productName+'</td>');
 						$td3 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.vehicleModel+'</td>');
 						$td4 = $('<td id="retailPricetd'+item.id+'" style="text-align:center;vertical-align:middle;"><a id="priceStr'+item.id+'" style="color:red;" href="javascript:queryPrice('+item.id+','+item.retailPrice+')">查看价格</a></td>');
+						$td5 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.priceChange+'</td>');
+						$td5Null = $('<td style="text-align:center;vertical-align:middle;color:black;"></td>');
 
 						$tr.append($td1);
 						$tr.append($td2);
 						$tr.append($td3);
 						$tr.append($td4);
+						if(item.priceChange==undefined){
+							$tr.append($td5Null);
+						}else{
+							$tr.append($td5);
+						}
 						$('#autoPartsTable').append($tr);
 					});
 				}
@@ -574,6 +579,11 @@
 					if(code==200){
 						$li = $('<a href="/userListPage" class="emeriss-menu-item-title" title="About">用户审核</a>');
 						$('#user_authority_menu').append($li);
+
+						$button = $('<button id="updatePartsButton" onclick="updateParts()" type="submit" class="button submit-newsletter">价格更新</button>&nbsp;&nbsp;');
+						$span = $('<span style="width: 100px;text-align:left;display:inline-block;" id="SpanUpdating"></span>');
+						$('#menu-top').append($button);
+						$('#menu-top').append($span);
 					}
 				}
 			});
@@ -593,8 +603,8 @@
 				button: [{
 					name: '保存',
 					callback: function() {
-						var ajaxbg = $("#id_loadspot");
-						ajaxbg.show();
+						$("#SpanUpdating").append('更新中...');
+						//$("#menu-top").append('<span id="SpanUpdating">更新中</span>');
 						var fd = new FormData();
 						var iframe = this.iframe.contentWindow;
 						console.log(iframe);
@@ -610,8 +620,19 @@
 							success:function(data){
 								//carHingesList(1);
 								console.log(data);
-								ajaxbg.hide();
-								alert("操作成功！");
+								var code = data.code;
+								if(code==200){
+									alert("更新成功");
+									$("#SpanUpdating").empty();
+									//debugger;
+									//$("#SpanUpdating").remove();
+									//$("#SpanUpdating").append('更新成功');
+									//$("#menu-top").append('<span id="SpanUpdatingSuccess">更新成功</span>');
+									//setTimeout("$('#SpanUpdatingSuccess').empty()",5000);
+								}else{
+									alert(data.message);
+									$("#SpanUpdating").empty();
+								}
 							},
 							error:function(e){
 								alert("网络错误，请重试！！");

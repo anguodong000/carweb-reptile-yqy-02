@@ -122,7 +122,8 @@ public class CarPartsServiceImpl implements CarPartsService {
     }
 
     @Override
-    public String updateParts(MultipartFile file) {
+    public int updateParts(MultipartFile file) {
+        int msg = 1;
         //获取文件的名字
         String originalFilename = file.getOriginalFilename();
         Workbook workbook = null;
@@ -146,7 +147,19 @@ public class CarPartsServiceImpl implements CarPartsService {
             for (int i = 0; i < numOfSheet; i++) {
                 //获取一个sheet也就是一个工作簿
                 Sheet sheet = workbook.getSheetAt(i);
-                String sheetName = sheet.getSheetName();
+                //检查表头
+                Row rowTitle = sheet.getRow(0);
+                if(StringUtils.isEmpty(rowTitle.getCell(0))|| StringUtils.isEmpty(rowTitle.getCell(1)) || StringUtils.isEmpty(rowTitle.getCell(2)) ){
+                    msg = 0;
+                    break;
+                }
+                if(!rowTitle.getCell(0).getStringCellValue().contains("商品编号") ||
+                        !rowTitle.getCell(0).getStringCellValue().contains("OEM")||
+                        !rowTitle.getCell(1).getStringCellValue().contains("名称") ||
+                        !rowTitle.getCell(2).getStringCellValue().contains("价格") ){
+                    msg = 0;
+                    break;
+                }
                 int lastRowNum = sheet.getLastRowNum();
                 //从第一行开始第一行一般是标题
                 String productNumber = "";
@@ -207,7 +220,7 @@ public class CarPartsServiceImpl implements CarPartsService {
                 }
             }
         }
-        return "上传成功";
+        return msg;
     }
 
     @Override

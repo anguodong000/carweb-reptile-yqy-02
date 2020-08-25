@@ -119,10 +119,10 @@
                     <table width="1180px" style="table-layout: fixed;">
                         <thead>
                         <tr style="">
-                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">用户名</th>
-                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">手机号</th>
-                            <!--<th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">电子邮箱</th>-->
+                            <!--<th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">用户名</th>-->
                             <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">公司名称</th>
+                            <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">联系人手机号</th>
+                            <!--<th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">电子邮箱</th>-->
                             <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">公司地址</th>
                             <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">用户状态</th>
                             <th style="width:130px;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">操作</th>
@@ -406,20 +406,26 @@
                 }
                 $.each(data.data.userList, function(i,item){
                     $tr = $('<tr></tr>');
-                    $td1 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.username+'</td>');
-                    $td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.telephone+'</td>');
+                    /*$td1 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.username+'</td>');*/
+                    $td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.company+'</td>');
                     /*$td3 = $('<td style="text-align:center;vertical-align:middle;">'+item.email+'</td>');*/
-                    $td4 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.company+'</td>');
+                    $td4 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.telephone+'</td>');
                     $td5 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.companyAddress+'</td>');
-                    $td6 = $('<td style="text-align:center;vertical-align:middle;color:red;">'+item.isAutyorityName+'</td>');
+                    $td61 = $('<td style="text-align:center;vertical-align:middle;color:green;">已启用</td>');
+                    $td62 = $('<td style="text-align:center;vertical-align:middle;color:red;">已禁用</td>');
                     $td7 = $('<td style="text-align:center;vertical-align:middle;color:black;"><a href="javascript:userAuthority('+item.telephone+',1)" style="color:cornflowerblue;">启用</a>&nbsp;&nbsp;<a href="javascript:userAuthority('+item.telephone+',0)" style="color:cornflowerblue;">禁用</a></td>');
 
-                    $tr.append($td1);
+                    /*$tr.append($td1);*/
                     $tr.append($td2);
                     /*$tr.append($td3);*/
                     $tr.append($td4);
                     $tr.append($td5);
-                    $tr.append($td6);
+
+                    if(item.isAutyority==1){
+                        $tr.append($td61);
+                    }else{
+                        $tr.append($td62);
+                    }
                     $tr.append($td7);
                     $('#autoPartsTable').append($tr);
                 });

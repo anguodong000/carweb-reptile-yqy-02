@@ -23,10 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import java.sql.Timestamp;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @Slf4j
@@ -54,20 +51,19 @@ public class UserController {
         BaseResponse baseResponse = new BaseResponse();
         Map map = new LinkedHashMap();
         List<UserEntity> list = userService.list(userDTO);
+        List<UserEntity> listDTO = new ArrayList<>();
         for(UserEntity user:list){
             user.setEmail(user.getEmail() == null ? "" : user.getEmail());
             user.setCompany(user.getCompany() == null? "":user.getCompany());
             user.setCompanyAddress(user.getCompanyAddress() == null? "":user.getCompanyAddress());
-            if(user.getIsAutyority()==0){
-                user.setIsAutyorityName("已禁用");
-            }else{
-                user.setIsAutyorityName("已启用");
+            if(!"YQY".equals(user.getUsername()) && !"anguodong".equals(user.getUsername()) && !"13439970960".equals(user.getUsername()) ){
+                listDTO.add(user);
             }
         }
         int total = userService.userTotal(userDTO);
         map.put("total",total);
         map.put("currentPage",userDTO.getCurrentPage());
-        map.put("userList",list);
+        map.put("userList",listDTO);
         baseResponse.setData(map);
         return baseResponse;
     }
