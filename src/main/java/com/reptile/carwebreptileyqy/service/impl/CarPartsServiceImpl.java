@@ -149,12 +149,13 @@ public class CarPartsServiceImpl implements CarPartsService {
                 Sheet sheet = workbook.getSheetAt(i);
                 //检查表头
                 Row rowTitle = sheet.getRow(0);
-                if(StringUtils.isEmpty(rowTitle.getCell(0))|| StringUtils.isEmpty(rowTitle.getCell(1)) || StringUtils.isEmpty(rowTitle.getCell(2)) ){
+                if(StringUtils.isEmpty(rowTitle.getCell(0))||
+                        StringUtils.isEmpty(rowTitle.getCell(1)) ||
+                        StringUtils.isEmpty(rowTitle.getCell(2)) ){
                     msg = 0;
                     break;
                 }
                 if(!rowTitle.getCell(0).getStringCellValue().contains("商品编号") ||
-                        !rowTitle.getCell(0).getStringCellValue().contains("OEM")||
                         !rowTitle.getCell(1).getStringCellValue().contains("名称") ||
                         !rowTitle.getCell(2).getStringCellValue().contains("价格") ){
                     msg = 0;
