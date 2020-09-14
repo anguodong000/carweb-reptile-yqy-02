@@ -577,8 +577,10 @@
 					console.log("data:"+data);
 					var code = data.code;
 					if(code==200){
-						$li = $('<a href="/userListPage" class="emeriss-menu-item-title" title="About">用户审核</a>');
-						$('#user_authority_menu').append($li);
+						$li1 = $('<a href="/userListPage" class="emeriss-menu-item-title" title="About">用户审核</a>');
+						$li2 = $('<a href="/queryPriceStatisticsPage" class="emeriss-menu-item-title" title="About">查询统计</a>');
+						$('#user_authority_menu').append($li1);
+						$('#user_authority_menu').append($li2);
 
 						$button = $('<button id="updatePartsButton" onclick="updateParts()" type="submit" class="button submit-newsletter">价格更新</button>&nbsp;&nbsp;');
 						$span = $('<span style="width: 100px;text-align:left;display:inline-block;" id="SpanUpdating"></span>');

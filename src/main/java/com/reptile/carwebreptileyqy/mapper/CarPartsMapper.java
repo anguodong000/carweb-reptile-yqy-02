@@ -1,7 +1,9 @@
 package com.reptile.carwebreptileyqy.mapper;
 
 import com.reptile.carwebreptileyqy.dto.CarPartsDTO;
+import com.reptile.carwebreptileyqy.dto.PriceStatisticsDTO;
 import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
+import com.reptile.carwebreptileyqy.dto.UserDTO;
 import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import org.apache.ibatis.annotations.Insert;
@@ -37,4 +39,8 @@ public interface CarPartsMapper {
     int updatePartRetailPrice(AutoPartsInfoEntity autoPartsInfoEntity);
 
     int savePartRetailPrice(AutoPartsInfoEntity autoPartsInfoEntity);
+
+    List<PriceStatisticsDTO> listPriceStatistics(UserDTO userDTO);
+
+    int priceStatisticsTotal(UserDTO userDTO);
 }

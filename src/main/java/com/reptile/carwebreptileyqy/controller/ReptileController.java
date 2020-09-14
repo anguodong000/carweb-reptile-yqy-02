@@ -102,6 +102,11 @@ public class ReptileController {
         return "user/user_list";
     }
 
+    @RequestMapping("/queryPriceStatisticsPage")
+    public String queryPriceStatisticsPage(ModelMap modelMap) {
+        return "part/query_price_statistics";
+    }
+
     @RequestMapping("/carHinges/importCarHingesHtml")
     public String importCarHingesHtml(ModelMap modelMap) {
         return "hinges/import_carhinges";

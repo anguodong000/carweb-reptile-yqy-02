@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>配齐网</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../images/timg.ico"/>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../css/animate.min.css">
+    <link rel="stylesheet" href="../../css/jquery-ui.css">
+    <link rel="stylesheet" href="../../css/slick.css">
+    <link rel="stylesheet" href="../../css/chosen.min.css">
+    <link rel="stylesheet" href="../../css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="../../css/magnific-popup.min.css">
+    <link rel="stylesheet" href="../../css/lightbox.min.css">
+    <link rel="stylesheet" href="../../js/fancybox/source/jquery.fancybox.css">
+    <link rel="stylesheet" href="../../css/jquery.scrollbar.min.css">
+    <link rel="stylesheet" href="../../css/mobile-menu.css">
+    <link rel="stylesheet" href="../../fonts/flaticon/flaticon.css">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="productsgrid-page">
+<header class="header style7">
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <div class="header-message">
+                    欢迎！
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <ul class="header-user-links">
+                    <li>
+                        <div sec:authorize="!isAuthenticated()">
+                            您好,<a href="/login-view"><span style="color:red">请登录</span></a>
+                            <a href="/logout" title="退出">退出</a>
+                        </div>
+                        <!--您好,<a href="#"><span style="color:red" sec:authentication="name"></span></a>-->
+                        <div sec:authorize="isAuthenticated()">
+                            您好,<a href="#"><span style="color:red" sec:authentication="name"></span></a>
+                            <a href="/logout" title="退出">退出</a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main-header">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img  src="../../images/logo.jpg" alt="img" width="400" height="100">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-nav-container">
+        <div class="container">
+            <div class="header-nav-wapper main-menu-wapper">
+                <div class="header-nav">
+                    <div class="container-wapper">
+                        <ul class="emeriss-clone-mobile-menu emeriss-nav main-menu" id="menu-main-menu">
+                            <li class="menu-item">
+                                <a href="/index" class="emeriss-menu-item-title" title="Home">首页</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="/hinges" class="emeriss-menu-item-title" title="Home">查询统计</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#" class="emeriss-menu-item-title" title="About">关于我们</a>
+                            </li>
+                            <li class="menu-item" id="user_authority_menu">
+                                <!--<a href="#" class="emeriss-menu-item-title" title="About">用户审核</a>-->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="main-content main-content-product no-sidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-trail breadcrumbs">
+                    <ul class="trail-items breadcrumb">
+                        <li class="trail-item trail-begin">
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li class="trail-item trail-end active">
+                            合页
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="site-main">
+                    <!--<h3 class="custom_blog_title">
+                        用户列表
+                    </h3>-->
+                    <div class="shop-top-control">
+                        <label class="coupon_code">公司:</label>
+                        <input id="company_queryform" type="text" style="background-color: white" placeholder="请输入公司名称"/>
+                        <button onclick="queryPriceStatisticsList(1)" type="submit" class="button submit-newsletter">查询</button>&nbsp;&nbsp;
+                    </div>
+                    <table width="1180px" style="table-layout: fixed;">
+                        <thead>
+                        <tr style="">
+                            <th style="width:60%;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">公司名称</th>
+                            <th style="width:40%;text-align:center;vertical-align:middle;color:cornflowerblue;font-weight:bold;">查询次数</th>
+                        </tr>
+                        </thead>
+                        <tbody id = "autoPartsTable">
+                        <!-- 后台数据-->
+                        </tbody>
+                    </table>
+
+                    <div class="pagination clearfix style2" >
+                        <div class="nav-link" id="editable_paginate">
+                            <!--页码-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="wrapper-sidebar shop-sidebar">
+                    <div class="widget woof_Widget">
+                        <div class="widget widget-categories">
+                            <h3 class="widgettitle">Categories</h3>
+                            <ul class="list-categories">
+                                <li>
+                                    <input type="checkbox" id="cb1">
+                                    <label for="cb1" class="label-text">
+                                        New Arrivals
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="cb2">
+                                    <label for="cb2" class="label-text">
+                                        Grooming
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="cb3">
+                                    <label for="cb3" class="label-text">
+                                        Beard Oil
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="cb4">
+                                    <label for="cb4" class="label-text">
+                                        Clothing
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="cb5">
+                                    <label for="cb5" class="label-text">
+                                        Accessories
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="cb6">
+                                    <label for="cb6" class="label-text">
+                                        Backpack
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="widget widget_filter_price">
+                            <h4 class="widgettitle">
+                                Price
+                            </h4>
+                            <div class="price-slider-wrapper">
+                                <div data-label-reasult="Range:" data-min="0" data-max="3000" data-unit="$" class="slider-range-price " data-value-min="0" data-value-max="1000">
+                                </div>
+                                <div class="price-slider-amount">
+                                    <span class="from">$45</span>
+                                    <span class="to">$215</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget widget-brand">
+                            <h3 class="widgettitle">Brand</h3>
+                            <ul class="list-brand">
+                                <li>
+                                    <input id="cb7" type="checkbox">
+                                    <label for="cb7" class="label-text">New Arrivals</label>
+                                </li>
+                                <li>
+                                    <input id="cb8" type="checkbox">
+                                    <label for="cb8" class="label-text">Grooming</label>
+                                </li>
+                                <li>
+                                    <input id="cb9" type="checkbox">
+                                    <label for="cb9" class="label-text">Beard Oil</label>
+                                </li>
+                                <li>
+                                    <input id="cb10" type="checkbox">
+                                    <label for="cb10" class="label-text">Clothing</label>
+                                </li>
+                                <li>
+                                    <input id="cb11" type="checkbox">
+                                    <label for="cb11" class="label-text">Accessories</label>
+                                </li>
+                                <li>
+                                    <input id="cb12" type="checkbox">
+                                    <label for="cb12" class="label-text">Backpack</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="widget widget_filter_size">
+                            <h4 class="widgettitle">Size</h4>
+                            <ul class="list-size">
+                                <li>
+                                    <a href="#">xs</a>
+                                </li>
+                                <li>
+                                    <a href="#">s</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">m</a>
+                                </li>
+                                <li>
+                                    <a href="#">l</a>
+                                </li>
+                                <li>
+                                    <a href="#">xl</a>
+                                </li>
+                                <li>
+                                    <a href="#">xxl</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="widget widget-color">
+                            <h4 class="widgettitle">
+                                Color
+                            </h4>
+                            <div class="list-color">
+                                <a href="#" class="color1"></a>
+                                <a href="#" class="color2 "></a>
+                                <a href="#" class="color3 active"></a>
+                                <a href="#" class="color4"></a>
+                                <a href="#" class="color5"></a>
+                                <a href="#" class="color6"></a>
+                                <a href="#" class="color7"></a>
+                            </div>
+                        </div>
+                        <div class="widget widget-tags">
+                            <h3 class="widgettitle">
+                                Popular Tags
+                            </h3>
+                            <ul class="tagcloud">
+                                <li class="tag-cloud-link">
+                                    <a href="#">Fashion</a>
+                                </li>
+                                <li class="tag-cloud-link">
+                                    <a href="#">Clothing</a>
+                                </li>
+                                <li class="tag-cloud-link">
+                                    <a href="#">Backpack</a>
+                                </li>
+                                <li class="tag-cloud-link active">
+                                    <a href="#">Accessories</a>
+                                </li>
+                                <li class="tag-cloud-link">
+                                    <a href="#">Hot</a>
+                                </li>
+                                <li class="tag-cloud-link">
+                                    <a href="#">Backpack</a>
+                                </li>
+                                <li class="tag-cloud-link">
+                                    <a href="#">Grooming</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="widget newsletter-widget">
+                        <div class="newsletter-form-wrap ">
+                            <h3 class="title">Subscribe to Our Newsletter</h3>
+                            <div class="subtitle">
+                                More special Deals, Events & Promotions
+                            </div>
+                            <input type="email" class="email" placeholder="Your email letter">
+                            <button type="submit" class="button submit-newsletter">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-device-mobile">
+    <div class="wapper">
+        <div class="footer-device-mobile-item device-home">
+            <a href="index.html">
+					<span class="icon">
+						<i class="fa fa-home" aria-hidden="true"></i>
+					</span>
+                Home
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-wishlist">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-heart" aria-hidden="true"></i>
+					</span>
+                Wishlist
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-cart">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+						<span class="count-icon">
+							0
+						</span>
+					</span>
+                <span class="text">Cart</span>
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-user">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</span>
+                Account
+            </a>
+        </div>
+    </div>
+</div>
+<footer class="footer style7">
+    <div class="container">
+        <div class="container-wapper">
+            <div class="row">
+                <p align="center">
+                    © 2020 北京华锦齐得利商贸有限责任公司  ｜
+                    <a href="http://www.beian.miit.gov.cn/" target="_blank">京ICP备20029352号</a>
+                </p>
+                <p align="center">
+                    邮箱：anguodong000@163.com | 客服QQ：1932604926 592912807
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--弹出框-->
+<script src="../../public/jquery-1.11.3.js"></script>
+<script src="../../public/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../js/plugins/lhgdialog/lhgdialog.js"></script>
+<!-- 弹出警示框 -->
+<script src="../../js/plugins/toastr/toastr.min.js"></script>
+<!-- 弹出确认框 -->
+<script src="../../public/artDialog4.1.7/artDialog.js?skin=blue"></script>
+<script src="../../public/artDialog4.1.7/plugins/iframeTools.js"></script>
+<script src="../../js/templet_form.js"></script>
+<script>
+    $(function() {
+        queryAuthority();
+        queryPriceStatisticsList(1);
+    });
+
+    function queryPriceStatisticsList(currentPage){
+        var company = $("#company_queryform").val();
+        var param = {currentPage:currentPage,company:company};
+        console.log(JSON.stringify(param));
+        $.ajax({
+            type:"POST",
+            data:JSON.stringify(param),
+            url:"/carParts/listPriceStatistics",
+            contentType:"application/json",
+            dataType:"json",
+            success:function(data){
+                $("#autoPartsTable").empty();
+                $("#totalPageUl").empty();
+                //总数
+                var total = data.data.total;
+                //总页数
+                var totalPageNums = Math.ceil(total/20);
+                //两侧显示的页码数 大于1
+                var edges = 2;
+                //主页码区显示的页码数 大于3
+                var playes = 5;
+                if(total==0){
+                    $('#editable_paginate').empty();
+                }else{
+                    renderPageItem(totalPageNums,playes,edges,currentPage);
+                }
+                $.each(data.data.priceStatisticsList, function(i,item){
+                    $tr = $('<tr></tr>');
+                    $td1 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.company+'</td>');
+                    $td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.count+'</td>');
+                    $tr.append($td1);
+                    $tr.append($td2);
+                    $('#autoPartsTable').append($tr);
+                });
+            }
+        });
+    }
+
+    function renderPageItem(totalPageNums,playes,edges,currentPage) {
+        //debugger;
+        $ul = $('<ul class="pagination pull-right" style="margin:0px 5px 5px 5px;">');
+        var start = 1;
+        var end = totalPageNums;
+        if(playes % 2){
+            //playes是奇数
+            start = currentPage - Math.floor(playes / 2);
+            end = currentPage + Math.floor(playes / 2);
+        }else{
+            //playes是偶数
+            start = currentPage - (playes / 2 - 1);
+            end = currentPage + playes / 2;
+        }
+        if (start <= edges + 1) {
+            start = 1;
+            if (end < playes && playes<totalPageNums) {
+                end = playes;
+            }
+        }else{
+            for (var i = 1; i <= edges; i++) {
+                $ul.append(renderItem(i,currentPage));
+            }
+            $ul.append('<span>...</span>');
+        }
+        if (end < totalPageNums - edges) {
+            for (var i = start; i <= end; i++) {
+                $ul.append(renderItem(i,currentPage));
+            }
+            $ul.append('<span>...</span>');
+            for (var i = totalPageNums - edges + 1; i <= totalPageNums; i++) {
+                $ul.append(renderItem(i,currentPage));
+            }
+        }else{
+            end = totalPageNums;
+            /*if(start>totalPageNums-playes+1){
+                start = totalPageNums-playes+1
+            }*/
+            for (var i = start; i <= end; i++) {
+                $ul.append(renderItem(i));
+            }
+        }
+        $ul.prepend(renderPrevItem(currentPage));
+        $ul.append(renderNextItem(currentPage,totalPageNums));
+        $('#editable_paginate').empty().append($ul);
+    }
+
+    function renderItem(i,currentPage) {
+        //debugger;
+        $item = $('<a href="javascript:autoPartList('+i+')">'+i+'</a>');
+        if (i == currentPage) {
+            $item.addClass('page-numbers current');
+        }else{
+            $item.addClass('page-numbers');
+        }
+        $item.on('click', (function (num) {
+            return function () {
+                currentPage = num;
+                renderPageItem(currentPage);
+            }
+        })(i));
+        return $item;
+    }
+
+    function renderPrevItem(currentPage) {
+        //debugger;
+        $prev = $('<a href="javascript:autoPartList('+currentPage+')" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i>');
+        if (currentPage == 1) {
+            $prev.addClass('disabled');
+        } else {
+            $prev.on('click', function () {
+                currentPage = currentPage - 1;
+                renderPageItem(currentPage);
+            })
+        }
+        return $prev;
+    }
+
+    function renderNextItem(currentPage,totalPageNums) {
+        //debugger;
+        $next = $('<a href="javascript:autoPartList('+currentPage+')" class="page-numbers"><i class="icon fa fa-angle-right" aria-hidden="true"></i></a>');
+        if (currentPage == totalPageNums) {
+            $next.addClass('disabled');
+        } else {
+            $next.on('click', function () {
+                currentPage = currentPage + 1;
+                renderPageItem(currentPage);
+            })
+        }
+        return $next;
+    }
+
+    //查询是否具有用户审核权限
+    function queryAuthority(){
+        $.ajax({
+            type:"POST",
+            data:"",
+            url:"/authority/isHaveAuthorityPage",
+            contentType:"application/json",
+            dataType:"json",
+            success:function(data){
+                console.log("data:"+data);
+                var code = data.code;
+                if(code==200){
+                    queryUserList(1);
+                    $li1 = $('<a href="#" class="emeriss-menu-item-title" title="About">用户审核</a>');
+                    $li2 = $('<a href="/queryPriceStatisticsPage" class="emeriss-menu-item-title" title="About">查询统计</a>');
+                    $('#user_authority_menu').append($li1);
+                    $('#user_authority_menu').append($li2);
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

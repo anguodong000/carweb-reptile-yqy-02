@@ -1,7 +1,9 @@
 package com.reptile.carwebreptileyqy.service.impl;
 
 import com.reptile.carwebreptileyqy.dto.CarPartsDTO;
+import com.reptile.carwebreptileyqy.dto.PriceStatisticsDTO;
 import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
+import com.reptile.carwebreptileyqy.dto.UserDTO;
 import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import com.reptile.carwebreptileyqy.mapper.CarPartsMapper;
@@ -258,5 +260,15 @@ public class CarPartsServiceImpl implements CarPartsService {
     public int createPriceNeed(QueryPriceDto queryPriceDto) {
         queryPriceDto.setCreateTime(new Date());
         return carPartsMapper.createPriceNeed(queryPriceDto);
+    }
+
+    @Override
+    public List<PriceStatisticsDTO> listPriceStatistics(UserDTO userDTO) {
+        return carPartsMapper.listPriceStatistics(userDTO);
+    }
+
+    @Override
+    public int priceStatisticsTotal(UserDTO userDTO) {
+        return carPartsMapper.priceStatisticsTotal(userDTO);
     }
 }

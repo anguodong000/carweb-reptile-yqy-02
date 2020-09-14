@@ -105,4 +105,22 @@
         insert into auto_parts_info(id,product_number,product_name,retail_price,price_change,create_time)
         values(#{id},#{productNumber},#{productName},#{retailPrice},#{priceChange},#{createTime})
     </insert>
+
+    <select id ="listPriceStatistics" parameterType="com.reptile.carwebreptileyqy.dto.UserDTO" resultType="com.reptile.carwebreptileyqy.dto.PriceStatisticsDTO">
+        select u.company,count(1) count from price_need p
+        left join user_info u
+        on u.telephone = p.username
+        where 1=1
+        <if test="company != null and company != ''">
+            and company LIKE CONCAT ('%', #{company},'%')
+        </if>
+        group by u.company
+    </select>
+
+    <select id ="priceStatisticsTotal" parameterType="com.reptile.carwebreptileyqy.dto.UserDTO" resultType="java.lang.Integer">
+        select count(1) from (select u.company,count(1) count from price_need p
+        left join user_info u
+        on u.telephone = p.username
+        group by u.company) a
+    </select>
 </mapper>

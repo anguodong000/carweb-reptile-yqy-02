@@ -1,8 +1,6 @@
 package com.reptile.carwebreptileyqy.controller;
 
-import com.reptile.carwebreptileyqy.dto.CarPartsDTO;
-import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
-import com.reptile.carwebreptileyqy.dto.RegisterDto;
+import com.reptile.carwebreptileyqy.dto.*;
 import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import com.reptile.carwebreptileyqy.entity.UserEntity;
@@ -208,20 +206,25 @@ public class CarPartsController {
         }
         return baseResponse;
     }
-    /*@PostMapping(value = "/carWeb/register",produces = MediaType.APPLICATION_JSON)
+
+    /**
+     * 价格统计查询
+     * @param userDTO
+     * @return
+     */
+    @PostMapping(value = "/carParts/listPriceStatistics",produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     @Consumes(MediaType.APPLICATION_JSON)
-    //@PreAuthorize("hasAuthority('QUERY_PARTS_PRICE')")
-    public BaseResponse register(
-            @RequestBody RegisterDto registerDto){
+    public BaseResponse listPriceStatistics(
+            @RequestBody UserDTO userDTO){
         BaseResponse baseResponse = new BaseResponse();
-        try{
-            int result = userService.createUser(registerDto);
-        }catch (Exception e){
-            baseResponse.setCode("202");
-            baseResponse.setExtraMessage("创建用户失败");
-            log.info("创建用户异常："+e.getMessage());
-        }
+        Map map = new LinkedHashMap();
+        List<PriceStatisticsDTO> list = carPartsService.listPriceStatistics(userDTO);
+        int total = carPartsService.priceStatisticsTotal(userDTO);
+        map.put("total",total);
+        map.put("currentPage",userDTO.getCurrentPage());
+        map.put("priceStatisticsList",list);
+        baseResponse.setData(map);
         return baseResponse;
-    }*/
+    }
 }
