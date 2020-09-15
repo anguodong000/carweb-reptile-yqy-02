@@ -107,6 +107,13 @@ public class ReptileController {
         return "part/query_price_statistics";
     }
 
+    @RequestMapping("/queryPriceStatisticsDetailPage")
+    public String queryPriceStatisticsDetailPage(ModelMap modelMap,HttpServletRequest request,String company) {
+        request.setAttribute("company",company);
+        return "part/query_price_statistics_detail";
+    }
+
+
     @RequestMapping("/carHinges/importCarHingesHtml")
     public String importCarHingesHtml(ModelMap modelMap) {
         return "hinges/import_carhinges";

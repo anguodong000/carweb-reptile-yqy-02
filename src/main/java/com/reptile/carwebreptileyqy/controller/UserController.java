@@ -129,17 +129,6 @@ public class UserController {
             baseResponse.setMessage("修改密码失败");
             return baseResponse;
         }
-        /*UserDetails userDetails = userDetailsService.loadUserByUsername(userDTO.getTelephone());
-        //进行授权登录
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDTO.getTelephone(), userDTO.getPassword(),userDetails.getAuthorities());
-        try{
-            token.setDetails(new WebAuthenticationDetails(request));
-            Authentication authenticatedUser = authenticationManager.authenticate(token);
-            SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-            request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-        }catch (Exception e){
-            log.info("用户授权失败："+e.getMessage());
-        }*/
         return baseResponse;
     }
 }

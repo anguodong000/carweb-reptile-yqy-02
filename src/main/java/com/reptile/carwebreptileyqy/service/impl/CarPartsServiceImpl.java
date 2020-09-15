@@ -271,4 +271,14 @@ public class CarPartsServiceImpl implements CarPartsService {
     public int priceStatisticsTotal(UserDTO userDTO) {
         return carPartsMapper.priceStatisticsTotal(userDTO);
     }
+
+    @Override
+    public List<PriceStatisticsDTO> listPriceStatisticsDetail(UserDTO userDTO) {
+        return carPartsMapper.listPriceStatisticsDetail(userDTO);
+    }
+
+    @Override
+    public int priceStatisticsDetailTotal(UserDTO userDTO) {
+        return carPartsMapper.priceStatisticsDetailTotal(userDTO);
+    }
 }

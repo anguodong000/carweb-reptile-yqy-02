@@ -123,4 +123,50 @@
         on u.telephone = p.username
         group by u.company) a
     </select>
+
+    <select id ="listPriceStatisticsDetail" parameterType="com.reptile.carwebreptileyqy.dto.UserDTO" resultType="com.reptile.carwebreptileyqy.dto.PriceStatisticsDTO">
+        SELECT DISTINCT a.product_number productNumber,a.vehicle_model vehicleModel,b.product_name productName,a.count
+        FROM
+            (
+            SELECT
+                i.product_number,
+                i.vehicle_model,
+                count( 1 ) count
+            FROM
+                price_need p
+                INNER JOIN auto_parts_info i ON p.partsId = i.id
+            WHERE
+                p.username IN ( SELECT telephone FROM user_info WHERE company = #{company} )
+            GROUP BY
+                i.product_number,
+                i.vehicle_model
+            ORDER BY
+                count DESC
+            ) a
+        INNER JOIN auto_parts_info b ON a.product_number = b.product_number AND a.vehicle_model = b.vehicle_model
+        ORDER BY a.count DESC
+    </select>
+
+    <select id ="priceStatisticsDetailTotal" parameterType="com.reptile.carwebreptileyqy.dto.UserDTO" resultType="java.lang.Integer">
+        select count(1) from (SELECT DISTINCT a.product_number productNumber,a.vehicle_model vehicleModel,b.product_name productName,a.count
+        FROM
+            (
+            SELECT
+                i.product_number,
+                i.vehicle_model,
+                count( 1 ) count
+            FROM
+                price_need p
+                INNER JOIN auto_parts_info i ON p.partsId = i.id
+            WHERE
+                p.username IN ( SELECT telephone FROM user_info WHERE company = #{company} )
+            GROUP BY
+                i.product_number,
+                i.vehicle_model
+            ORDER BY
+                count DESC
+            ) a
+        INNER JOIN auto_parts_info b ON a.product_number = b.product_number AND a.vehicle_model = b.vehicle_model
+        ORDER BY a.count DESC)x
+    </select>
 </mapper>

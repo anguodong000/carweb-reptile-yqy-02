@@ -32,4 +32,8 @@ public interface CarPartsService {
     List<PriceStatisticsDTO> listPriceStatistics(UserDTO userDTO);
 
     int priceStatisticsTotal(UserDTO userDTO);
+
+    List<PriceStatisticsDTO> listPriceStatisticsDetail(UserDTO userDTO);
+
+    int priceStatisticsDetailTotal(UserDTO userDTO);
 }

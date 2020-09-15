@@ -227,4 +227,25 @@ public class CarPartsController {
         baseResponse.setData(map);
         return baseResponse;
     }
+
+    /**
+     * 价格统计明细查询
+     * @param userDTO
+     * @return
+     */
+    @PostMapping(value = "/carParts/listPriceStatisticsDetail",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BaseResponse listPriceStatisticsDetail(
+            @RequestBody UserDTO userDTO){
+        BaseResponse baseResponse = new BaseResponse();
+        Map map = new LinkedHashMap();
+        List<PriceStatisticsDTO> list = carPartsService.listPriceStatisticsDetail(userDTO);
+        int total = carPartsService.priceStatisticsDetailTotal(userDTO);
+        map.put("total",total);
+        map.put("currentPage",userDTO.getCurrentPage());
+        map.put("priceStatisticsDetailList",list);
+        baseResponse.setData(map);
+        return baseResponse;
+    }
 }
