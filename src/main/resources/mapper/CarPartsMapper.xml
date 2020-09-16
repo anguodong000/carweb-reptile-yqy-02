@@ -125,48 +125,38 @@
     </select>
 
     <select id ="listPriceStatisticsDetail" parameterType="com.reptile.carwebreptileyqy.dto.UserDTO" resultType="com.reptile.carwebreptileyqy.dto.PriceStatisticsDTO">
-        SELECT DISTINCT a.product_number productNumber,a.vehicle_model vehicleModel,b.product_name productName,a.count
+        SELECT a.partsId,a.count,b.product_number productNumber,b.product_name productName,b.retail_price retailPrice,b.vehicle_model vehicleModel
         FROM
             (
-            SELECT
-                i.product_number,
-                i.vehicle_model,
-                count( 1 ) count
+            SELECT p.partsId,
+                count(1) count
             FROM
                 price_need p
-                INNER JOIN auto_parts_info i ON p.partsId = i.id
+                LEFT JOIN user_info u ON p.username = u.telephone
             WHERE
-                p.username IN ( SELECT telephone FROM user_info WHERE company = #{company} )
+                u.company = #{company}
             GROUP BY
-                i.product_number,
-                i.vehicle_model
-            ORDER BY
-                count DESC
+                partsId
             ) a
-        INNER JOIN auto_parts_info b ON a.product_number = b.product_number AND a.vehicle_model = b.vehicle_model
+            LEFT JOIN auto_parts_info b ON a.partsId = b.id
         ORDER BY a.count DESC
     </select>
 
     <select id ="priceStatisticsDetailTotal" parameterType="com.reptile.carwebreptileyqy.dto.UserDTO" resultType="java.lang.Integer">
-        select count(1) from (SELECT DISTINCT a.product_number productNumber,a.vehicle_model vehicleModel,b.product_name productName,a.count
+        select count(1) from (SELECT a.partsId,a.count,b.product_number productNumber,b.product_name productName,b.retail_price retailPrice,b.vehicle_model vehicleModel
         FROM
             (
-            SELECT
-                i.product_number,
-                i.vehicle_model,
-                count( 1 ) count
+            SELECT p.partsId,
+                count(1) count
             FROM
                 price_need p
-                INNER JOIN auto_parts_info i ON p.partsId = i.id
+                LEFT JOIN user_info u ON p.username = u.telephone
             WHERE
-                p.username IN ( SELECT telephone FROM user_info WHERE company = #{company} )
+                u.company = #{company}
             GROUP BY
-                i.product_number,
-                i.vehicle_model
-            ORDER BY
-                count DESC
+                partsId
             ) a
-        INNER JOIN auto_parts_info b ON a.product_number = b.product_number AND a.vehicle_model = b.vehicle_model
+            LEFT JOIN auto_parts_info b ON a.partsId = b.id
         ORDER BY a.count DESC)x
     </select>
 </mapper>

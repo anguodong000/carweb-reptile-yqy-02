@@ -99,7 +99,7 @@
                             <a href="index.html">首页</a>
                         </li>
                         <li class="trail-item trail-end active">
-                            合页
+                            查询统计
                         </li>
                     </ul>
                 </div>
@@ -325,8 +325,8 @@
     function statisticsDetail(company) {
         $.dialog({
             title: '明细查询',
-            width: 800,
-            height: 500,
+            width: 900,
+            height: 600,
             lock:true,
             content: 'url:/queryPriceStatisticsDetailPage?company='+company,
             init: function() {

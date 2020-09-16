@@ -241,6 +241,9 @@ public class CarPartsController {
         BaseResponse baseResponse = new BaseResponse();
         Map map = new LinkedHashMap();
         List<PriceStatisticsDTO> list = carPartsService.listPriceStatisticsDetail(userDTO);
+        for (PriceStatisticsDTO priceStatisticsDTO : list){
+            priceStatisticsDTO.setRetailPrice(priceStatisticsDTO.getRetailPrice().setScale(2,BigDecimal.ROUND_HALF_UP));
+        }
         int total = carPartsService.priceStatisticsDetailTotal(userDTO);
         map.put("total",total);
         map.put("currentPage",userDTO.getCurrentPage());
