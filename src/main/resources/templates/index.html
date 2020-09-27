@@ -583,8 +583,14 @@
 						$('#user_authority_menu').append($li2);
 
 						$button = $('<button id="updatePartsButton" onclick="updateParts()" type="submit" class="button submit-newsletter">价格更新</button>&nbsp;&nbsp;');
+						$button1 = $('<button id="clearDataButton" onclick="clearData()" type="submit" class="button submit-newsletter">数据清洗</button>&nbsp;&nbsp;');
+						$button2 = $('<button id="correctPriceButton" onclick="correctPrice()" type="submit" class="button submit-newsletter">价格纠错</button>&nbsp;&nbsp;');
 						$span = $('<span style="width: 100px;text-align:left;display:inline-block;" id="SpanUpdating"></span>');
 						$('#menu-top').append($button);
+						$('#menu-top').append("&nbsp;&nbsp;")
+						$('#menu-top').append($button1);
+						$('#menu-top').append("&nbsp;&nbsp;")
+						$('#menu-top').append($button2);
 						$('#menu-top').append($span);
 					}
 				}
@@ -631,7 +637,7 @@
 									//$("#SpanUpdating").append('更新成功');
 									//$("#menu-top").append('<span id="SpanUpdatingSuccess">更新成功</span>');
 									//setTimeout("$('#SpanUpdatingSuccess').empty()",5000);
-								}else{
+								}else if(code == 203){
 									alert(data.message);
 									$("#SpanUpdating").empty();
 								}
@@ -667,12 +673,53 @@
 			});
 		})
 
-		/*<a href="javascript:autoPartList('+currentPage+')" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
-		<a href="#" class="page-numbers">1</a>
-				<a href="#" class="page-numbers">2</a>
-				<a href="#" class="page-numbers current">3</a>
-				<a href="#" class="page-numbers"><i class="icon fa fa-angle-right" aria-hidden="true"></i></a>
-		<li class="paginate_button previous" ><a href="javascript:autoPartList('+i+')">'+i+'</a></li>*/
+		//数据清洗
+		function clearData(){
+			$.ajax({
+				type:"POST",
+				url:"/autoPartsInfo/clearData",
+				contentType:"application/json",
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					if(data.code==401){
+						alert(data.message);
+					}
+					if(data.code==200){
+						alert("清洗成功！");
+					}
+				},
+				error:function(e){
+					window.location.href="/login-view";
+					console.log(e);
+				}
+
+			});
+		}
+
+		//价格纠错
+		function correctPrice(){
+			$.ajax({
+				type:"POST",
+				url:"/autoPartsInfo/correctPrice",
+				contentType:"application/json",
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					if(data.code==401){
+						alert(data.message);
+					}
+					if(data.code==200){
+						alert("纠错成功！");
+					}
+				},
+				error:function(e){
+					window.location.href="/login-view";
+					console.log(e);
+				}
+
+			});
+		}
 	</script>
 </body>
 </html>

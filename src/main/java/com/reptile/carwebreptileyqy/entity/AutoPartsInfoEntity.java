@@ -10,7 +10,7 @@ public class AutoPartsInfoEntity implements Serializable {
     private static final long serialVersionUID = -8742074947015792578L;
 
     @Field("id")
-    private String id;
+    private Integer id;
 
     @Field("productNumber")
     private String productNumber;

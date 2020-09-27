@@ -17,15 +17,16 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.response.UpdateResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -140,6 +141,7 @@ public class CarPartsServiceImpl implements CarPartsService {
             e.printStackTrace();
         }
         if (workbook == null) {
+            msg = 2;
             log.info(originalFilename);
             //throw new BusinessException(ReturnCode.CODE_FAIL, "格式错误");
         } else {
@@ -190,33 +192,40 @@ public class CarPartsServiceImpl implements CarPartsService {
                     }
                     try{
                         //查询配件是否存在
-                        AutoPartsInfoEntity queryEntity = carPartsMapper.getPartByProductNumber(productNumber);
-                        AutoPartsInfoEntity autoPartsInfoEntity = new AutoPartsInfoEntity();
-                        if(queryEntity!=null){
-                            autoPartsInfoEntity.setId(queryEntity.getId());
-                            autoPartsInfoEntity.setProductNumber(productNumber);
-                            autoPartsInfoEntity.setProductName(queryEntity.getProductName());
-                            autoPartsInfoEntity.setVehicleModel(queryEntity.getVehicleModel());
-                            autoPartsInfoEntity.setWholesalePrice(queryEntity.getWholesalePrice());
-                            autoPartsInfoEntity.setRetailPrice(retailPrice.doubleValue());
-                            autoPartsInfoEntity.setDiscountPrice(queryEntity.getDiscountPrice());
-                            autoPartsInfoEntity.setPriceChange(priceChange);
-                            autoPartsInfoEntity.setUpdateTime(new Date());
-                            //更新数据库
-                            carPartsMapper.updatePartRetailPrice(autoPartsInfoEntity);
+                        List<AutoPartsInfoEntity> queryEntityList = carPartsMapper.getPartByProductNumber(productNumber.trim());
+                        if(!CollectionUtils.isEmpty(queryEntityList)){
+                            for(AutoPartsInfoEntity queryEntity:queryEntityList){
+                                AutoPartsInfoEntity autoPartsInfoEntity = new AutoPartsInfoEntity();
+                                autoPartsInfoEntity.setId(queryEntity.getId());
+                                autoPartsInfoEntity.setProductNumber(productNumber);
+                                autoPartsInfoEntity.setProductName(queryEntity.getProductName());
+                                autoPartsInfoEntity.setVehicleModel(queryEntity.getVehicleModel());
+                                autoPartsInfoEntity.setWholesalePrice(queryEntity.getWholesalePrice());
+                                autoPartsInfoEntity.setRetailPrice(retailPrice.doubleValue());
+                                autoPartsInfoEntity.setDiscountPrice(queryEntity.getDiscountPrice());
+                                autoPartsInfoEntity.setPriceChange(priceChange);
+                                autoPartsInfoEntity.setUpdateTime(new Date());
+                                //更新数据库
+                                carPartsMapper.updatePartRetailPrice(autoPartsInfoEntity);
+                                //添加到索引库
+                                UpdateResponse updateResponse = solrClient.addBean(autoPartsInfoEntity);
+                                solrClient.commit();
+                                log.info("所以库更新成功：{}",updateResponse);
+                            }
                         }else{
-                            autoPartsInfoEntity.setId(String.valueOf(carPartsMapper.getPartMaxId()));
+                            AutoPartsInfoEntity autoPartsInfoEntity = new AutoPartsInfoEntity();
+                            autoPartsInfoEntity.setId(carPartsMapper.getPartMaxId());
                             autoPartsInfoEntity.setProductNumber(productNumber);
                             autoPartsInfoEntity.setProductName(productName);
                             autoPartsInfoEntity.setRetailPrice(retailPrice.doubleValue());
                             autoPartsInfoEntity.setPriceChange(priceChange);
                             autoPartsInfoEntity.setCreateTime(new Date());
                             carPartsMapper.savePartRetailPrice(autoPartsInfoEntity);
+                            //添加到索引库
+                            UpdateResponse updateResponse = solrClient.addBean(autoPartsInfoEntity);
+                            log.info("所以库创建成功：{}",updateResponse);
+                            solrClient.commit();
                         }
-                        //添加到索引库
-                        UpdateResponse updateResponse = solrClient.addBean(autoPartsInfoEntity);
-                        System.out.println("updateResponse:"+updateResponse);
-                        solrClient.commit();
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -224,11 +233,6 @@ public class CarPartsServiceImpl implements CarPartsService {
             }
         }
         return msg;
-    }
-
-    @Override
-    public List<CarPartsEntity> list(CarPartsDTO carPartsDTO) {
-        return carPartsMapper.list(carPartsDTO);
     }
 
     @Override
@@ -280,5 +284,100 @@ public class CarPartsServiceImpl implements CarPartsService {
     @Override
     public int priceStatisticsDetailTotal(UserDTO userDTO) {
         return carPartsMapper.priceStatisticsDetailTotal(userDTO);
+    }
+
+    @Override
+    public int clearData() {
+        //查询所有创建时间和修改时间都为空重复数据
+        List<AutoPartsInfoEntity> listRepeatParts = carPartsMapper.listRepeatParts();
+        if(!CollectionUtils.isEmpty(listRepeatParts)){
+            for(AutoPartsInfoEntity autoPartsInfoEntity : listRepeatParts){
+                //根据编号查询重复具体配件信息
+                Map<String,Object> params = new HashMap<>();
+                params.put("productNumber",autoPartsInfoEntity.getProductNumber());
+                List<AutoPartsInfoEntity> autoPartsInfoList = carPartsMapper.listParts(params);
+                for(AutoPartsInfoEntity partsInfo : autoPartsInfoList){
+                    //删除配件
+                    carPartsMapper.deletePart(partsInfo.getId());
+                    List<AutoPartsInfoEntity> autoPartsInfoList1 = carPartsMapper.listParts(params);
+                    //剩余一条数据跳出循环
+                    if(autoPartsInfoList1.size()==1){
+                        break;
+                    }
+                }
+            }
+        }
+
+        //查询创建时间或者修改时间不为空的重复数据
+        List<AutoPartsInfoEntity> listRepeatParts1 = carPartsMapper.listRepeatParts1();
+        if(!CollectionUtils.isEmpty(listRepeatParts1)){
+            for(AutoPartsInfoEntity autoPartsInfoEntity1 : listRepeatParts1){
+                //根据编号查询重复具体配件信息
+                Map<String,Object> params1 = new HashMap<>();
+                params1.put("productNumber",autoPartsInfoEntity1.getProductNumber());
+                List<AutoPartsInfoEntity> autoPartsInfoList = carPartsMapper.listParts(params1);
+                for(AutoPartsInfoEntity partsInfo : autoPartsInfoList){
+                    //价格更新字段为空说明是旧数据
+                    if(partsInfo.getPriceChange()==null){
+                        //删除配件
+                        carPartsMapper.deletePart(partsInfo.getId());
+                        List<AutoPartsInfoEntity> autoPartsInfoList1 = carPartsMapper.listParts(params1);
+                        //剩余一条数据跳出循环
+                        if(autoPartsInfoList1.size()==1){
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return 1;
+    }
+
+    @Override
+    public int correctPrice() {
+        //查询同意编号下价格不一样的数据
+        List<AutoPartsInfoEntity> autoPartsInfoEntityList = carPartsMapper.listCorrectParts();
+        if(!CollectionUtils.isEmpty(autoPartsInfoEntityList)){
+            for (AutoPartsInfoEntity autoPartsInfoEntity:autoPartsInfoEntityList){
+                //根据编号查询配件数据
+                Map<String,Object> params = new HashMap<>();
+                params.put("productNumber",autoPartsInfoEntity.getProductNumber());
+                List<AutoPartsInfoEntity> partsList = carPartsMapper.listParts(params);
+                double retailPrice = 0;
+                String priceChange = "";
+                boolean flag = false;
+                if(!CollectionUtils.isEmpty(partsList)){
+                    for(AutoPartsInfoEntity partNumber : partsList) {
+                        if(!StringUtils.isEmpty(partNumber.getPriceChange())){
+                            retailPrice = partNumber.getRetailPrice();
+                            priceChange = partNumber.getPriceChange();
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag){
+                        for(AutoPartsInfoEntity part : partsList) {
+                            AutoPartsInfoEntity updatePartEntity = new AutoPartsInfoEntity();
+                            BeanUtils.copyProperties(part,updatePartEntity);
+                            updatePartEntity.setRetailPrice(retailPrice);
+                            updatePartEntity.setPriceChange(priceChange);
+                            updatePartEntity.setUpdateTime(new Date());
+                            //更新数据库
+                            carPartsMapper.updatePartRetailPrice(updatePartEntity);
+                            //更新索引库
+                            try{
+                                UpdateResponse updateResponse = solrClient.addBean(updatePartEntity);
+                                solrClient.commit();
+                                log.info("所以库更新成功：{}",updateResponse);
+                            }catch (Exception e){
+                                log.info("所以库更新失败");
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        return 0;
     }
 }

@@ -13,8 +13,6 @@ import java.util.List;
 public interface CarPartsService {
     String upload(MultipartFile file);
 
-    List<CarPartsEntity> list(CarPartsDTO carPartsDTO);
-
     List<AutoPartsInfoEntity> autoPartsInfoList(CarPartsDTO carPartsDTO);
 
     int total(CarPartsDTO carPartsDTO);
@@ -36,4 +34,8 @@ public interface CarPartsService {
     List<PriceStatisticsDTO> listPriceStatisticsDetail(UserDTO userDTO);
 
     int priceStatisticsDetailTotal(UserDTO userDTO);
+
+    int clearData();
+
+    int correctPrice();
 }

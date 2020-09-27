@@ -90,7 +90,7 @@
 
     <select id ="getPartByProductNumber" parameterType="java.lang.String" resultType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
         select id,product_number productNumber,product_name productName,vehicle_model vehicleModel,wholesale_price wholesalePrice,retail_price retailPrice,discount_price discountPrice,price_change priceChange
-        from auto_parts_info where product_number = #{productNumber} limit 1
+        from auto_parts_info where product_number = #{productNumber}
     </select>
 
     <select id="getPartMaxId" resultType="int">
@@ -158,5 +158,55 @@
             ) a
             LEFT JOIN auto_parts_info b ON a.partsId = b.id
         ORDER BY a.count DESC)x
+    </select>
+
+    <select id="listRepeatParts" resultType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
+        SELECT
+        a.product_number productNumber,
+        a.vehicle_model vehicleModel
+        FROM
+            auto_parts_info a
+        WHERE a.create_time IS NULL AND a.update_time IS NULL
+        GROUP BY
+            a.product_number,
+            a.vehicle_model
+        HAVING
+        count( 1 )> 1
+    </select>
+
+    <select id="listRepeatParts1" resultType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
+        SELECT
+        product_number productNumber, vehicle_model vehicleModel
+        FROM
+            auto_parts_info
+        WHERE
+            product_number NOT IN (
+            SELECT
+                a.product_number
+            FROM
+                auto_parts_info a
+            WHERE
+                a.create_time IS NULL
+                AND a.update_time IS NULL
+            GROUP BY
+                a.product_number,
+                a.vehicle_model
+            HAVING
+                count( 1 )> 1
+            )
+        group by product_number, vehicle_model HAVING count(1)> 1
+    </select>
+
+    <select id="listParts" parameterType="java.util.Map" resultType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
+        select id,product_number productNumber,product_name productName,vehicle_model vehicleModel,retail_price retailPrice,price_change priceChange
+        from auto_parts_info where product_number = #{productNumber} order by id
+    </select>
+
+    <delete id="deletePart" parameterType="java.lang.Integer">
+        delete from auto_parts_info where id = #{partId}
+    </delete>
+
+    <select id="listCorrectParts" parameterType="java.util.Map" resultType="com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity">
+        select product_number productNumber from auto_parts_info group by product_number HAVING count(1)>1
     </select>
 </mapper>

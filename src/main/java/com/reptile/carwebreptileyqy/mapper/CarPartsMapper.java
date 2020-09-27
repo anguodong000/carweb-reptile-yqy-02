@@ -9,6 +9,7 @@ import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface CarPartsMapper {
@@ -32,7 +33,7 @@ public interface CarPartsMapper {
     @Insert("insert into price_need(partsId,username,create_time) values(#{partsId},#{username},#{createTime})")
     int createPriceNeed(QueryPriceDto queryPriceDto);
 
-    AutoPartsInfoEntity getPartByProductNumber(String productNumber);
+    List<AutoPartsInfoEntity> getPartByProductNumber(String productNumber);
 
     int getPartMaxId();
 
@@ -47,4 +48,14 @@ public interface CarPartsMapper {
     List<PriceStatisticsDTO> listPriceStatisticsDetail(UserDTO userDTO);
 
     int priceStatisticsDetailTotal(UserDTO userDTO);
+
+    List<AutoPartsInfoEntity> listRepeatParts();
+
+    List<AutoPartsInfoEntity> listRepeatParts1();
+
+    List<AutoPartsInfoEntity> listParts(Map<String,Object> params);
+
+    int deletePart(Integer partId);
+
+    List<AutoPartsInfoEntity> listCorrectParts();
 }

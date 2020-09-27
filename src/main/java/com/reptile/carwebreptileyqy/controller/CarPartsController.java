@@ -57,22 +57,6 @@ public class CarPartsController {
         return "上传成功!";
     }
 
-    @PostMapping(value = "/carParts/list",produces = MediaType.APPLICATION_JSON)
-    @ResponseBody
-    @Consumes(MediaType.APPLICATION_JSON)
-    public BaseResponse listAll(
-            @RequestBody CarPartsDTO carPartsDTO){
-        BaseResponse baseResponse = new BaseResponse();
-        Map map = new LinkedHashMap();
-        List<CarPartsEntity> list = carPartsService.list(carPartsDTO);
-        int total = carPartsService.total(carPartsDTO);
-        map.put("total",total);
-        map.put("currentPage",carPartsDTO.getCurrentPage());
-        map.put("carPartsList",list);
-        baseResponse.setData(map);
-        return baseResponse;
-    }
-
     @PostMapping(value = "/carParts/queryCarPartsByDetailId",produces = MediaType.APPLICATION_JSON)
     @ResponseBody
     @Consumes(MediaType.APPLICATION_JSON)
@@ -201,6 +185,10 @@ public class CarPartsController {
                 baseResponse.setCode("202");
                 baseResponse.setMessage("导入失败,excel表头格式错误!");
             }
+            if(msg==2){
+                baseResponse.setCode("203");
+                baseResponse.setMessage("导入失败,excel文件格式错误,应该是xlsx文件");
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -249,6 +237,42 @@ public class CarPartsController {
         map.put("currentPage",userDTO.getCurrentPage());
         map.put("priceStatisticsDetailList",list);
         baseResponse.setData(map);
+        return baseResponse;
+    }
+
+    @PostMapping(value = "/autoPartsInfo/clearData",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BaseResponse clearData(
+            HttpServletRequest request, HttpServletResponse response)  {
+        BaseResponse baseResponse = new BaseResponse();
+        try{
+            int msg = carPartsService.clearData();
+            if(msg==0){
+                baseResponse.setCode("202");
+                baseResponse.setMessage("导入失败,excel表头格式错误!");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return baseResponse;
+    }
+
+    @PostMapping(value = "/autoPartsInfo/correctPrice",produces = MediaType.APPLICATION_JSON)
+    @ResponseBody
+    @Consumes(MediaType.APPLICATION_JSON)
+    public BaseResponse correctPrice(
+            HttpServletRequest request, HttpServletResponse response)  {
+        BaseResponse baseResponse = new BaseResponse();
+        try{
+            int msg = carPartsService.correctPrice();
+            if(msg==0){
+                baseResponse.setCode("202");
+                baseResponse.setMessage("导入失败,excel表头格式错误!");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return baseResponse;
     }
 }
