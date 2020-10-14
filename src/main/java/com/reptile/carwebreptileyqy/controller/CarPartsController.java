@@ -230,7 +230,9 @@ public class CarPartsController {
         Map map = new LinkedHashMap();
         List<PriceStatisticsDTO> list = carPartsService.listPriceStatisticsDetail(userDTO);
         for (PriceStatisticsDTO priceStatisticsDTO : list){
-            priceStatisticsDTO.setRetailPrice(priceStatisticsDTO.getRetailPrice().setScale(2,BigDecimal.ROUND_HALF_UP));
+            if(priceStatisticsDTO.getRetailPrice()!=null){
+                priceStatisticsDTO.setRetailPrice(priceStatisticsDTO.getRetailPrice().setScale(2,BigDecimal.ROUND_HALF_UP));
+            }
         }
         int total = carPartsService.priceStatisticsDetailTotal(userDTO);
         map.put("total",total);
