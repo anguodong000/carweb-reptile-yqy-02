@@ -16,4 +16,6 @@ public class UserDTO implements Serializable {
     private String email;
     private String company;
     private String validateCode;
+    private String startTime;
+    private String endTime;
 }

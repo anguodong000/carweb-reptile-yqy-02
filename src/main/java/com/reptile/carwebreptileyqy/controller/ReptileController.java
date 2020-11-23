@@ -108,8 +108,10 @@ public class ReptileController {
     }
 
     @RequestMapping("/queryPriceStatisticsDetailPage")
-    public String queryPriceStatisticsDetailPage(ModelMap modelMap,HttpServletRequest request,String company) {
+    public String queryPriceStatisticsDetailPage(ModelMap modelMap,HttpServletRequest request,String company,String startTime,String endTime) {
         request.setAttribute("company",company);
+        request.setAttribute("startTime",startTime);
+        request.setAttribute("endTime",endTime);
         return "part/query_price_statistics_detail";
     }
 

@@ -23,6 +23,23 @@
     <link rel="stylesheet" href="../../css/mobile-menu.css">
     <link rel="stylesheet" href="../../fonts/flaticon/flaticon.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <style type="text/css">
+        .txt{cursor: pointer;
+        }
+        .txt_week{width: 15px;
+        }
+        .sp{font-size: 12px;
+            color: #09F;
+        }
+        .sp1{font-size: 12px;
+            color:#F66;
+        }
+        #outerDiv{text-align:left;
+            width: 600px;
+            border: 1px solid #CCCCCC;
+            padding: 10px 0 5px 5px;
+        }
+    </style>
 </head>
 <body class="productsgrid-page">
 <header class="header style7">
@@ -114,6 +131,10 @@
                     <div class="shop-top-control">
                         <label class="coupon_code">公司:</label>
                         <input id="company_queryform" type="text" style="background-color: white" placeholder="请输入公司名称"/>
+                        <label class="coupon_code">开始时间:</label>
+                        <input type="text" id="txt_first" onclick="WdatePicker({readOnly:true, maxDate:'#F{$dp.$D(\'txt_last\')||\'2099-12-31\'}'});" class="txt" style="background-color: white"/>
+                        <label class="coupon_code">结束时间:</label>
+                        <input type="text" id="txt_last" onclick="WdatePicker({readOnly:true,  minDate: '#F{$dp.$D(\'txt_first\')}', maxDate:'2099-12-31'});" class="txt" style="background-color: white"/>
                         <button onclick="queryPriceStatisticsList(1)" type="submit" class="button submit-newsletter">查询</button>&nbsp;&nbsp;
                     </div>
                     <table width="1180px" style="table-layout: fixed;">
@@ -164,6 +185,8 @@
 <script src="../../public/artDialog4.1.7/artDialog.js?skin=blue"></script>
 <script src="../../public/artDialog4.1.7/plugins/iframeTools.js"></script>
 <script src="../../js/templet_form.js"></script>
+<!-- 日期插件-->
+<script type="text/javascript" src="../../public/My97DatePicker/WdatePicker.js"></script>
 <script>
     $(function() {
         queryAuthority();
@@ -172,7 +195,15 @@
 
     function queryPriceStatisticsList(currentPage){
         var company = $("#company_queryform").val();
-        var param = {currentPage:currentPage,company:company};
+        var startTime = $("#txt_first").val();
+        var endTime = $("#txt_last").val();
+        if(startTime != null && startTime !=""){
+            if(endTime == null || endTime == ""){
+                alert("结束时间不能为空");
+                return;
+            }
+        }
+        var param = {currentPage:currentPage,company:company,startTime:startTime,endTime:endTime};
         console.log(JSON.stringify(param));
         $.ajax({
             type:"POST",
@@ -199,7 +230,7 @@
                 $.each(data.data.priceStatisticsList, function(i,item){
                     $tr = $('<tr></tr>');
                     $td1 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.company+'</td>');
-                    $td2 = $('<td style="text-align:center;vertical-align:middle;color:black;"><a href="javascript:void(0)" onclick="statisticsDetail(\''+item.company+'\')" style="color:cornflowerblue;">'+item.count+'</a></td>');
+                    $td2 = $('<td style="text-align:center;vertical-align:middle;color:black;"><a href="javascript:void(0)" onclick="statisticsDetail(\''+item.company+'\',\''+startTime+'\',\''+endTime+'\')" style="color:cornflowerblue;">'+item.count+'</a></td>');
                     $tr.append($td1);
                     $tr.append($td2);
                     $('#autoPartsTable').append($tr);
@@ -322,13 +353,13 @@
         });
     }
 
-    function statisticsDetail(company) {
+    function statisticsDetail(company,startTime,endTime) {
         $.dialog({
             title: '明细查询',
             width: 900,
             height: 600,
             lock:true,
-            content: 'url:/queryPriceStatisticsDetailPage?company='+company,
+            content: 'url:/queryPriceStatisticsDetailPage?company='+company+'&startTime='+startTime+'&endTime='+endTime,
             init: function() {
                 //var ul = iframe.document.getElementById('right_list');
                 var iframe = this.iframe.contentWindow;

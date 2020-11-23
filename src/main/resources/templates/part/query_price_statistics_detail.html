@@ -38,6 +38,8 @@
                         <input id="company_queryform" type="text" style="background-color: white" placeholder="请输入公司名称"/>
                         <button onclick="queryPriceStatisticsList(1)" type="submit" class="button submit-newsletter">查询</button>&nbsp;&nbsp;-->
                         <input id="company_queryform" style="width:500px" type="text" th:value="${company}" readonly="true">
+                        <input id="startTime" style="width:500px" type="text" th:value="${startTime}" readonly="true">
+                        <input id="endTime" style="width:500px" type="text" th:value="${endTime}" readonly="true">
                     </div>
                     <table width="1180px" style="table-layout: fixed;">
                         <thead>
@@ -83,7 +85,9 @@
 
     function queryPriceStatisticsList(currentPage){
         var company = $("#company_queryform").val();
-        var param = {currentPage:currentPage,company:company};
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        var param = {currentPage:currentPage,company:company,startTime:startTime,endTime:endTime};
         console.log(JSON.stringify(param));
         $.ajax({
             type:"POST",

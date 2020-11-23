@@ -25,6 +25,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -379,5 +380,10 @@ public class CarPartsServiceImpl implements CarPartsService {
             }
         }
         return 0;
+    }
+
+    @Override
+    public void exportExcel(HttpServletResponse response, UserDTO userDTO) {
+        
     }
 }

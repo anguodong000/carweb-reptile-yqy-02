@@ -107,14 +107,21 @@
     </insert>
 
     <select id ="listPriceStatistics" parameterType="com.reptile.carwebreptileyqy.dto.UserDTO" resultType="com.reptile.carwebreptileyqy.dto.PriceStatisticsDTO">
-        select u.company,count(1) count from price_need p
-        left join user_info u
-        on u.telephone = p.username
+        select a.company,count(1) count from (
+            select u.company,p.id,p.partsId,p.username,convert_tz(p.create_time,"+00:00","+08:00")createTimeUTC from price_need p
+            left join user_info u
+            on u.telephone = p.username
+            where 1=1
+            <if test="company != null and company != ''">
+                and company LIKE CONCAT ('%', #{company},'%')
+            </if>
+        )a
         where 1=1
-        <if test="company != null and company != ''">
-            and company LIKE CONCAT ('%', #{company},'%')
+        <if test="startTime != null and startTime!=''">
+            and date(a.createTimeUTC) between #{startTime} and #{endTime}
         </if>
-        group by u.company
+        group by a.company
+
     </select>
 
     <select id ="priceStatisticsTotal" parameterType="com.reptile.carwebreptileyqy.dto.UserDTO" resultType="java.lang.Integer">
@@ -128,15 +135,10 @@
         SELECT a.partsId,a.count,b.product_number productNumber,b.product_name productName,b.retail_price retailPrice,b.vehicle_model vehicleModel
         FROM
             (
-            SELECT p.partsId,
-                count(1) count
-            FROM
-                price_need p
-                LEFT JOIN user_info u ON p.username = u.telephone
-            WHERE
-                u.company = #{company}
-            GROUP BY
-                partsId
+                select d.partsId,count(1) count from (select p.id,p.partsId,p.username,convert_tz(p.create_time,"+00:00","+08:00")createTimeUTC from price_need p)d
+                LEFT JOIN user_info u ON d.username = u.telephone
+                WHERE u.company = #{company} and date(d.createTimeUTC) between #{startTime} and #{endTime}
+                GROUP BY d.partsId
             ) a
             LEFT JOIN auto_parts_info b ON a.partsId = b.id
         ORDER BY a.count DESC
