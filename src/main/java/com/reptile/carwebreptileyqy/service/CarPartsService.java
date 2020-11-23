@@ -8,6 +8,7 @@ import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -40,5 +41,5 @@ public interface CarPartsService {
 
     int correctPrice();
 
-    void exportExcel(HttpServletResponse response,UserDTO userDTO);
+    void exportExcel(HttpServletRequest request,HttpServletResponse response, UserDTO userDTO);
 }

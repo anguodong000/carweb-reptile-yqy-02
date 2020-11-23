@@ -6,10 +6,11 @@ import com.reptile.carwebreptileyqy.dto.QueryPriceDto;
 import com.reptile.carwebreptileyqy.dto.UserDTO;
 import com.reptile.carwebreptileyqy.entity.AutoPartsInfoEntity;
 import com.reptile.carwebreptileyqy.entity.CarPartsEntity;
+import com.reptile.carwebreptileyqy.entity.GraspRecordEntity;
 import com.reptile.carwebreptileyqy.mapper.CarPartsMapper;
 import com.reptile.carwebreptileyqy.service.CarPartsService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -25,8 +26,12 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.*;
 
 @Service
@@ -375,7 +380,6 @@ public class CarPartsServiceImpl implements CarPartsService {
                             }
                         }
                     }
-
                 }
             }
         }
@@ -383,7 +387,65 @@ public class CarPartsServiceImpl implements CarPartsService {
     }
 
     @Override
-    public void exportExcel(HttpServletResponse response, UserDTO userDTO) {
-        
+    public void exportExcel(HttpServletRequest request,HttpServletResponse response, UserDTO userDTO) {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("配件数据");
+        HSSFRow row = sheet.createRow(0);
+        //设置列宽，setColumnWidth的第二个参数要乘以256，这个参数的单位是1/256个字符宽度
+        sheet.setColumnWidth(0,15*256);
+        sheet.setColumnWidth(1,15*256);
+        sheet.setColumnWidth(2,25*256);
+        sheet.setColumnWidth(3,40*256);
+        sheet.setColumnWidth(4,70*256);
+        sheet.setColumnWidth(5,15*256);
+        sheet.setColumnWidth(6,15*256);
+        //设置为居中加粗
+        HSSFCellStyle style = workbook.createCellStyle();
+        HSSFFont font = workbook.createFont();
+        font.setBold(true);
+        style.setFont(font);
+
+        HSSFCell cell;
+        cell = row.createCell(0);
+        cell.setCellValue("配件编号");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(1);
+        cell.setCellValue("配件名称");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(2);
+        cell.setCellValue("价格");
+        cell.setCellStyle(style);
+
+        //获取数据
+        List<PriceStatisticsDTO> priceStatisticsDTOList = carPartsMapper.listPriceStatisticsDetail(userDTO);
+
+        int rowNum=1;
+        for(PriceStatisticsDTO priceStatisticsDTO:priceStatisticsDTOList){
+            HSSFRow row1 = sheet.createRow(rowNum);
+            row1.createCell(0).setCellValue(priceStatisticsDTO.getProductNumber());
+            row1.createCell(1).setCellValue(priceStatisticsDTO.getProductName());
+            row1.createCell(2).setCellValue(Double.parseDouble(priceStatisticsDTO.getRetailPrice().toString()));
+            rowNum++;
+        }
+        String path = request.getSession().getServletContext().getRealPath("/static/download/");
+        String fileName=path+"\\"+"配件数据导出"+".xls";
+        //String fileName = "配件数据导出.xls";
+        try {
+            FileOutputStream fos = new FileOutputStream(fileName);
+            workbook.write(fos);
+            fos.flush();
+            fos.close();
+
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(fileName, "utf-8"));
+            OutputStream outputStream = response.getOutputStream();
+            workbook.write(outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

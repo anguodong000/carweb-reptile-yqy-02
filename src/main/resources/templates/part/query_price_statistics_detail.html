@@ -40,6 +40,14 @@
                         <input id="company_queryform" style="width:500px" type="text" th:value="${company}" readonly="true">
                         <input id="startTime" style="width:500px" type="text" th:value="${startTime}" readonly="true">
                         <input id="endTime" style="width:500px" type="text" th:value="${endTime}" readonly="true">
+
+                        <!--<form method="POST" enctype="multipart/form-data" action="/autoPartsInfo/exportExcel">
+                            <p>
+                                <input type="submit" value="导出excel" />
+                            </p>
+                        </form>-->
+
+                        <a href="javascript:exportExcel()" >导出</a>
                     </div>
                     <table width="1180px" style="table-layout: fixed;">
                         <thead>
@@ -299,6 +307,74 @@
                 callback: function() {
                 }
             }]
+        });
+    }
+
+
+    /*function exportExcel(){
+        var company = $("#company_queryform").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        window.location.href = "/autoPartsInfo/exportExcel?company="+company+"&startTime="+startTime+"&endTime="+endTime;
+
+        /!*var form = $("<form>");
+        form.attr('style', 'display:none');
+        form.attr('target', '');
+        form.attr('method', 'post');
+        form.attr('action', '/autoPartsInfo/exportExcel');
+
+        var input1 = $('<input>');
+        input1.attr('type', 'hidden');
+        input1.attr('name', 'company');
+        input1.attr('value', company);      /!* JSON.stringify($.serializeObject($('#searchForm'))) *!/
+
+        var input2 = $('<input>');
+        input2.attr('type', 'hidden');
+        input2.attr('name', 'startTime');
+        input2.attr('value', startTime);
+
+        var input3 = $('<input>');
+        input3.attr('type', 'hidden');
+        input3.attr('name', 'endTime');
+        input3.attr('value', endTime);
+
+        $('body').append(form);
+        form.append(input1);
+        form.append(input2);
+        form.append(input3);
+
+        form.submit();
+        form.remove();*!/
+    }*/
+
+    function exportExcel(){
+        var company = $("#company_queryform").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        var param = {company:company,startTime:startTime,endTime:endTime};
+        console.log(JSON.stringify(param));
+        $.ajax({
+            type:"POST",
+            data:JSON.stringify(param),
+            url:"/autoPartsInfo/exportExcel",
+            contentType:"application/json",
+            dataType:"json",
+            success:function(data){
+                window.location.href = "static/download/配件数据导出.xls"
+               /* //总数
+                var total = data.data.total;
+                //总页数
+                var totalPageNums = Math.ceil(total/20);
+                //两侧显示的页码数 大于1
+                var edges = 2;
+                //主页码区显示的页码数 大于3
+                var playes = 5;
+                if(total==0){
+                    $('#editable_paginate').empty();
+                }else{
+                    renderPageItem(totalPageNums,playes,edges,currentPage);
+                }*/
+            }
         });
     }
 </script>

@@ -416,13 +416,18 @@
 						$td1 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.productNumber+'</td>');
 						$td2 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.productName+'</td>');
 						$td3 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.vehicleModel+'</td>');
+						$td3Null = $('<td style="text-align:center;vertical-align:middle;color:black;"></td>');
 						$td4 = $('<td id="retailPricetd'+item.id+'" style="text-align:center;vertical-align:middle;"><a id="priceStr'+item.id+'" style="color:red;" href="javascript:queryPrice('+item.id+','+item.retailPrice+')">查看价格</a></td>');
 						$td5 = $('<td style="text-align:center;vertical-align:middle;color:black;">'+item.priceChange+'</td>');
 						$td5Null = $('<td style="text-align:center;vertical-align:middle;color:black;"></td>');
 
 						$tr.append($td1);
 						$tr.append($td2);
-						$tr.append($td3);
+						if(item.vehicleModel==undefined){
+							$tr.append($td3Null);
+						}else{
+							$tr.append($td3);
+						}
 						$tr.append($td4);
 						if(item.priceChange==undefined){
 							$tr.append($td5Null);
