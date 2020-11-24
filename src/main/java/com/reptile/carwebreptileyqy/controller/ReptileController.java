@@ -2,6 +2,7 @@ package com.reptile.carwebreptileyqy.controller;
 
 import com.reptile.carwebreptileyqy.dto.UserDTO;
 import com.reptile.carwebreptileyqy.entity.UserEntity;
+import com.reptile.carwebreptileyqy.service.CarPartsService;
 import com.reptile.carwebreptileyqy.service.ReptileService;
 import com.reptile.carwebreptileyqy.service.UserService;
 import com.reptile.carwebreptileyqy.service.impl.UserDetailsServiceImpl;
@@ -23,6 +24,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -42,6 +44,9 @@ public class ReptileController {
 
     @Autowired
     UserService userService;
+
+    @Resource
+    CarPartsService carPartsService;
 
     @RequestMapping("/main")
     public String reptileStart(ModelMap modelMap) {
@@ -706,5 +711,13 @@ public class ReptileController {
         return "导出成功！";
     }
 
-
+    @PostMapping(value = "/autoPartsInfo/exportExcel")
+    public String exportExcel(HttpServletRequest request,HttpServletResponse response,UserDTO userDTO) {
+        try{
+            carPartsService.exportExcel(request,response,userDTO);
+        }catch (Exception e){
+            return "导出失败";
+        }
+        return "导出成功";
+    }
 }

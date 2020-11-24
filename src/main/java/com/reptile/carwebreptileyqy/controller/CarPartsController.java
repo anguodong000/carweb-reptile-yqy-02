@@ -278,14 +278,4 @@ public class CarPartsController {
         return baseResponse;
     }
 
-    @PostMapping(value = "/autoPartsInfo/exportExcel",produces = MediaType.APPLICATION_JSON)
-    @ResponseBody
-    public String exportExcel(HttpServletRequest request,HttpServletResponse response,@RequestBody UserDTO userDTO) {
-        try{
-            carPartsService.exportExcel(request,response,userDTO);
-        }catch (Exception e){
-            return "导出失败!";
-        }
-        return "导出成功！";
-    }
 }

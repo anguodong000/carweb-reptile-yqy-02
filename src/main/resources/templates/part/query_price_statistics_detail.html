@@ -47,7 +47,7 @@
                             </p>
                         </form>-->
 
-                        <a href="javascript:exportExcel()" >导出</a>
+                        <a href="javascript:void(0)" onclick="exportExcel()">导出</a>
                     </div>
                     <table width="1180px" style="table-layout: fixed;">
                         <thead>
@@ -311,13 +311,13 @@
     }
 
 
-    /*function exportExcel(){
+    function exportExcel(){
         var company = $("#company_queryform").val();
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
         window.location.href = "/autoPartsInfo/exportExcel?company="+company+"&startTime="+startTime+"&endTime="+endTime;
 
-        /!*var form = $("<form>");
+        var form = $("<form>");
         form.attr('style', 'display:none');
         form.attr('target', '');
         form.attr('method', 'post');
@@ -326,7 +326,7 @@
         var input1 = $('<input>');
         input1.attr('type', 'hidden');
         input1.attr('name', 'company');
-        input1.attr('value', company);      /!* JSON.stringify($.serializeObject($('#searchForm'))) *!/
+        input1.attr('value', company);
 
         var input2 = $('<input>');
         input2.attr('type', 'hidden');
@@ -344,10 +344,10 @@
         form.append(input3);
 
         form.submit();
-        form.remove();*!/
-    }*/
+        form.remove();
+    }
 
-    function exportExcel(){
+    /*function exportExcel(){
         var company = $("#company_queryform").val();
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
@@ -358,10 +358,21 @@
             data:JSON.stringify(param),
             url:"/autoPartsInfo/exportExcel",
             contentType:"application/json",
-            dataType:"json",
+            dataType:"text",
             success:function(data){
-                window.location.href = "static/download/配件数据导出.xls"
-               /* //总数
+                alert(data.code);
+                /!*var code = data.code;
+                if(code==200){
+                    queryUserList(1);
+                    $li1 = $('<a href="#" class="emeriss-menu-item-title" title="About">用户审核</a>');
+                    $li2 = $('<a href="/queryPriceStatisticsPage" class="emeriss-menu-item-title" title="About">查询统计</a>');
+                    $('#user_authority_menu').append($li1);
+                    $('#user_authority_menu').append($li2);
+                }*!/
+
+                //alert("D:\\Download\\配件数据导出.xls");
+                window.location.href = 'D:\\Download\\配件数据导出.xls';
+               /!* //总数
                 var total = data.data.total;
                 //总页数
                 var totalPageNums = Math.ceil(total/20);
@@ -373,10 +384,14 @@
                     $('#editable_paginate').empty();
                 }else{
                     renderPageItem(totalPageNums,playes,edges,currentPage);
-                }*/
+                }*!/
+            },
+            error:function (data, status, e){
+                debugger;
+                alert(data);
             }
         });
-    }
+    }*/
 </script>
 </body>
 </html>

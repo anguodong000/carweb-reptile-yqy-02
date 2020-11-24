@@ -374,9 +374,9 @@ public class CarPartsServiceImpl implements CarPartsService {
                             try{
                                 UpdateResponse updateResponse = solrClient.addBean(updatePartEntity);
                                 solrClient.commit();
-                                log.info("所以库更新成功：{}",updateResponse);
+                                log.info("索引库更新成功：{}",updateResponse);
                             }catch (Exception e){
-                                log.info("所以库更新失败");
+                                log.info("索引库更新失败");
                             }
                         }
                     }
@@ -429,9 +429,7 @@ public class CarPartsServiceImpl implements CarPartsService {
             row1.createCell(2).setCellValue(Double.parseDouble(priceStatisticsDTO.getRetailPrice().toString()));
             rowNum++;
         }
-        String path = request.getSession().getServletContext().getRealPath("/static/download/");
-        String fileName=path+"\\"+"配件数据导出"+".xls";
-        //String fileName = "配件数据导出.xls";
+        String fileName = "配件数据导出.xls";
         try {
             FileOutputStream fos = new FileOutputStream(fileName);
             workbook.write(fos);
